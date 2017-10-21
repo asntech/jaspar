@@ -1,0 +1,41 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  Tour
+{% endblock %}
+
+{% block content_header %}
+ JASPAR tour 
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Tour</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-video-camera" aria-hidden="true"></i> JASPAR new web interface tour</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+<iframe width="800" height="500" src="https://www.youtube.com/embed/I9ZE4bjMfm0?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>           
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+    </div>
+
+{% endblock %}

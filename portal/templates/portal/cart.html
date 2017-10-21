@@ -1,0 +1,191 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Profile Cart
+{% endblock %}
+
+{% block content_header %}
+Profile Cart
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">cart</li>
+{% endblock %}
+{% block content %}
+
+  <div class="row">
+  <form action="/analysis" id="analysis_form" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="cart_data" value="true">
+
+    <div class="col-xs-12 col-md-9 col-xl-9">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title"> You have <b>{{ matrices|length }} </b>  profile(s) in your cart.</h3>
+
+               {% if request.session.imatrix_ids|length > 0 %}
+               <div class="box-tools pull-right">
+              <button type="button" class="btn btn-xs btn-info" data-container="body" data-toggle="popover" data-placement="left" title="Perform analysis using cart" data-content="You can use the profiles in your cart to perform analysis listed on the right panel.">
+                     <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </button>
+              </div>
+
+            {% endif %}
+
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+            
+            {% if removed %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-trash"></i> You have deleted one profile from your cart
+            </div>
+            {% endif %}
+
+            {% if request.session.imatrix_ids|length < 1 %}
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>You have <b>{{ request.session.imatrix_ids|length }}</b>  profiles(s) in your cart. Please search for profiles <a href="/">here</a> and add some to perform analysis. 
+            </div> 
+
+            {% endif %}
+
+              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
+                <thead>
+                <tr>
+                <th>
+                  {% if request.session.imatrix_ids|length > 0 %}
+                  <a href="/cart/empty" class="color-warning" title="Remove all profiles"><i class="fa fa-2x fa-trash"></i></a>
+                  {% endif %}
+                  </th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Species</th>
+                  <th>Class</th>
+                  <th>Family</th>
+                  <th>Logo</th>
+              
+                </tr>
+                </thead>
+                <tbody>
+                {% for matrix in matrices %}
+                  <tr>
+                    <td><a href="?remove={{ matrix.id }}" title="Remove from cart"> <i class="fa fa-trash"></i></a></td>
+                  <td><b><a href="/matrix/{{ matrix.base_id }}.{{ matrix.version }}">{{ matrix.base_id }}.{{ matrix.version }}</a></b></td>
+                  <td>{{ matrix.name }}</td>
+                  <td>
+                  {% for val in matrix.species %}                    
+                                        
+                    <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{ val.0 }}"
+                     target="_blank"> 
+                     {{ val.1 }}
+                    </a> <br>
+
+                  {% endfor %}
+                  </td>
+                  <td>{{ matrix.class|join:"::" }} </td>
+                  <td>{{ matrix.family|join:"::" }}</td>
+                 
+                  <td>
+                  <a href="/matrix/{{ matrix.base_id }}.{{ matrix.version }}">
+                  <img class="zoom" src="{% static 'logos/svg/' %}{{ matrix.base_id }}.{{ matrix.version }}.svg" width="150px" height="50px" title="Click to view details"></a>
+                  </td>
+                 
+                
+               
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table>             
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+         <!-- /.box -->
+      </div>
+
+      <div class="col-xs-12 col-md-3 col-xl-3">
+         {% include "portal/analysis_modules.html" %}
+      </div>
+    </form>
+            
+  </div>
+
+  {% block javascript %}
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+  <script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+    onModulesLoaded : function() {
+  
+    }
+  });
+
+  // Restrict presentation length
+  $('#scan_sequence').restrictLength( $('#pres-max-length') );
+
+</script>
+
+     <script type="text/javascript">
+      $('#fill').click(
+    function(){
+        $('#scan_sequence').val($(this).val());
+          }
+      );
+
+     </script>
+
+
+  {% endblock %}
+
+  {% block datatable %}
+<script>
+  $(function () {
+    $('#search_table').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+     // "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "bProcessing": true,
+      "bScrollInfinite": true,
+      "fixedHeader": false,
+      "bLengthChange": true,
+      "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+      "searchHighlight": true,
+      "pageLength": 10,
+      "order": [[ 1, "asc" ]],
+      "responsive": true,               
+      //"sScrollY": "100%",
+      "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [0,6] }
+                      ],
+      "oLanguage": {
+                     "sSearch": "Filter:",
+                     "sLengthMenu": "Display _MENU_ profiles",
+                   },
+          'dom': 'lfrtipB',
+            'buttons': [
+            'copy', 'csv'
+               ], 
+
+    });
+  });
+</script>
+{% endblock %}
+  
+{% endblock %}

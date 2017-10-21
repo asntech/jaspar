@@ -1,0 +1,75 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Tools
+{% endblock %}
+
+{% block content_header %}
+ JASPAR tools
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Tools</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">JASPAR software tools</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            <h4><em>JASPAR is supported by a growing number of open-source software tools and APIs implemented in various programming languages including Perl, Python/Biopython, R/Bioconductor and Ruby.</em></h3>
+
+            <div id="bioconductor-tfbstools-package" class="section level1">
+            <h3>RESTful API</h3>
+            <p>The <strong>JASPAR 2018 </strong> comes with a Representational State Transfer (REST) application programming interface (API) to access the JASPAR database programmatically (Khan A. et al. 2017). The RESTful API enables programmatic access to JASPAR by most programming languages and returns data in seven widely used formats including JSON, JSONP, JASPAR, MEME, PFM, TRANSFAC, and YAML. Further, it provides a browsable interface for bioinformatics tool developers. The API is freely accessible at <strong>http://jaspar.genereg.net/api/</strong>  </p>
+
+            <h3>Bioconductor TFBSTools package</h3>
+            <p><strong>TFBSTools</strong> is an R/Bioconductor package for the analysis and manipulation of transcription factor binding sites and their associated transcription factor profile matrices. <strong>TFBStools</strong> provides a toolkit for handling TFBS profile matrices, scanning sequences and alignments including whole genomes, and querying the JASPAR database. The functionality of the package can be easily extended to include advanced statistical analysis, data visualisation and data integration.</p>
+            <p>To retrieve data from JASPAR database, we also provided two Bioconductor data packages <strong>JASPAR2014</strong>, <strong>JASPAR2016</strong>.</p>
+            <p>TFBSTools: <a href="http://bioconductor.org/packages/TFBSTools/" class="uri">http://bioconductor.org/packages/TFBSTools/</a></p>
+            <p>JASPAR2014: <a href="http://bioconductor.org/packages/JASPAR2014/" class="uri">http://bioconductor.org/packages/JASPAR2014/</a></p>
+            <p>JASPAR2016: <a href="http://bioconductor.org/packages/JASPAR2016/" class="uri">http://bioconductor.org/packages/JASPAR2016/</a></p>
+            </div>
+            <div id="tfbs-perl-module" class="section level1">
+            <h3>TFBS Perl module</h3>
+            <p>The Perl TFBS module provides funtionality for a large number of tasks including scanning sequences and alignments for putative TFBS. It includes a JAPAR inteface module, TFBS::DB::JASPAR6 for retrieving binding site profiles from the JASPAR database. Currently this Perl module is not under active development. All the functionality can be found in <strong>TFBSTools</strong> Bioconductor package. Users are highly encouraged to switch to <strong>TFBSTools</strong>.</p>
+            <p><a href="http://tfbs.genereg.net/" class="uri">http://tfbs.genereg.net/</a></p>
+            </div>
+            <div id="biopython-module" class="section level1">
+            <h3>Biopython module</h3>
+            <p>Biopython now contains a JASPAR specific sub-class of the Biopython <em>Bio.motifs</em> class for the retrieval of profiles from the JASPAR database as well as reading and writing motifs in various flat file formats.</p>
+            <p><a href="http://biopython.org" class="uri">http://biopython.org</a></p>
+            <p>Please also refer to the <a href="http://biopython.org/DIST/docs/api">Biopython API docs</a> as well as the JASPAR section in the <a href="http://biopython.org/DIST/docs/tutorial/Tutorial.html">Biopython Tutorial and Cookbook</a> for examples on how to use Biopython with JASPAR.</p>
+            </div>
+            <div id="ruby-gem" class="section level1">
+            <h3>Ruby Gem</h3>
+            <p>A Ruby gem providing basic funtionality for parsing, searching, and comparing JASPAR motifs.</p>
+            <p><a href="https://rubygems.org/gems/bio-jaspar" class="uri">https://rubygems.org/gems/bio-jaspar</a></p>
+            </div>
+            <div id="transcript-factor-flexible-models-tffm" class="section level1">
+            <h3>Transcript Factor Flexible Models (TFFM)</h3>
+            <p>New in JASPAR 2016, 130 profiles are provided as TFFM models.</p>
+            <p><a href="http://cisreg.cmmt.ubc.ca/TFFM/doc/" class="uri">http://cisreg.cmmt.ubc.ca/TFFM/doc/</a></p>
+            </div>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+    </div>
+
+{% endblock %}

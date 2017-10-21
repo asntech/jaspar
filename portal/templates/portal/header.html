@@ -1,0 +1,73 @@
+{% load static %}
+<!-- Main Header -->
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b><span class="label label-danger">J</span></b><sup>18</sup></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b><font style="color:#508cb8"><i class="ai ai-open-access"></i></font><font style="color:#dd4b39">JASPAR</font></b><sup>2018</sup></span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">   
+
+        <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-cart-arrow-down"></i> Cart
+              <span class="label label-success">{{ request.session.imatrix_ids|length }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have {{ request.session.imatrix_ids|length }} profile(s) in cart. </li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                {% for item in request.session.cart %}
+                  <li>
+                    <a href="/matrix/{{ item.matrix_id }}">
+                      <div class="pull-left">
+                      <img src="{% static 'logos/' %}{{ item.logo }}" class="img-square" alt="{{ item.matrix_id }}">
+                      </div>
+                      <h4>
+                        {{ item.name|truncatechars:16 }}, {{ item.matrix_id }}
+                        <small><i class="fa fa-folder-open"></i> {{ item.collection }}</small>
+                      </h4>
+                      <p>{{ item.family|join:"::"|truncatechars:35 }}</p>
+                    </a>
+                  </li>
+                  {% endfor %}
+                  
+                </ul>
+              </li>
+              {% if request.session.imatrix_ids|length > 0 %}
+              <li class="footer"> <a href="/cart"> <b><i class="fa fa-cart-arrow-down"></i> View all profiles</a></b> </li>
+              <li class="footer"><a href="/cart/empty"><b><i class="fa fa-trash"></i> Empty the cart</a></b></li>
+              {% else %}
+              <li class="footer"> <a href="/search"> <b><i class="fa fa-search"></i> Search profiles and add to cart</a></b> </li>
+              {% endif %}
+            </ul>
+          </li>
+          <!--
+          <li>
+            <a href="http://jaspar.genereg.net/html/DOWNLOAD/" target="_blank"><i class="fa fa-download"></i> Download Data</a>
+          </li>
+        -->
+          
+          <li>
+            <a href="/blog"><i class="fa  fa-rss-square"> JASPAR Blog</i></a>
+          </li>
+          <!--
+          <li>
+            <a href="/blog" data-toggle="control-sidebar"><i class="fa fa-bullhorn"> News</i></a>
+          </li>
+          -->
+        </ul>
+      </div>
+    </nav>
+  </header>

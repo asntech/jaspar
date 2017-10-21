@@ -1,0 +1,105 @@
+{% load static %}
+
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+<!--      
+     <img src="{% static 'img/jasparlogo_2016beta.png' %}" alt="JASPAR 2018" width="100%">
+     -->
+
+      <!-- /.search form -->
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <!-- Optionally, you can add icons to the links -->
+      
+        <li class="{% if request.view == 'index' %}active{% endif %}">
+            <a href="/"><i class="fa fa-home"></i> <span>Home</span></a>
+        </li>
+        
+        <li class="treeview {% if request.view == 'about' or request.view == 'faq' or request.view == 'docs' or request.view == 'changelog' %}active{% endif %}">
+            <a href="#"><i class="fa fa-info-circle"></i><span> About</span>
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+            
+            <ul class="treeview-menu">
+            <li class="{% if request.view == 'about' %}active{% endif %}">
+            <a href="{% url 'about' %}"><i class="fa fa-info-circle"></i> <span>About JASPAR</span></a>
+            </li>
+            <li class="{% if request.view == 'faq' %}active{% endif %}"><a href="/faq"><i class="fa fa-question-circle"></i> <span>FAQ</span></a></li>
+            <li class="{% if request.view == 'docs' %}active{% endif %}"><a href="/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+             <li class="{% if request.view == 'changelog' %}active{% endif %}"><a href="/changelog"><i class="fa fa-history"></i> <span>Changelog</span></a></li>
+            </ul>
+        </li>
+
+        <li class="{% if request.collection == 'CORE' %}active{% endif %}"">
+          <a href="/collection/core"><i class="fa  fa-folder-open"></i><span> Browse JASPAR CORE</span> </a></li>
+
+        <li class="treeview {% if request.view == 'collection' and request.collection != 'CORE' %}active{% endif %}" id="jaspar-browse">
+         <a href="#"><i class="fa fa-folder-open"></i><span> Browse Collections</span>
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+          </a>
+           <ul class="treeview-menu">
+           
+            <li class="{% if request.collection == 'CNE' %}active{% endif %}"><a href="/collection/cne"><i class="fa fa-circle-o"></i> <span>JASPAR CNE</span></a></li>
+            <li class="{% if request.collection == 'FAM' %}active{% endif %}"><a href="/collection/fam"><i class="fa fa-circle-o"></i> <span>JASPAR FAM </span></a></li>
+            <li class="{% if request.collection == 'PBM' %}active{% endif %}"><a href="/collection/pbm"><i class="fa fa-circle-o"></i> <span>JASPAR PBM </span></a></li>
+            <li class="{% if request.collection == 'PBM_HLH' %}active{% endif %}"><a href="/collection/pbm_hlh"><i class="fa fa-circle-o"></i> <span>JASPAR PBM HLH </span></a></li>
+            <li class="{% if request.collection == 'PBM_HOMEO' %}active{% endif %}"><a href="/collection/pbm_homeo"><i class="fa fa-circle-o"></i> <span>JASPAR PBM HOMEO</span></a></li>
+            <li class="{% if request.collection == 'PHYLOFACTS' %}active{% endif %}"><a href="/collection/phylofacts"><i class="fa fa-circle-o"></i> <span>JASPAR PHYLOFACTS </span></a></li>
+            <li class="{% if request.collection == 'POLII' %}active{% endif %}"><a href="/collection/polII"><i class="fa fa-circle-o"></i> <span>JASPAR POLII </span></a></li>
+            <li class="{% if request.collection == 'SPLICE' %}active{% endif %}"><a href="/collection/splice"><i class="fa fa-circle-o"></i> <span>JASPAR SPLICE </span></a></li>
+          </ul>
+
+        </li>
+
+        <li class="treeview {% if request.view == 'tools' or request.view == 'align' or request.view == 'inference' %}active{% endif %}">
+            <a href="#"><i class="fa fa-wrench"></i><span> Tools</span>
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+            
+            <ul class="treeview-menu">          
+            
+            <li class="{% if request.view == 'inference' %}active{% endif %}" id="profile-inference"><a href="/inference"><i class="fa fa-refresh"></i> <span>Profile Inference</span></a></li>
+            <li class="{% if request.view == 'align' %}active{% endif %}"><a href="/align"><i class="fa fa-align-center"></i> <span>Matrix Align</span></a></li>
+            <li class="{% if request.view == 'tools' %}active{% endif %}"><a href="/tools"><i class="fa fa-wrench"></i> <span>External tools</span></a></li>
+
+            </ul>
+        </li>
+
+        <li><a href="/api/" target="_blank"><i class="fa fa-plug"></i> <span> RESTful API </span></a></li>
+        <li class="{% if request.view == 'downloads' %}active{% endif %}>"> <a href="/downloads"><i class="fa fa-download"></i> <span>Download Data</span></a></li>
+        <li class="{% if request.view == 'cluster' %}active{% endif %}">
+            <a href="/matrix-clusters"><i class="fa fa-delicious"></i> <span>Matrix Clusters</span></a>
+        </li>
+
+        <li class="{% if request.view == 'tracks' %}active{% endif %}">
+            <a href="/genome-tracks"><i class="fa fa-map-marker"></i> <span>Genome Tracks</span></a>
+        </li>
+
+        
+
+        <!--
+        <li class="treeview {% if request.view == 'apidocs' or request.view == 'api-browsable' %}active{% endif %}" id="jaspar-api">
+          <a href="#"><i class="fa fa-plug"></i><span>RESTful API </span>
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+          </a>
+        <ul class="treeview-menu" id="api-pulldown">
+          <li class="{% if request.view == 'api-browsable' %}active{% endif %}"">
+          <a href="/api/v1/"><i class="fa fa-folder-open"></i><span> Browsable API</span> </a></li>
+          <li class="{% if request.view == 'apidocs' %}active{% endif %}"">
+          <a href="/api"><i class="fa fa-book"></i><span> API Docs</span> </a></li>
+        </ul>
+        </li>
+        -->
+        <!--
+
+       
+        <li class="{% if request.view == 'contact_us' %}active{% endif %}"><a href="/contact-us"><i class="fa fa-envelope-o"></i><span> Contact Us</span></a></li>
+
+      -->
+
+       
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>

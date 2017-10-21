@@ -1,0 +1,13 @@
+This directory contains data of JASPAR database.
+
+Files/Directories included in this directory:
+
+  - *.pfm files:  the Position Frequency Matrix (PFM)
+
+  - *.sites files: the sequences used to generate the PFM
+
+  - *.bed files: the genomic coordinates of the sequences 
+
+  - centrality_files: the plots of centrality
+
+  - database: this directory contains of a dump of the JASPAR database

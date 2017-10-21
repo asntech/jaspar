@@ -1,0 +1,163 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+RESTful API Overview
+{% endblock %}
+
+{% block content_header %}
+API Overview
+{% endblock %}
+      
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+
+  <li><a href="/api/"><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="#"> Overview</a></li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+
+ <div class="row">
+
+ <div class="col-sm-2">
+
+    <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+</div>
+
+  <div class="col-md-10 col-lg-10 col-xs-12">
+        <div class="box box-primary">
+           <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-info-circle"> </i> API Overview</h3>
+            
+           </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+         <p>The JASPAR RESTful API provides programmatic and human-browsable access to JASPAR database, which is implemented in Python by using Django REST Framework. <br>
+          </p>
+        <h3 class="page-header">API Versioning</h3>
+        <p>Currently, JASPAR API have Version 1, which is available at<b> {{ request.get_api_host }}</b>.  New versions will be realeased here with new URL and there will be a prior notice before obsoleting any older API version.
+        </p>
+
+
+        <h3 class="page-header">Throttling</h3>
+        <p>Our API is using throttling in order to control the rate of requests that clients can make to the API. We allow <b>25</b> requests per second from the <b>same IP address</b>, but no limit on the total number of requests. <br>
+
+        Please feel free to write to us if you need higher request.
+        </p>
+
+        <h3 class="page-header">Pagination</h3>
+        <p>To provide a faster response to each request and to prevent larger accidental downloads, API provides pagination. Users can increase or decrease the number of records per pages by setting the <code>page_size</code>.
+        By default <code>page_size=10</code>, which can be increased up-to <b>100</b>.
+        <pre>{{ request.get_api_host }}matrix/?page=1&page_size=25</pre>
+        Further, to jump from one page to another, specify the <code>page</code> parameter.
+        <pre>{{ request.get_api_host }}matrix/?page=2</pre>
+        </p>
+      
+
+         <h3 class="page-header">Ordering</h3>
+        <p>
+        This supports simple query parameter controlled ordering of results. The query parameter is named <code>order</code>.
+
+        <br>For example, to order matrices by name:
+        <pre>{{ request.get_api_host }}matrix/?order=name</pre>
+        The client may also specify reverse order by prefixing the field name with '-', like so:
+      <pre>{{ request.get_api_host }}matrix/?order=-name</pre>
+        Multiple orderings may also be specified: <pre>{{ request.get_api_host }}matrix/?order=name,version</pre>
+
+
+        <h3 class="page-header">Output formats</h3>
+        <p>
+        REST API provides several data renderer types, that allow you to return responses with various media types.
+   
+        The query parameter is named <code>format</code>. <br> Currently, available data fromats are; <code>json</code>, <code>jsonp</code>, <code>api</code>, <code>yaml</code>, 
+        <code>jaspar</code>, <code>transfac</code>, <code>pfm</code>
+        <br>For example, to return all the matrices in JSON format:
+        <pre>{{ request.get_api_host }}matrix/?format=json</pre>
+        <br>For example, to return PFM values of matrix <code>MA0001.1</code> in JASPAR format:
+        <pre>{{ request.get_api_host }}matrix/MA0001.1/?format=jaspar</pre>
+        The above URL will return this:
+        <pre>
+>MA0001.1 AGL3
+A [  0.00   3.00  79.00  40.00  66.00  48.00  65.00  11.00  65.00   0.00]
+C [ 94.00  75.00   4.00   3.00   1.00   2.00   5.00   2.00   3.00   3.00]
+G [  1.00   0.00   3.00   4.00   1.00   0.00   5.00   3.00  28.00  88.00]
+T [  2.00  19.00  11.00  50.00  29.00  47.00  22.00  81.00   1.00   6.00]
+        </pre>
+
+        </p>
+
+        <p>You can set the output format type in three different ways:</p>
+
+        <p><b>1.</b> By setting <code>?format=format</code> url parameter. For example;</p>
+        <ul>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=json">{{ request.get_api_host }}matrix/MA0001.1/?format=json</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=jsonp">{{ request.get_api_host }}matrix/MA0001.1/?format=jsonp</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=yaml">{{ request.get_api_host }}matrix/MA0001.1/?format=yaml</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=api">{{ request.get_api_host }}matrix/MA0001.1/?format=api</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=jaspar">{{ request.get_api_host }}matrix/MA0001.1/?format=jaspar</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=transfac">{{ request.get_api_host }}matrix/MA0001.1/?format=transfac</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=pfm">{{ request.get_api_host }}matrix/MA0001.1/?format=pfm</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1/?format=meme">{{ request.get_api_host }}matrix/MA0001.1/?format=meme</a></li>
+
+   
+        </ul></li>
+        
+        <p><b>2.</b> By adding <code>.format</code> suffix. For example</p>
+
+        <ul>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.json">{{ request.get_api_host }}matrix/MA0001.1.json</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.jsonp">{{ request.get_api_host }}matrix/MA0001.1.jsonp</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.yaml">{{ request.get_api_host }}matrix/MA0001.1.yaml</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.api">{{ request.get_api_host }}matrix/MA0001.1.api</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.jaspar">{{ request.get_api_host }}matrix/MA0001.1.jaspar</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.transfac">{{ request.get_api_host }}matrix/MA0001.1.transfac</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.pfm">{{ request.get_api_host }}matrix/MA0001.1.pfm</a></li>
+        <li><a href="{{ request.get_api_host }}matrix/MA0001.1.meme">{{ request.get_api_host }}matrix/MA0001.1.meme</a></li>
+
+        </ul>
+
+        <p><b>3.</b> By using the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">Accept headers</a>. For example;</p>
+
+<pre class="prettyprint">
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: application/json'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: application/javascript'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: application/yaml'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: text/html'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: text/jaspar'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: text/transfac'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: text/pfm'
+curl '{{ request.get_api_host }}matrix/MA0001.1' -H 'Accept: text/meme'
+
+</pre>
+
+<p>If there is a conflict between the Accept headers and the format parameter, the following error message will be returned;</p>
+<pre class="prettyprint">
+curl '{{ request.get_api_host }}matrix/?format=jsonp' -H 'Accept: application/json'
+{
+"detail": "Could not satisfy the request's Accept header"
+}
+</code></pre>
+
+
+<h3 class="page-header">Caching</h3>
+<p>
+ Setting up the cache is very useful to enhance the performance of the API. For this API, we are using <a href="http://memcached.org/" target="_blank"> Memcached</a>, which is a fast, efficient and entirely memory-based cache server. It is used by sites such as Facebook and Wikipedia to reduce database access and dramatically increase site performance. Memcached runs as a daemon and is allotted a specified amount of RAM. All it does is provide a fast interface for adding, retrieving and deleting data in the cache. All data is stored directly in memory, so there’s no overhead of database or filesystem usage.
+
+We are using a Python Memcached binding <a href="https://pypi.python.org/pypi/python-memcached" target="_blank"> python-memcached</a>, which is running on localhost (127.0.0.1) port 11211,
+</p>
+
+        </div>
+        </div>
+    </div>
+  
+</div>
+
+{% endblock %}
+
+
+

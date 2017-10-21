@@ -1,0 +1,393 @@
+     <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+                {% if request.view == 'cart' %}
+                Analyze profiles in your cart
+                {% else %}
+                Analyze selected profiles
+                {% endif %}
+              </h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <p> <b>
+
+            {% if request.view == 'cart' %}
+                 Use the matrix profiles in your cart to perform the following analysis.
+            {% else %}
+                 Please select matrix profiles on the left side to add to your cart or perform the following analysis. 
+            {% endif %}
+
+            </b>
+            </p>
+            <hr>
+            
+            <div class="box-group" id="accordion">
+                
+                {% if request.view != 'cart' %}
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#cart">
+                         <i class="fa fa-cart-plus"></i> Add to cart 
+                      </a>
+                    </h4>
+
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Add to the cart" data-content="The selected profiles on the left table can be added to the card. You need to view your cart to download or perform different analysis by using the profiles in the cart.">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    
+                  </div>
+                  <div id="cart" class="panel-collapse collapse in">
+                    <div class="box-body">
+
+                     <div class="alert alert-info alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <i class="icon fa fa-info-circle"></i>You have <b>{{ request.session.imatrix_ids|length }}</b>  profile(s) in your cart.
+
+                      {% if request.session.imatrix_ids|length > 0 %}
+                      You can view your cart to download the profile(s) or perform analysis.
+
+                      {% else %}
+                      You can add profiles to the cart to download or perform analysis.
+                     {% endif %}
+
+                     </div>           
+                     <div class="row">
+                      <div class="col-xs-6">
+                     <div class="form-group">
+                      <button type="submit" class="btn btn-primary" id="cart_submit" name="cart" value="cart"><i class="fa fa-cart-plus"></i> Add to cart </button>
+
+                     </div>
+                     </div>
+
+                    <div class="col-xs-6">
+                       <div class="form-group">
+                       <a type="button" href="/cart"  class="btn btn-success pull-right" name="cart" value="cart"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> View cart </a>
+                        
+                       </div>
+                     </div>
+                    </div> 
+                                            
+                    </div>
+                  </div>
+                </div>
+
+                {% endif %}
+
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#scan_tab">
+                        <i class="fa fa-qrcode"></i> Scan
+                      </a>
+                    </h4>
+                     <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Basic sequence analysis" data-content="The feature allows the user to submit a DNA sequence and analyze by using a subset of profiles. Sensitivity and specificity of the results will be affected by the relative score threshold, by default 80%. The input sequence should be in fasta-formatted.">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                  </div>
+                  <div id="scan_tab" class="panel-collapse collapse {% if request.view == 'cart' %}in{% endif %}">
+                    <div class="box-body">
+                      <p>
+                      {% if request.view == 'cart' %}
+                          Input a (<b>FASTA-formatted</b>) sequence to scan with the matrix models in the cart.
+                      {% else %}
+                          Input a (<b>FASTA-formatted</b>) sequence to scan with selected matrix models.
+                      {% endif %}
+                    <button type="button" class="btn btn-link" 
+                       value=">seq1
+AGAAAAAAAGCTAGCGAGCTAGCTGATCGTAGCTAGCTGATCGATGCTAGCTATGCTCAGCGAT"
+              name="fill" id="fill"><i class="fa fa-edit"> </i> Load example sequence</button>
+                      </p>
+                      <div class="form-group">
+                        <label>Enter FASTA sequence here: </label>  (<span id="pres-max-length">3000</span> nucleotides left)
+                        <textarea class="form-control" name="scan_sequence" id="scan_sequence" rows="6" maxlength='3000' placeholder="Enter fasta-formatted sequence ..."
+                        data-toggle="tooltip" data-placement="bottom" title="Please submit a fasta sequence less than 3000 nucleotides." data-validation="fasta_file"></textarea>
+                      </div>
+                      
+                      <hr>
+                      Relative profile score threshold   <input type="text" size="2" maxlength='3' name='threshold_score' value="80" data-validation="number" data-validation-allowing="range[1;100]" /> %  
+                      <button type="submit" class="btn btn-primary pull-right" name="scan" id="scan_button" value="scan"><i class="fa fa-qrcode"></i> Scan </button>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#cluster">
+                      <i class="fa fa-barcode"></i> Cluster 
+                      </a>
+                    </h4>
+
+                   <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Dynamic clustering of matrices" data-content="The feature provides the user with a means of investigating the relationship between the various matrices. This functionality is provided by the STAMP (Similarity, Tree-building, & Alignment of Motifs and Profiles) tool. ">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                  </div>
+                  <div id="cluster" class="panel-collapse collapse">
+                    <div class="box-body">
+                    <p>
+                     {% if request.view == 'cart' %}
+                          Cluster the models in your cart using  <a href="http://www.benoslab.pitt.edu/stamp/" target="_blank">STAMP</a> tool.
+                      {% else %}
+                          Cluster selected models using  <a href="http://www.benoslab.pitt.edu/stamp/" target="_blank">STAMP</a> tool.
+                      {% endif %}
+                    
+                    </p>
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                         <div class="form-group">
+                          <label for="cc" class="control-label">Column comparison metric</label>
+                            <select name="cc" class="form-control">
+                              <option value="PCC" selected>Pearson Correlation Coefficient</option>
+                              <option value="ALLR_LL">ALLR with low score limit of 2</option>
+                              <option value="ALLR">Average Log-Likelihood Ratio</option>
+                              <option value="CS">Chi-Squared</option>
+                              <option value="KL"> Kullback-Lieber</option>
+                              <option value="SSD">Sum of Squared Distances</option>
+                            </select>
+                         </div>
+                     </div>
+
+                      <div class="col-xs-12">
+                         <div class="form-group">
+                          <label for="align" class="control-label">Alignment method </label>
+                             <select name="align" class="form-control">
+                              <!--
+                              <option value="NW"> Needleman-Wunsch</option>
+                              <option value="SW"> Smith-Waterman (linear gaps)</option>
+                              <option value="SWA"> Smith-Waterman (affine gaps)</option>
+                            -->
+                              <option value="SWU" selected="">  Smith-Waterman (ungapped & extended)</option>
+                            </select>
+                         </div>
+                       </div>
+                    </div> 
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                         <div class="form-group">
+                          <label for="tree" class="control-label">Tree-building method</label>
+                            <select name="tree" class="form-control">
+                              <option value="UPGMA" selected>Unweighted Pair Group Method with Arithmetic Mean</option>
+                              <option value="SOTA">Self-Organizing Tree Algorithm</option>
+                            </select>
+                         </div>
+                     </div>
+
+                      <div class="col-xs-12">
+                         <div class="form-group">
+                          <label for="ma" class="control-label">Multiple alignment method </label>
+                             <select name="ma" class="form-control">
+                              <option value="PPA" selected> Progressive Profile Alignment</option>
+                              <option value="IR"> Iterative Refinement</option>
+                            
+                            </select>
+                         </div>
+                       </div>
+                    </div>
+                    <hr>
+                        <button type="submit" class="pull-right btn btn-primary" name="cluster" value="cluster"><i class="fa fa-barcode"></i> Cluster </button> <br><br>
+                        You can use the Newick tree from results to visualize on <a href="http://phylotree.hyphy.org/" target="_blank">PhyloTree</a> 
+                    </div>
+                  </div>
+                </div>
+
+                <div id="randomize_outer" class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#randomize">
+                        <i class="fa fa-cube"></i> Randomize
+                      </a>
+                    </h4>
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Random sampling" data-content="This feature enables the users to generate random Position Frequency Matrices (PFMs) from selected/cart profiles. It is assumed that each column in the profile is independent and described by a mixture of Dirichlet multinomials in which the letters are drawn from a multinomial and the multinomial parameters are drawn from a mixture of Dirichlets.">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                    
+                  </div>
+                  <div id="randomize" class="panel-collapse collapse">
+                    <div class="box-body">
+                      <p>
+                      {% if request.view == 'cart' %}
+                           Create <b>random</b> matrix models based on models in your cart.
+                      {% else %}
+                          Create <b>random</b> matrix models based on selected models.
+                      {% endif %}
+
+                      </p>
+                     
+                      <div class="row">
+                      <div class="col-xs-6">
+                         <div class="form-group">
+                          <label for="randomize_count" class="control-label">No. of matrices</label>
+                            <input type="text" size="2" maxlength="5" name="randomize_count" value="200" data-validation="number" data-validation-allowing="range[1;10000]" class="form-control"/>
+                         </div>
+                     </div>
+
+                      <div class="col-xs-6">
+                         <div class="form-group">
+                          <label for="randomize_format" class="control-label">Matrix format </label>
+                             <select name="randomize_format" class="form-control">
+                              <option value="jaspar">JASPAR</option>
+                              <option value="pfm" selected="true">Raw PFM</option>
+                              <option value="transfac">TRANSFAC</option>
+                               <option value="meme">MEME</option>
+                            </select>
+                         </div>
+                       </div>
+                    </div> 
+
+                      <hr>
+                       <button type="submit" class="btn btn-primary pull-right" name="randomize" value="randomize"><i class="fa fa-cube"></i> Randomize </button>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#permute">
+                        <i class="fa fa-random"></i>  Permute
+                      </a>
+                    </h4>
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Column permutation" data-content="This option simply shuffles the columns in matrices. This can either be done by just shuffling columns within each selected/cart matrix, or by shuffling columns almong all selected/cart matrices.">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    
+                  </div>
+                  <div id="permute" class="panel-collapse collapse">
+                    <div class="box-body">
+                     <p>
+                     {% if request.view == 'cart' %}
+                           Create models with <b>permuted</b> columns from models in your cart.
+                      {% else %}
+                          Create models with <b>permuted</b> columns from selected models.
+                      {% endif %}
+                     </p> 
+                      
+                    <div class="row">
+                      <div class="col-xs-7">
+                         <div class="form-group">
+                          <label for="permute_type" class="control-label">Type</label>
+                            <select name="permute_type" class="form-control">
+                            <option value="intra">Within each matrix</option>
+                            <option value="inter">Between all matrices</option>
+                          </select>
+                         </div>
+                     </div>
+
+                      <div class="col-xs-5">
+                         <div class="form-group">
+                          <label for="permute_format" class="control-label">Matrix format </label>
+                             <select name="permute_format" class="form-control">
+                              <option value="jaspar">JASPAR</option>
+                              <option value="pfm">Raw PFM</option>
+                              <option value="transfac">TRANSFAC</option>
+                               <option value="meme">MEME</option>
+                            </select>
+                         </div>
+                       </div>
+                    </div> 
+                       <hr>
+                       <button type="submit" class="btn btn-primary pull-right" name="permute" value="permute"><i class="fa fa-random"></i> Permute </button>
+
+                    </div>
+                  </div>
+                </div>
+
+                 <div class="panel box box-warning">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#download">
+                        <i class="fa fa-download"></i>  Download
+                      </a>
+                    </h4>
+
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-success" data-container="body" data-toggle="popover" data-placement="left" title="Download models" data-content="The selected/cart models 
+                       can be downloaded in four different formats, including Raw PFM, JASPAR, TRANSFAC and MEME format.">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    
+                  </div>
+                  <div id="download" class="panel-collapse collapse">
+                    <div class="box-body">
+                     <p>
+                     {% if request.view == 'cart' %}
+                          Download the PFMs of the model(s) in your cart in four different <a href="/faq/#data-formats">formats</a>.
+                      {% else %}
+                          Download the PFMs of the model(s) selected in four different <a href="/faq/#data-formats">formats</a>.
+                      {% endif %}
+                     
+                     </p> 
+                     
+                     <div class="row">
+                      <div class="col-xs-7">
+                     <div class="form-group">
+                      <label for="download_type" class="control-label">Download type</label>
+                        <select name="download_type" class="form-control">
+                          <option value="combined">Combined text file</option>
+                          <option value="seq">Individual zip file</option>
+                        </select>
+                     </div>
+                     </div>
+
+                    <div class="col-xs-5">
+                       <div class="form-group">
+                        <label for="download_format" class="control-label">Matrix format </label>
+                          <select name="download_format" class="form-control">
+                             <option value="jaspar">JASPAR</option>
+                             <option value="pfm">Raw PFM</option>
+                             <option value="transfac">TRANSFAC</option>
+                             <option value="meme">MEME</option>
+                           </select>
+                       </div>
+                     </div>
+                    </div> 
+                    <hr>
+
+                     <div class="form-group">
+                      <button type="submit" class="btn btn-primary pull-right" name="download" value="download"><i class="fa fa-download"></i> Download </button>
+                    </div> 
+                        
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+            </div>
+          {% if request.view == 'cart' and request.session.imatrix_ids|length == 0 %}
+            <div class="overlay">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+           {% endif %}
+            
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          
+

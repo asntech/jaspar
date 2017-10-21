@@ -1,0 +1,298 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Download data  
+{% endblock %}
+
+{% block content_header %}
+ Download JASPAR data
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Downloads</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+   <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" id="detailTabs">
+              <li class="active"><a href="#pfm" data-toggle="tab"><i class="fa fa-download"></i> CORE PFMs </a></li>
+              <li><a href="#tffm" data-toggle="tab"><i class="fa fa-download"> </i> TFFMs</a></li>
+              <li><a href="#collections" data-toggle="tab"><i class="fa fa-download"> </i> JASPAR collections (PFMs)</a></li>
+              <li><a href="#clustering" data-toggle="tab"><i class="fa fa-download"> </i> Matrix clustering</a></li>
+              <li><a href="#sql" data-toggle="tab"><i class="fa fa-download"> </i> SQL dump</a></li>
+              <li><a href="#other" data-toggle="tab"><i class="fa fa-download"> </i> Other data</a></li>
+            </ul>
+            <div class="tab-content">
+            
+              <div class="active tab-pane" id="pfm">
+
+                <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>Download JASPAR CORE <i>Position Frequency Matrix (PFM)</i> (non-redundant and redundant) in JASPAR, MEME and TRANSFAC matrix format for six taxonomic groups. More information about matrix formats can be found <a href="/faq/#data-formats">here</a>. 
+
+               </div>
+              
+              <table class="table table-bordered" id="download">
+                <tr>
+                  <th>Taxonomic group</th>
+                  <th>PFMs (non-redundant)</th>
+                  <th>PFMs (redundant)</th>
+                </tr>
+                {% for tax_group in tax_groups %}
+                <tr>
+                  <th>{{ tax_group }}</th>
+                  <td>
+                    <ul>
+                      <li> Individual PFMs (zip) [<a href="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+
+                      <li> Single batch file (txt) [<a href="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_non-redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+                    </ul>
+                    
+                  </td>
+                  <td>
+                    <ul>
+                      <li> Individual PFMs (zip) [<a href="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+
+                      <li> Single batch file (txt) [<a href="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_{{ tax_group|lower }}_redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+                        </ul>
+                  </td>                
+                </tr>
+                {% endfor %}
+
+                <tr>
+                  <th>All CORE profiles </th>
+                  <td>
+                    <ul>
+                      <li> Individual PFMs (zip) [<a href="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+
+                      <li> Single batch file (txt) [<a href="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_non-redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+                    </ul>
+                    
+                  </td>
+                  <td>
+                    <ul>
+                      <li> Individual PFMs (zip) [<a href="/download/CORE/JASPAR2018_CORE_redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+
+                      <li> Single batch file (txt) [<a href="/download/CORE/JASPAR2018_CORE_redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | <a href ="/download/CORE/JASPAR2018_CORE_redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | <a href ="/download/CORE/JASPAR2018_CORE_redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a>] </li>
+                        </ul>
+                  </td>                
+                </tr>
+
+              </table>
+
+              The JASPAR CORE database contains a curated, non-redundant set of profiles, derived from published collections of experimentally defined transcription factor binding sites for eukaryotes. The prime difference to similar resources (TRANSFAC, etc) consist of the open data acess, non-redundancy and quality. <br>
+              <b>When should it be used?</b> When seeking models for specific factors or structural classes, or if experimental evidence is paramount
+
+          <!-- /.box -->
+          </div>
+
+          <div class="tab-pane" id="tffm">
+
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>
+                Here you can download XML files for each of the Transcription Factor
+                Flexible Models (TFFMs). For each TFFM there is both a 1st-order and a
+                detailed model each of which is described in a separate XML file.
+
+                The TFFM_table.csv, gives additional information about
+                each TFFM. It contains the following columns:
+                <ul>
+                <li>TFFM ID - the unique ID of the TFFM including version number</li>
+                <li>PFM ID - the JASPAR matrix ID of the profile used initially to train the TFFM</li>
+                <li>TF Name - name of the transcription factor</li>
+                <li>ChIP-seq file - name of the ChIP-seq peak data file used to train the TFFM</li>
+                <li>1st-order log(p) - log(p-value) of the 1st-order TFFM model</li>
+                <li>Detailed log(p) - log(p-value) of the detailed TFFM model</li>
+                </ul>
+                </div>
+
+                <hr>
+                <h4>
+                <p><a href="/download/TFFM.tar.gz"> <i class="fa fa-download"></i> TFFM.tar.gz</a>: This tar file contains XML files for each of the Transcription Factor
+                Flexible Models (TFFMs)</p>
+                <br>
+
+                <p><a href="/download/TFFM_table.csv"> <i class="fa fa-download"></i> TFFM_table.csv</a>: This file contains additional information about
+                each TFFMs</p>
+
+                </h4>
+
+
+                <hr>
+                For more detailed documentation about TFFMs please see:
+                <a href="http://www.cisreg.ca/TFFM/doc" target="_blank">http://www.cisreg.ca/TFFM/doc</a>
+                <br>
+
+                Anthony Mathelier, Wyeth Wasserman, <a href="https://www.ncbi.nlm.nih.gov/pubmed/24039567" target="_blank"> The next generation of transcription factor binding site prediction</a>. PLoS Comput Biol. 2013;9(9):e1003214. doi: 10.1371/journal.pcbi.1003214.
+
+          </div>
+
+
+          <div class="tab-pane" id="other">
+              <h3>Download other data including sites, sequence logos, bed files </h3>
+
+              <hr>
+
+              <h4>
+                <p><a href="/download/sites.tar.gz"> <i class="fa fa-download"></i> Sites files</a>: the sequences used to generate the PFM</p>
+                <p><a href="/download/bed_files.tar.gz"> <i class="fa fa-download"></i> BED files</a>: the genomic coordinates of the sequences</p>
+                <p><a href="/download/sequence_logos_svg.tar.gz"> <i class="fa fa-download"></i> Logos</a>:  Sequence logos in SVG format</p>
+                <p><a href="/download/centrality_files.tar.gz"> <i class="fa fa-download"></i> Centrality plots</a>: the plots of centrality</p>
+              </h4>
+          </div>
+
+          <div class="tab-pane" id="clustering">
+             <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>Download JASPAR CORE matrix clustering for five taxonomic groups.
+               </div>
+              
+              <table class="table table-bordered" id="download">
+                <tr>
+                  <th>Taxonomic group</th>
+                  <th>Radial tree [zip]</th>
+                  <th>Clustering summary [zip]</th>
+                </tr>
+                {% for tax_group in tax_groups|slice:"5" %}
+                <tr>
+                  <th>{{ tax_group }}</th>
+                  <td><a href="http://folk.uio.no/azizk/JASPAR_2018_clustering/results/JASPAR_2018_matrix_clustering_RADIAL/{{ tax_group|lower }}/JASPAR_2018_matrix_clustering_{{ tax_group|lower }}_archive.zip"> <i class="fa fa-download"></i> </a> </td>
+                  <td><a href="http://folk.uio.no/azizk/JASPAR_2018_clustering/results/JASPAR_2018_matrix_clustering/{{ tax_group|lower }}/JASPAR_2018_matrix_clustering_{{ tax_group|lower }}_archive.zip"> <i class="fa fa-download"></i> </a> </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+          </div>
+
+          <div class="tab-pane" id="collections">
+               <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>Download all the PFMs in JASPAR, MEME and TRANSFAC matrix format for JASPAR collections including CORE, CNE, PHYLO FACTS, SPLICE, POLII, FAM, PBM, PBM HOMEO and PBM HLH.
+               </div>
+              
+              <table class="table table-bordered" id="download">
+                <tr>
+                  <th>Collection</th>
+                  <th>Individual PFMs (zip)</th>
+                  <th>Single batch file (txt)</th>
+                </tr>
+                {% for collection in collections %}
+                <tr>
+                  <th>{{ collection }} <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-xs btn-info" data-container="body" data-toggle="popover" data-placement="right" title="What is JASPAR {{ collection }}?" data-content="
+
+                      {% if collection == 'CORE' %}
+                      The JASPAR CORE database contains a curated, non-redundant set of profiles, derived from published collections of experimentally defined transcription factor binding sites for eukaryotes. The prime difference to similar resources (TRANSFAC, etc) consist of the open data acess, non-redundancy and quality. It should it be used, when seeking models for specific factors or structural classes, or if experimental evidence is paramount
+
+                      {% elif collection == 'CNE' %}
+                      JASPAR CNE is a collection of 233 matrix profiles derived by Xie et al. (PNAS 2007) by clustering of overrepresented motifs from human conserved non-coding elements. While the biochemical and biological role of most of these patterns is still unknown, Xie et al. have shown that the most abundant ones correspond to known DNA-binding proteins, among them is the insulator-binding protein CTCF. If should be used, when characterizing of regulatory inputs in long-range developmental gene regulation in vertebrates.
+
+                      {% elif collection == 'FAM' %}
+                      The JASPAR FAM database consist of models describing shared binding properties of structural classes of transcription factors. These types of models can be called familial profiles, consensus matrices or metamodels. The models have two prime benefits: 1) Since many factors have similar tagrget sequences, we often experience multiple predictions at the same locations that correspond to the same site. This type of models reduce the complexity of the results. 2) The models can be used to classify newly derived profiles (or project what type of structural class its cognate transcription factor belongs to). It should be used, when searching large genomic sequences with no prior knowledge. For classification of new user-supplied profiles.
+                      
+                      {% elif collection == 'PBM' %}
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE. The PBM collection is the set derived by Badis et al (Science 2009) from binding preferences of 104 mouse transcription factors.
+                      It should be used, when characterizing of regulatory inputs in long-range developmental gene regulation in vertebrates. 
+                    
+                 
+                      {% elif collection == 'PBM_HLH' %}
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE. The PBM HLH, collection is the set derived by Grove et al (Cell 2008). It holds 19 C. elegans bHLH transcription factor models.
+                      It should be used, where it is important that each matrix was derived using the same protocol, focusing on bHLH factors
+                   
+                
+                      {% elif collection == 'PBM_HOMEO' %}
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE.The PBM, collection is the set derived by Berger et al (Cell 2008) including 176 profiles from mouse homeodomain. It should be used, where it is important that each matrix was derived using the same protocol, focused on homeobox factors
+                  
+                      {% elif collection == 'PHYLOFACTS' %}
+                      The JASPAR PHYLOFACTS database consists of 174 profiles that were extracted from phylogenetically conserved gene upstream elements.See Xie et al., Systematic discovery of regulatory motifs in human promoters and 3' UTRs by comparison of several mammals., Nature 434, 338-345 (2005) and supplementary material for details. 
+                     
+                      When should it be used? The JASPAR PHYLOFACTS matrices are a mix of known and as of yet undefined motifs. They are useful when one expects that other factors might determine promoter characteristics, such as structural aspects and tissue specificity. They are highly complementary to the JASPAR CORE matrices, so are best used in combination with this matrix set.
+                   
+                      {% elif collection == 'POLII' %}
+                      The JASPAR POLII database consist of models describing patterns found in RNA Polymerase II (Pol II) promoters. Some of these correposnd to a known protein (like the TATA box), while some has no specific interactor (like DPE). Models are taken from published literature or public databases. It should be used, when investigating core promoters from multicellular eukaryotes
+
+                       {% elif collection == 'SPLICE' %}
+                      JASPAR SPLICE is a small collection contains matrix profiles of human canonical and non-canonical splice sites, as matching donor:acceptor pairs. It currently contains only 6 highly reliable profiles obtained from human genome made by Chong et al. 2004. 
+                      It should be used, when analyzing splice sites and alternative splicing.
+                      
+                      {% endif %}
+                      ">
+                     <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </button>
+                    </div></th>
+
+                  {% if collection == 'CORE' %}
+                  <td>
+                    <a href="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> |
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a> (Non-redundant)
+                    <br>
+                   <a href="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> |
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a> (Redundant)
+                  </td>
+                  <td>
+                    <a href="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_non-redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a> (Non-redundant)
+                    <br>
+                    <a href="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/CORE/JASPAR2018_{{ collection }}_redundant_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a> (Redundant)
+                  </td>
+
+                  {% else %}
+                   <td>
+                    <a href="/download/collections/JASPAR2018_{{ collection }}_pfms_jaspar.zip"> <i class="fa fa-download"></i> JASPAR</a> | 
+                    <a href ="/download/collections/JASPAR2018_{{ collection }}_pfms_meme.zip"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/collections/JASPAR2018_{{ collection }}_pfms_transfac.zip"> <i class="fa fa-download"></i> TRANSFAC </a>
+                  </td>
+                  <td>
+                    <a href="/download/collections/JASPAR2018_{{ collection }}_pfms_jaspar.txt"> <i class="fa fa-download"></i> JASPAR</a> | 
+                    <a href ="/download//collections/JASPAR2018_{{ collection }}_pfms_meme.txt"> <i class="fa fa-download"></i> MEME </a> | 
+                    <a href ="/download/collections/JASPAR2018_{{ collection }}_pfms_transfac.txt"> <i class="fa fa-download"></i> TRANSFAC </a> 
+                  </td>
+
+                  {% endif %}
+
+                </tr>
+                {% endfor %}
+
+            </table>
+
+          </div>
+
+
+          <div class="tab-pane" id="sql">
+              <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i> Download the whole JASPAR 2018 database as mysqldump and sqlite database.
+               </div>
+              
+
+              <h4><a href="/download/database/JASPAR2018.sql.tar.gz"><i class="fa fa-download"></i> JASPAR2018.sql.tar.gz</a> : SQL-format dump file</h4>
+              <hr>
+              <h4><a href="/download/database/JASPAR2018.sqlite.tar.gz"><i class="fa fa-download"></i> JASPAR2018.sqlite.tar.gz</a> : SQLite database file</h4>
+
+
+              
+
+          </div>
+
+
+
+
+        </div>
+  </div>
+</div>
+
+
+{% endblock %}

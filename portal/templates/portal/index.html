@@ -1,0 +1,328 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+An open-access database of transcription factor binding profiles
+{% endblock %}
+
+{% block content_header %}
+{% endblock %}
+      
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_header %} {% endblock %}
+
+{% block content %}
+
+  {% block stylesheets %}
+    <style type="text/css">
+  
+
+.jumbotron-billboard .img {
+    margin-bottom: 0px;
+    opacity: 0.3;
+    color: #fff;
+    background: #fff url("{% static 'img/jaspar_logo_2018.png' %}") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+
+    position:absolute;
+    top:0;left:0;
+    z-index:1;
+}
+.jumbotron {position:relative;padding:50px;
+  border-radius: 8px;
+  border: 4px;
+  border-color: #fff;
+  border-style: solid;
+}
+.jumbotron .container {z-index:2;
+ position:relative;
+  z-index:2;
+}
+  </style>
+
+  {% endblock %}
+
+
+    <div class="row">
+    
+    {% include "portal/quick_search.html" %}
+
+    </div>
+
+  
+    <div class="row">
+
+      <div class="col-md-6 col-lg-6 col-xs-12">
+        
+        <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-search"></i>
+                <h3 class="box-title">Browse JASPAR CORE for six different taxonomic groups</h3>
+              </div>
+          <div class="box-body" id="jaspar-core">
+          
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary" >
+              <a href="/search?q=&collection=CORE&tax_group=vertebrates">
+              <img class="img-responsive img-square" src="{% static 'img/tetra_small.jpg' %}" width="100%" alt="JASPAR CORE Vertebrata">
+              <h4 align="center">Vertebrata</h4></a>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+              <a href="/search?q=&collection=CORE&tax_group=nematodes">
+              <img class="img-responsive img-square" src="{% static 'img/C_elegans_stained_small.jpg' %}" width="100%" alt="JASPAR CORE Nematoda">
+              <h4 align="center">Nematoda</h4></a>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+              <a href="/search?q=&collection=CORE&tax_group=insects">
+              <img class="img-responsive img-square" src="{% static 'img/Drosophila_small.jpg' %}" width="100%" alt="JASPAR CORE Insecta">
+              <h4 align="center">Insecta</h4></a>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+               <a href="/search?q=&collection=CORE&tax_group=plants">
+              <img class="img-responsive img-square" src="{% static 'img/Fern_small.jpg' %}" width="100%" alt="JASPAR CORE Plantae">
+              <h4 align="center">Plantae</h4></a>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+               <a href="/search?q=&collection=CORE&tax_group=fungi">
+              <img class="img-responsive img-square" src="{% static 'img/Morelasci_small.jpg' %}" width="100%" alt="JASPAR CORE Fungi">
+              <h4 align="center">Fungi </h4></a>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+              <a href="/search?q=&collection=CORE&tax_group=urochordates">
+              <img class="img-responsive img-square" src="{% static 'img/tunicates_small.jpg' %}" width="100%" alt="Urochordata">
+              <h4 align="center">Urochordata</h4></a>
+              </div>
+            </div>
+            
+          </div>
+
+          </div>
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title"> <i class="fa fa-info-circle"></i> JASPAR CORE & when should it be used?</h3>
+              <div class="pull-right">
+                  <a href="/about"> <i class="fa fa-link"></i> Info about other collections</a> 
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            The JASPAR CORE contains a curated, non-redundant set of profiles, derived from published and experimentally defined transcription factor binding sites for eukaryotes. It should be used, when seeking models for specific factors or structural classes, or if experimental evidence is paramount.
+            </div>
+            <!-- /.box-body -->
+          </div>
+                  
+        </div>
+
+         <div class="col-md-6 col-lg-6 col-xs-12">
+
+          <div class="jumbotron jumbotron-billboard">
+            <div class="img"></div>
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <h2 align="center">The high-quality transcription factor binding profile database</h2>
+                          <h5 align="center"><a href="/about">Read more about JASPAR</a></h5> <br>
+                          <p align="center"><a class="btn btn-md btn-danger" id="jaspar-tour" href="#" role="button"><i class="fa fa-play"></i> JASPAR interactive tour</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-pencil-square-o"></i> Citing JASPAR 2018</h3>
+              <div class="pull-right">
+                   <a href="https://www.ncbi.nlm.nih.gov/pubmed/26531826" target="_blank"><i class="ai ai-pubmed"></i> PubMed </a> 
+                   | <a href="https://doi.org/10.1093/nar/gkv1176" target="_blank"><i class="fa fa-external-link"></i> NAR </a>
+                   | <a href="https://academic.oup.com/nar/article-pdf/44/D1/D110/16661586/gkv1176.pdf" target="_blank"> <i class="fa fa-file-pdf-o"></i> PDF </a>
+
+              </div>
+            </div>
+            <div class="box-body">
+            <!--
+           Mathelier, A. et al. (2016). JASPAR 2016: a major expansion and update of the open-access database of transcription factor binding profiles. Nucleic Acids Res. 2016 44: D110-D115.
+            -->
+           Khan, A. et al. (2018). JASPAR 2018: update of the open-access database of transcription factor binding profiles and its web framework. Nucleic Acids Res. 2018 (In print)
+         
+            </div>
+          </div>
+      </div>    
+      </div>
+
+      <div class="row">
+       
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-refresh"></i></span>
+            <div class="info-box-content">
+              <a href="/inference"><span class="info-box-number">Profile Inference</span></a>
+              <span>Infer profile(s) given TF protein sequence </span>
+              
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+     
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-align-center"></i></span>
+
+            <div class="info-box-content">
+              <a href="/align"><span class="info-box-number">Matrix Align</span></a>
+              <span> Align to a custom matrix or IUPAC string</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-plug"></i></span>
+
+            <div class="info-box-content">
+              <a href="/api" target="_blank"><span class="info-box-number">RESTful API</span></a>
+              <span>Access JASPAR database programmatically</span>
+              
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-download"></i></span>
+
+            <div class="info-box-content">
+              <a href="/downloads"> <span class="info-box-number">Download</span></a>
+              <span>Batch download PFMs, TFFMs, sites, SQL etc </span>
+             
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    {% block javascript %}
+     <script type="text/javascript">
+      $('#jaspar-tour').click(function(){
+        var tour = {
+          id: 'jaspar-home',
+          showPrevButton: true,
+          scrollDuration: 700,
+          steps: [
+            {
+              title: 'Browse JASPAR CORE',
+              content: 'Browse JASPAR <strong>CORE</strong> database for six different taxonomic groups.',
+              target: 'jaspar-core',
+              placement: 'bottom',
+              xOffset: "center",
+              arrowOffset: "center",
+              onNext: function() {
+                $('#jaspar-search').val('Gata3');
+              }
+            },
+
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'jaspar-search',
+              placement: 'bottom',
+              ultipage: true,
+              onNext: function() {
+                window.location = '/search?q=Gata3&collection=all&tax_group=all&version=all&type=all';
+              }
+            },
+
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'jaspar-search',
+              placement: 'bottom',
+              onNext: function() {
+                $('ul#api-pulldown').toggle(200);
+              }
+            },
+
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/search?q=Gata3&collection=all&tax_group=all&version=all&type=all';
+              }
+            },
+            
+            {
+              title: 'Programmatic access',
+              content: 'Access JASPAR data programmatically through RESTful API',
+              target: 'jaspar-api',
+              placement: 'top',
+            },
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/matrix/MA0037.2';
+              }
+            },
+            {
+              title: 'Profile summary',
+              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
+              target: 'matrix-detail',
+              placement: 'bottom',
+            },
+            {
+              title: "Matrix summary",
+              content: "Matrix summary page",
+              target: "matrix-detail",
+              placement: "bottom",
+              xOffset: "center",
+              arrowOffset: "center"
+            }
+          ]
+        }
+       if(hopscotch.getState() === "jaspar-home:4") {
+        hopscotch.startTour(tour, 4);
+       }else{
+        hopscotch.startTour(tour, 0);
+       }
+
+      });
+    </script>
+    {% endblock %}
+
+  {% endblock %}

@@ -1,0 +1,446 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content_header %}
+ About JASPAR
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">About</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8 col-lg-8 col-xs-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">What is JASPAR?</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <p>JASPAR is a collection of transcription factor DNA-binding preferences, modeled as matrices. These can be converted into Position Weight Matrices (PWMs or PSSMs), used for scanning genomic sequences.</p>
+            <p>JASPAR is the only database with this scope where the data can be used with no restrictions (open-source). For a comprehensive review of models and how they can be used, please see the following reviews</p>
+            <ul>
+            <li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=25045190&amp;query_hl=1">Modeling the specificity of protein-DNA interactions Quant Biol. 2013 Jun;1(2):115-130</a></li>
+            <li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15131651&amp;query_hl=4">Applied bioinformatics for the identification of regulatory elements Nat Rev Genet. 2004 Apr;5(4):276-87</a></li>
+            </ul>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+       <div class="col-md-4 col-lg-4 col-xs-12">
+
+        <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">All JASPAR CORE profile stats</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="chart-responsive">
+                    <canvas id="JASPARstats" height="150"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                  <ul class="chart-legend clearfix">
+                    <li><i class="fa fa-circle-o text-red"></i> Vertebrates </li>
+                    <li><i class="fa fa-circle-o text-green"></i> Plants</li>
+                    <li><i class="fa fa-circle-o text-yellow"></i> Insects</li>
+                    <li><i class="fa fa-circle-o text-aqua"></i> Nematodes</li>
+                    <li><i class="fa fa-circle-o text-light-blue"></i> Fungi</li>
+                    <li><i class="fa fa-circle-o text-gray"></i> Urochordates</li>
+                  </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
+          </div>
+
+        <div class="col-md-8 col-lg-8 col-xs-12">
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">JASPAR CORE and it's Collections and when should it be used?</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+
+                      <a data-toggle="collapse" data-parent="#accordion" href="#CORE">
+                        JASPAR CORE
+                      </a>
+                    </h4>
+                    
+                  </div>
+                  <div id="CORE" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      The JASPAR CORE database contains a curated, non-redundant set of profiles, derived from published collections of experimentally defined transcription factor binding sites for eukaryotes. The prime difference to similar resources (TRANSFAC, etc) consist of the open data acess, non-redundancy and quality. <br>
+              <b>When should it be used?</b> When seeking models for specific factors or structural classes, or if experimental evidence is paramount
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#CNE">
+                         Collection CNE
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="CNE" class="panel-collapse collapse">
+                    <div class="box-body">
+                      JASPAR CNE is a collection of 233 matrix profiles derived by Xie et al. (PNAS 2007) by clustering of overrepresented motifs from human conserved non-coding elements. While the biochemical and biological role of most of these patterns is still unknown, Xie et al. have shown that the most abundant ones correspond to known DNA-binding proteins, among them is the insulator-binding protein CTCF. <br> 
+              <b>When should it be used?</b> When characterizing of regulatory inputs in long-range developmental gene regulation in vertebrates.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#FAM">
+                         Collection FAM
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="FAM" class="panel-collapse collapse">
+                    <div class="box-body">
+                      The JASPAR FAM database consist of models describing shared binding properties of structural classes of transcription factors. These types of models can be called familial profiles, consensus matrices or metamodels. The models have two prime benefits: 1) Since many factors have similar tagrget sequences, we often experience multiple predictions at the same locations that correspond to the same site. This type of models reduce the complexity of the results. 2) The models can be used to classify newly derived profiles (or project what type of structural class its cognate transcription factor belongs to).  <br> 
+              <b>When should it be used?</b> When searching large genomic sequences with no prior knowledge. For classification of new user-supplied profiles.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#PBM">
+                         Collection PBM
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="PBM" class="panel-collapse collapse">
+                    <div class="box-body">
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE. The PBM collection is the set derived by Badis et al (Science 2009) from binding preferences of 104 mouse transcription factors. <br> 
+              <b>When should it be used?</b> When characterizing of regulatory inputs in long-range developmental gene regulation in vertebrates. 
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#PBMHLH">
+                         Collection PBM HLH
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="PBMHLH" class="panel-collapse collapse">
+                    <div class="box-body">
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE. The PBM HLH, collection is the set derived by Grove et al (Cell 2008). It holds 19 C. elegans bHLH transcription factor models <br> 
+                    <b>When should it be used?</b> Where it is important that each matrix was derived using the same protocol, focusing on bHLH factors
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#PBMHOMEO">
+                         Collection PBM HOMEO
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="PBMHOMEO" class="panel-collapse collapse">
+                    <div class="box-body">
+                      All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: UniPROBE.The PBM, collection is the set derived by Berger et al (Cell 2008) including 176 profiles from mouse homeodomain.
+                      <br> 
+                    <b>When should it be used?</b> Where it is important that each matrix was derived using the same protocol, focused on homeobox factors
+                    </div>
+                  </div>
+                </div>
+
+                 <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#PHYLOFACTS">
+                         Collection PHYLOFACTS
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="PHYLOFACTS" class="panel-collapse collapse">
+                    <div class="box-body">
+                      The JASPAR PHYLOFACTS database consists of 174 profiles that were extracted from phylogenetically conserved gene upstream elements.See Xie et al., Systematic discovery of regulatory motifs in human promoters and 3' UTRs by comparison of several mammals., Nature 434, 338-345 (2005) and supplementary material for details. 
+                      <br> 
+                    <b>When should it be used?</b> The JASPAR PHYLOFACTS matrices are a mix of known and as of yet undefined motifs. They are useful when one expects that other factors might determine promoter characteristics, such as structural aspects and tissue specificity. They are highly complementary to the JASPAR CORE matrices, so are best used in combination with this matrix set.
+                    </div>
+                  </div>
+                </div>
+
+
+                 <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#POLII">
+                         Collection POLII
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="POLII" class="panel-collapse collapse">
+                    <div class="box-body">
+                      The JASPAR POLII database consist of models describing patterns found in RNA Polymerase II (Pol II) promoters. Some of these correposnd to a known protein (like the TATA box), while some has no specific interactor (like DPE). Models are taken from published literature or public databases. 
+                      <br> 
+                    <b>When should it be used?</b> When investigating core promoters from multicellular eukaryotes
+                    </div>
+                  </div>
+                </div>
+
+
+                 <div class="panel box box-solid">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#SPLICE">
+                         Collection SPLICE
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="SPLICE" class="panel-collapse collapse">
+                    <div class="box-body">
+                      JASPAR SPLICE is a small collection contains matrix profiles of human canonical and non-canonical splice sites, as matching donor:acceptor pairs. It currently contains only 6 highly reliable profiles obtained from human genome made by Chong et al. 2004 <br> 
+                    <b>When should it be used?</b> When analyzing splice sites and alternative splicing.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->    
+      </div>
+        <!-- /.col (LEFT) -->
+        <div class="col-md-4">
+          <!-- LINE CHART -->
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">JASPAR CORE data growth per release</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="lineChart" style="height:250px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!-- /.col (RIGHT) -->
+
+    </div>
+
+  {% block javascript %}
+  <script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+
+  <script type="text/javascript">
+       $(function () {
+
+      'use strict';
+
+
+      //-------------
+      //- PIE CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var pieChartCanvas = $("#JASPARstats").get(0).getContext("2d");
+      var pieChart = new Chart(pieChartCanvas);
+      
+      var PieData = [
+        {
+          value: {{ vertibrates }},
+          color: "#f56954",
+          highlight: "#f56954",
+          label: "Vertebrates"
+        },
+        {
+          value: {{ plants }},
+          color: "#00a65a",
+          highlight: "#00a65a",
+          label: "Plants"
+        },
+        {
+          value: {{ insects }},
+          color: "#f39c12",
+          highlight: "#f39c12",
+          label: "Insects"
+        },
+        {
+          value: {{ nematodes }},
+          color: "#00c0ef",
+          highlight: "#00c0ef",
+          label: "Nematodes"
+        },
+        {
+          value: {{ fungi }},
+          color: "#3c8dbc",
+          highlight: "#3c8dbc",
+          label: "Fungi"
+        },
+        {
+          value: {{ urochordates }},
+          color: "#d2d6de",
+          highlight: "#d2d6de",
+          label: "Urochordates"
+        }
+      ];
+    
+    var pieOptions = {
+    //Boolean - Whether we should show a stroke on each segment
+    segmentShowStroke: true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor: "#fff",
+    //Number - The width of each segment stroke
+    segmentStrokeWidth: 1,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps: 100,
+    //String - Animation easing effect
+    animationEasing: "easeOutBounce",
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate: true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale: false,
+    //Boolean - whether to make the chart responsive to window resizing
+    responsive: true,
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: false,
+    //String - A legend template
+    legendTemplate: "",
+    //String - A tooltip template
+    tooltipTemplate: "<%=value %> <%=label%> profiles"
+  };
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      pieChart.Doughnut(PieData, pieOptions);
+      //-----------------
+      //- END PIE CHART -
+      //-----------------
+
+
+    });
+  
+  </script>
+
+<script type="text/javascript">
+  
+  $(function () {
+
+  
+    var lineChartData = {
+      labels: ["2004", "2006", "2008", "2010", "2014", "2016", "2018"],
+      datasets: [
+        {
+          label: "non-redundant",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [111, 123, 137, 457, 593, 1082, 1404]
+
+        }
+      ]
+    };
+
+    var lineChartOptions = {
+      //Boolean - If we should show the scale at all
+      showScale: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: false,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - Whether the line is curved between points
+      bezierCurve: true,
+      //Number - Tension of the bezier curve between points
+      bezierCurveTension: 0.3,
+      //Boolean - Whether to show a dot for each point
+      pointDot: false,
+      //Number - Radius of each point dot in pixels
+      pointDotRadius: 4,
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth: 1,
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius: 20,
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke: true,
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth: 2,
+      //Boolean - Whether to fill the dataset with a color
+      datasetFill: true,
+      //String - A legend template
+      legendTemplate: "",
+       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true
+    };
+
+    var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+    var lineChart = new Chart(lineChartCanvas);
+    lineChartOptions.datasetFill = false;
+    lineChart.Line(lineChartData, lineChartOptions);
+  });
+  </script>
+
+
+  {% endblock %}
+
+{% endblock %}

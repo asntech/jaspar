@@ -1,0 +1,64 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    UCSC Genome Browser track data hub
+{% endblock %}
+
+{% block content_header %}
+ JASPAR UCSC Genome Browser tracks
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Genome tracks</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+  <div class="col-md-12">
+          <div class="box box-primary">
+            <!-- /.box-header -->
+            <div class="box-header with-border"><h3 class="box-title"> <i class="fa fa-map-marker"></i> JASPAR UCSC tracks</h3></div>
+            <!-- /.box-body -->
+            <div class="box-body">UCSC Genome Browser track data hub containing genome-wide binding site predictions for TF profiles in the JASPAR CORE vertebrates collection.</div>
+
+            <!-- /.box-header -->
+            <div class="box-header with-border"><h3 class="box-title"><strong>How-to</strong></h3></div>
+            <!-- /.box-body -->
+            <div class="box-body">
+              <p><strong>1. Direct link</strong></p>
+              <p> View the <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&hubUrl=http://expdata.cmmt.ubc.ca/JASPAR/UCSC_tracks/hub.txt" target="_blank">hg19</a> and <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&hubUrl=http://expdata.cmmt.ubc.ca/JASPAR/UCSC_tracks/hub.txt"  target="_blank">hg38</a> tracks directly in the UCSC Genome Browser.
+              </p>
+              <p><img class="img img-responsive" src="{% static 'img/1.png' %}" width="100%"></p>
+              <p><img class="img img-responsive" src="{% static 'img/2.png' %}" width="100%"></p>
+              <p><strong>2. Track data hubs</strong></p>
+              <p>Insert the JASPAR track data hub URL into your own UCSC Genome Browser session via &quot;<em>MyData =&gt; Track Hubs</em>&quot; by pasting the hub URL in the &quot;<em>URL:</em>&quot; box and clicking on &quot;<em>Add Hub</em>&quot;.</p>
+              <p>JASPAR track data hub URL: <a href="http://expdata.cmmt.ubc.ca/JASPAR/UCSC_tracks/hub.txt">http://expdata.cmmt.ubc.ca/JASPAR/UCSC_tracks/hub.txt</a></p>
+              <p><img class="img img-responsive" src="{% static 'img/AddHub1.png' %}" width="80%"></p>
+              <p><img class="img img-responsive" src="{% static 'img/AddHub2.png' %}" width="80%"></p>
+              <p><strong>3. Download</strong></p>
+              <p>Underlying TFBS prediction data is available for download and further analysis: <a href="http://expdata.cmmt.ubc.ca/JASPAR/downloads/UCSC_tracks/2018/" target="_blank">http://expdata.cmmt.ubc.ca/JASPAR/downloads/UCSC_tracks/2018/</a></p>
+              <p>Example of dataset (random sample of lines):</p>
+              <p><img  class="img img-responsive" src="{% static 'img/4.png' %}" width="60%"></p>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-header with-border"><h3 class="box-title">Further information</h3></div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <p>Click on the JASPAR track details within the UCSC Genome browser to view the track help page:</p>
+              <p><img class="img img-responsive" src="{% static 'img/3.png' %}" width="100%"></p>
+              <ul>
+                <li>Code and data used to create the UCSC tracks are available at <a href="https://github.com/wassermanlab/JASPAR-UCSC-tracks"  target="_blank">https://github.com/wassermanlab/JASPAR-UCSC-tracks</a></li>
+                <li>For more information on the use of UCSC track data hubs, see <a href='http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html'  target="_blank">Using UCSC Genome Browser Track Hubs</a></li>
+              </ul>
+            </div>
+          <!-- /.box -->
+          </div>
+  </div>
+</div>
+
+{% endblock %}

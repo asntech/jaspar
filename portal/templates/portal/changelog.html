@@ -1,0 +1,92 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+ Changelog
+{% endblock %}
+
+{% block content_header %}
+ JASPAR Changelog
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Changelog</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"> <i class="fa fa-history"></i> JASPAR Changelog</h3>
+               <div class="box-tools pull-right">
+
+              </div>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <h3>20/10/2016</h3>
+                We have updated the .sites files for the following profile matrices:
+                <br>
+
+                <code>
+                MA0529.1, MA0535.1, MA0530.1, MA0452.2, MA0216.2, MA0534.1, MA0533.1, MA0531.1, MA0536.1, MA0247.2, MA0237.2, MA0532.1, MA0149.1, MA0166.1, MA0167.1, MA0169.1, MA0170.1, MA0171.1, MA0172.1, MA0175.1, MA0176.1, MA0177.1, MA0183.1, MA0189.1, MA0191.1, MA0192.1, MA0194.1, MA0195.1, MA0196.1, MA0199.1, MA0201.1, MA0203.1, MA0204.1, MA0206.1, MA0208.1, MA0209.1, MA0210.1, MA0211.1, MA0214.1, MA0217.1, MA0219.1, MA0221.1, MA0222.1, MA0225.1, MA0228.1, MA0229.1, MA0230.1, MA0233.1, MA0234.1, MA0235.1, MA0238.1, MA0240.1, MA0245.1, MA0247.1, MA0250.1, MA0253.1, MA0256.1, MA0257.1, MA0444.1
+                </code>
+                <br>
+                The corrected .sites files have not been retrieved for the following profile matrices: <br>
+                <code>
+                MA0029.1, MA0030.1, MA0139.1, MA0141.1, MA0144.1, MA0145.1, MA0146.1, MA0147.1, MA0138.2, MA0104.2, MA0168.1, MA0173.1, MA0174.1, MA0178.1, MA0180.1, MA0181.1, MA0184.1, MA0193.1, MA0200.1, MA0202.1, MA0207.1, MA0216.1, MA0218.1, MA0227.1, MA0239.1, MA0246.1, MA0248.1, MA0252.1, MA0260.1, MA0443.1, MA0445.1, MA0446.1, MA0447.1, MA0448.1, MA0449.1, MA0454.1, MA0456.1, MA0457.1, MA0459.1
+                </code>
+
+                <h3>10/12/2014</h3>
+                The plant SOC1 TF (MA0554) is incorrect in JASPAR due to a manual annotation problem.
+
+                The old incorrect matrix is:
+
+                <pre>
+                  <code>
+##   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+## A    0    0   33    0  139   78    0   78   64     0    59     0     0
+## C  209  210  168  326  125  223  206  153    0   263    90   258   180
+## G  115  135    0   44  119   95   23  123    6    99    57   134    10
+## T  482  461  605  436  423  410  577  452  736   444   600   414   616
+##   [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21]
+## A     0    49   117     0    33    14    79   126
+## C   343     0   286   121   208   190   240   136
+## G    78   115     0     0    64     0    98   147
+## T   385   642   403   685   501   602   389   397
+                  </code>
+                </pre>
+The updated matrix is:
+                <pre>
+                  <code>
+##   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+## A  288  172   65   62  117   20    0  459  137   130    22    98    90
+## C  123  264   27    0   47  855  617   37   78     6     8    24    71
+## G   99  113   34   51   89   13    9   56    0     0     0     0    86
+## T  378  339  762  775  635    0  262  336  673   752   858   766   641
+##   [,14] [,15]
+## A   181    17
+## C    10    23
+## G   683   665
+## T    14   183
+                  </code>
+                </pre>
+
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div>
+
+{% endblock %}

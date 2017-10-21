@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mixture PUBLIC "-//ghmm.org//DOCUMENT ghmm V1.0//EN" "http://ghmm.sourceforge.net/xml/1.0/ghmm.dtd">
+<mixture version="1.0" noComponents="1">
+ <HMM name="" type="discrete">
+  <alphabet id="0">
+   <symbol code="0">A</symbol>
+   <symbol code="1">C</symbol>
+   <symbol code="2">G</symbol>
+   <symbol code="3">T</symbol>
+  </alphabet>
+  <state id="0" initial="0.26415678">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="1" initial="0.23026325">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="2" initial="0.24009853">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="3" initial="0.26402201">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="4" initial="0.00030545">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="5" initial="0.00018871">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="6" initial="0.00028037">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="7" initial="0.00068490">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="8" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="9" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="10" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="11" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="12" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="13" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="14" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="15" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="16" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="17" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="18" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="19" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="20" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="21" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="22" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="23" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="24" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="25" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="26" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="27" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="28" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="29" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="30" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="31" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="32" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="33" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="34" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="35" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="36" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="37" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="38" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="39" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="40" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="41" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="42" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="43" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="44" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="45" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="46" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="47" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="48" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="49" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="50" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="51" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="52" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="53" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="54" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="55" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="56" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="57" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="58" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="59" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="60" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="61" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="62" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="63" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="64" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="65" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="66" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="67" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="68" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="69" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="70" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="71" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <state id="72" initial="0.00000000">
+   <discrete id="0">1, 0, 0, 0</discrete>
+  </state>
+  <state id="73" initial="0.00000000">
+   <discrete id="0">0, 1, 0, 0</discrete>
+  </state>
+  <state id="74" initial="0.00000000">
+   <discrete id="0">0, 0, 1, 0</discrete>
+  </state>
+  <state id="75" initial="0.00000000">
+   <discrete id="0">0, 0, 0, 1</discrete>
+  </state>
+  <transition source="0" target="0">
+   <probability>0.27103962</probability>
+  </transition>
+  <transition source="0" target="1">
+   <probability>0.19750073</probability>
+  </transition>
+  <transition source="0" target="2">
+   <probability>0.29599332</probability>
+  </transition>
+  <transition source="0" target="3">
+   <probability>0.22077486</probability>
+  </transition>
+  <transition source="0" target="4">
+   <probability>0.0040327483</probability>
+  </transition>
+  <transition source="0" target="5">
+   <probability>0.0030145127</probability>
+  </transition>
+  <transition source="0" target="6">
+   <probability>0.0041421741</probability>
+  </transition>
+  <transition source="0" target="7">
+   <probability>0.0035020305</probability>
+  </transition>
+  <transition source="1" target="0">
+   <probability>0.33921314</probability>
+  </transition>
+  <transition source="1" target="1">
+   <probability>0.26793824</probability>
+  </transition>
+  <transition source="1" target="2">
+   <probability>0.053153954</probability>
+  </transition>
+  <transition source="1" target="3">
+   <probability>0.32618767</probability>
+  </transition>
+  <transition source="1" target="4">
+   <probability>0.0043693632</probability>
+  </transition>
+  <transition source="1" target="5">
+   <probability>0.0036150618</probability>
+  </transition>
+  <transition source="1" target="6">
+   <probability>0.00077881869</probability>
+  </transition>
+  <transition source="1" target="7">
+   <probability>0.004743744</probability>
+  </transition>
+  <transition source="2" target="0">
+   <probability>0.26500184</probability>
+  </transition>
+  <transition source="2" target="1">
+   <probability>0.23601409</probability>
+  </transition>
+  <transition source="2" target="2">
+   <probability>0.26692243</probability>
+  </transition>
+  <transition source="2" target="3">
+   <probability>0.21822012</probability>
+  </transition>
+  <transition source="2" target="4">
+   <probability>0.0036020161</probability>
+  </transition>
+  <transition source="2" target="5">
+   <probability>0.0031962524</probability>
+  </transition>
+  <transition source="2" target="6">
+   <probability>0.0036743538</probability>
+  </transition>
+  <transition source="2" target="7">
+   <probability>0.0033688998</probability>
+  </transition>
+  <transition source="3" target="0">
+   <probability>0.16643986</probability>
+  </transition>
+  <transition source="3" target="1">
+   <probability>0.24039162</probability>
+  </transition>
+  <transition source="3" target="2">
+   <probability>0.30805942</probability>
+  </transition>
+  <transition source="3" target="3">
+   <probability>0.27254548</probability>
+  </transition>
+  <transition source="3" target="4">
+   <probability>0.00223548</probability>
+  </transition>
+  <transition source="3" target="5">
+   <probability>0.0031855597</probability>
+  </transition>
+  <transition source="3" target="6">
+   <probability>0.0038409083</probability>
+  </transition>
+  <transition source="3" target="7">
+   <probability>0.0033016732</probability>
+  </transition>
+  <transition source="4" target="8">
+   <probability>0.26937885</probability>
+  </transition>
+  <transition source="4" target="9">
+   <probability>0.20786077</probability>
+  </transition>
+  <transition source="4" target="10">
+   <probability>0.31602558</probability>
+  </transition>
+  <transition source="4" target="11">
+   <probability>0.2067348</probability>
+  </transition>
+  <transition source="5" target="8">
+   <probability>0.34013139</probability>
+  </transition>
+  <transition source="5" target="9">
+   <probability>0.25078205</probability>
+  </transition>
+  <transition source="5" target="10">
+   <probability>0.062317003</probability>
+  </transition>
+  <transition source="5" target="11">
+   <probability>0.34676956</probability>
+  </transition>
+  <transition source="6" target="8">
+   <probability>0.26481272</probability>
+  </transition>
+  <transition source="6" target="9">
+   <probability>0.26246753</probability>
+  </transition>
+  <transition source="6" target="10">
+   <probability>0.25544276</probability>
+  </transition>
+  <transition source="6" target="11">
+   <probability>0.21727699</probability>
+  </transition>
+  <transition source="7" target="8">
+   <probability>0.16453057</probability>
+  </transition>
+  <transition source="7" target="9">
+   <probability>0.22428597</probability>
+  </transition>
+  <transition source="7" target="10">
+   <probability>0.35211778</probability>
+  </transition>
+  <transition source="7" target="11">
+   <probability>0.25906568</probability>
+  </transition>
+  <transition source="8" target="12">
+   <probability>0.319658</probability>
+  </transition>
+  <transition source="8" target="13">
+   <probability>0.16301643</probability>
+  </transition>
+  <transition source="8" target="14">
+   <probability>0.27277329</probability>
+  </transition>
+  <transition source="8" target="15">
+   <probability>0.24455228</probability>
+  </transition>
+  <transition source="9" target="12">
+   <probability>0.4016733</probability>
+  </transition>
+  <transition source="9" target="13">
+   <probability>0.20090907</probability>
+  </transition>
+  <transition source="9" target="14">
+   <probability>0.062514626</probability>
+  </transition>
+  <transition source="9" target="15">
+   <probability>0.33490301</probability>
+  </transition>
+  <transition source="10" target="12">
+   <probability>0.31115496</probability>
+  </transition>
+  <transition source="10" target="13">
+   <probability>0.16582521</probability>
+  </transition>
+  <transition source="10" target="14">
+   <probability>0.25027151</probability>
+  </transition>
+  <transition source="10" target="15">
+   <probability>0.27274833</probability>
+  </transition>
+  <transition source="11" target="12">
+   <probability>0.19751402</probability>
+  </transition>
+  <transition source="11" target="13">
+   <probability>0.17675746</probability>
+  </transition>
+  <transition source="11" target="14">
+   <probability>0.34509228</probability>
+  </transition>
+  <transition source="11" target="15">
+   <probability>0.28063624</probability>
+  </transition>
+  <transition source="12" target="16">
+   <probability>0.29641578</probability>
+  </transition>
+  <transition source="12" target="17">
+   <probability>0.13025976</probability>
+  </transition>
+  <transition source="12" target="18">
+   <probability>0.37404461</probability>
+  </transition>
+  <transition source="12" target="19">
+   <probability>0.19927986</probability>
+  </transition>
+  <transition source="13" target="16">
+   <probability>0.49534129</probability>
+  </transition>
+  <transition source="13" target="17">
+   <probability>0.14908105</probability>
+  </transition>
+  <transition source="13" target="18">
+   <probability>0.082499301</probability>
+  </transition>
+  <transition source="13" target="19">
+   <probability>0.27307836</probability>
+  </transition>
+  <transition source="14" target="16">
+   <probability>0.28763284</probability>
+  </transition>
+  <transition source="14" target="17">
+   <probability>0.1522336</probability>
+  </transition>
+  <transition source="14" target="18">
+   <probability>0.33929667</probability>
+  </transition>
+  <transition source="14" target="19">
+   <probability>0.22083688</probability>
+  </transition>
+  <transition source="15" target="16">
+   <probability>0.23167719</probability>
+  </transition>
+  <transition source="15" target="17">
+   <probability>0.1450154</probability>
+  </transition>
+  <transition source="15" target="18">
+   <probability>0.44494571</probability>
+  </transition>
+  <transition source="15" target="19">
+   <probability>0.17836169</probability>
+  </transition>
+  <transition source="16" target="20">
+   <probability>0.28868011</probability>
+  </transition>
+  <transition source="16" target="21">
+   <probability>0.074295573</probability>
+  </transition>
+  <transition source="16" target="22">
+   <probability>0.60776506</probability>
+  </transition>
+  <transition source="16" target="23">
+   <probability>0.029259259</probability>
+  </transition>
+  <transition source="17" target="20">
+   <probability>0.67839501</probability>
+  </transition>
+  <transition source="17" target="21">
+   <probability>0.17303438</probability>
+  </transition>
+  <transition source="17" target="22">
+   <probability>0.095250284</probability>
+  </transition>
+  <transition source="17" target="23">
+   <probability>0.053320321</probability>
+  </transition>
+  <transition source="18" target="20">
+   <probability>0.35920276</probability>
+  </transition>
+  <transition source="18" target="21">
+   <probability>0.088360714</probability>
+  </transition>
+  <transition source="18" target="22">
+   <probability>0.5170984</probability>
+  </transition>
+  <transition source="18" target="23">
+   <probability>0.035338126</probability>
+  </transition>
+  <transition source="19" target="20">
+   <probability>0.28532285</probability>
+  </transition>
+  <transition source="19" target="21">
+   <probability>0.093179262</probability>
+  </transition>
+  <transition source="19" target="22">
+   <probability>0.58771046</probability>
+  </transition>
+  <transition source="19" target="23">
+   <probability>0.033787424</probability>
+  </transition>
+  <transition source="20" target="24">
+   <probability>0.047000368</probability>
+  </transition>
+  <transition source="20" target="25">
+   <probability>0.1445199</probability>
+  </transition>
+  <transition source="20" target="26">
+   <probability>0.076309772</probability>
+  </transition>
+  <transition source="20" target="27">
+   <probability>0.73216996</probability>
+  </transition>
+  <transition source="21" target="24">
+   <probability>0.13071227</probability>
+  </transition>
+  <transition source="21" target="25">
+   <probability>0.28341401</probability>
+  </transition>
+  <transition source="21" target="26">
+   <probability>0.017808491</probability>
+  </transition>
+  <transition source="21" target="27">
+   <probability>0.56806523</probability>
+  </transition>
+  <transition source="22" target="24">
+   <probability>0.032601423</probability>
+  </transition>
+  <transition source="22" target="25">
+   <probability>0.063155143</probability>
+  </transition>
+  <transition source="22" target="26">
+   <probability>0.050539449</probability>
+  </transition>
+  <transition source="22" target="27">
+   <probability>0.85370398</probability>
+  </transition>
+  <transition source="23" target="24">
+   <probability>0.09145407</probability>
+  </transition>
+  <transition source="23" target="25">
+   <probability>0.30365483</probability>
+  </transition>
+  <transition source="23" target="26">
+   <probability>0.33384727</probability>
+  </transition>
+  <transition source="23" target="27">
+   <probability>0.27104383</probability>
+  </transition>
+  <transition source="24" target="28">
+   <probability>0.018795648</probability>
+  </transition>
+  <transition source="24" target="29">
+   <probability>0.97435917</probability>
+  </transition>
+  <transition source="24" target="30">
+   <probability>0.0053837548</probability>
+  </transition>
+  <transition source="24" target="31">
+   <probability>0.0014614268</probability>
+  </transition>
+  <transition source="25" target="28">
+   <probability>0.0031390388</probability>
+  </transition>
+  <transition source="25" target="29">
+   <probability>0.99614659</probability>
+  </transition>
+  <transition source="25" target="30">
+   <probability>0.00049024803</probability>
+  </transition>
+  <transition source="25" target="31">
+   <probability>0.00022412292</probability>
+  </transition>
+  <transition source="26" target="28">
+   <probability>0.008547468</probability>
+  </transition>
+  <transition source="26" target="29">
+   <probability>0.98703331</probability>
+  </transition>
+  <transition source="26" target="30">
+   <probability>0.0038705061</probability>
+  </transition>
+  <transition source="26" target="31">
+   <probability>0.00054871188</probability>
+  </transition>
+  <transition source="27" target="28">
+   <probability>0.0009709477</probability>
+  </transition>
+  <transition source="27" target="29">
+   <probability>0.99697633</probability>
+  </transition>
+  <transition source="27" target="30">
+   <probability>0.001415036</probability>
+  </transition>
+  <transition source="27" target="31">
+   <probability>0.00063768629</probability>
+  </transition>
+  <transition source="28" target="32">
+   <probability>0.99179548</probability>
+  </transition>
+  <transition source="28" target="33">
+   <probability>0.0017458681</probability>
+  </transition>
+  <transition source="28" target="34">
+   <probability>0.0035416821</probability>
+  </transition>
+  <transition source="28" target="35">
+   <probability>0.0029169657</probability>
+  </transition>
+  <transition source="29" target="32">
+   <probability>0.96172925</probability>
+  </transition>
+  <transition source="29" target="33">
+   <probability>0.011982798</probability>
+  </transition>
+  <transition source="29" target="34">
+   <probability>0.0023253537</probability>
+  </transition>
+  <transition source="29" target="35">
+   <probability>0.023962598</probability>
+  </transition>
+  <transition source="30" target="32">
+   <probability>0.94457303</probability>
+  </transition>
+  <transition source="30" target="33">
+   <probability>0.025959223</probability>
+  </transition>
+  <transition source="30" target="34">
+   <probability>0.026172069</probability>
+  </transition>
+  <transition source="30" target="35">
+   <probability>0.0032956812</probability>
+  </transition>
+  <transition source="31" target="32">
+   <probability>0.96250543</probability>
+  </transition>
+  <transition source="31" target="33">
+   <probability>0.023074274</probability>
+  </transition>
+  <transition source="31" target="34">
+   <probability>0.0047957873</probability>
+  </transition>
+  <transition source="31" target="35">
+   <probability>0.0096245096</probability>
+  </transition>
+  <transition source="32" target="36">
+   <probability>0.00078506323</probability>
+  </transition>
+  <transition source="32" target="37">
+   <probability>0.69835741</probability>
+  </transition>
+  <transition source="32" target="38">
+   <probability>0.022759792</probability>
+  </transition>
+  <transition source="32" target="39">
+   <probability>0.27809774</probability>
+  </transition>
+  <transition source="33" target="36">
+   <probability>0.00047830623</probability>
+  </transition>
+  <transition source="33" target="37">
+   <probability>0.79373752</probability>
+  </transition>
+  <transition source="33" target="38">
+   <probability>0.00024150667</probability>
+  </transition>
+  <transition source="33" target="39">
+   <probability>0.20554267</probability>
+  </transition>
+  <transition source="34" target="36">
+   <probability>9.9107744e-05</probability>
+  </transition>
+  <transition source="34" target="37">
+   <probability>0.5984534</probability>
+  </transition>
+  <transition source="34" target="38">
+   <probability>0.00048422858</probability>
+  </transition>
+  <transition source="34" target="39">
+   <probability>0.40096327</probability>
+  </transition>
+  <transition source="35" target="36">
+   <probability>0.00038464499</probability>
+  </transition>
+  <transition source="35" target="37">
+   <probability>0.78397154</probability>
+  </transition>
+  <transition source="35" target="38">
+   <probability>0.0077028126</probability>
+  </transition>
+  <transition source="35" target="39">
+   <probability>0.207941</probability>
+  </transition>
+  <transition source="36" target="40">
+   <probability>0.38566295</probability>
+  </transition>
+  <transition source="36" target="41">
+   <probability>0.01068166</probability>
+  </transition>
+  <transition source="36" target="42">
+   <probability>0.60356285</probability>
+  </transition>
+  <transition source="36" target="43">
+   <probability>9.2535642e-05</probability>
+  </transition>
+  <transition source="37" target="40">
+   <probability>0.39062117</probability>
+  </transition>
+  <transition source="37" target="41">
+   <probability>0.017490017</probability>
+  </transition>
+  <transition source="37" target="42">
+   <probability>0.59112133</probability>
+  </transition>
+  <transition source="37" target="43">
+   <probability>0.00076749057</probability>
+  </transition>
+  <transition source="38" target="40">
+   <probability>0.073407246</probability>
+  </transition>
+  <transition source="38" target="41">
+   <probability>0.37258577</probability>
+  </transition>
+  <transition source="38" target="42">
+   <probability>0.55363945</probability>
+  </transition>
+  <transition source="38" target="43">
+   <probability>0.00036753081</probability>
+  </transition>
+  <transition source="39" target="40">
+   <probability>0.014750252</probability>
+  </transition>
+  <transition source="39" target="41">
+   <probability>0.0077477775</probability>
+  </transition>
+  <transition source="39" target="42">
+   <probability>0.97705967</probability>
+  </transition>
+  <transition source="39" target="43">
+   <probability>0.00044230007</probability>
+  </transition>
+  <transition source="40" target="44">
+   <probability>0.016299498</probability>
+  </transition>
+  <transition source="40" target="45">
+   <probability>0.0050868108</probability>
+  </transition>
+  <transition source="40" target="46">
+   <probability>0.010081168</probability>
+  </transition>
+  <transition source="40" target="47">
+   <probability>0.96853252</probability>
+  </transition>
+  <transition source="41" target="44">
+   <probability>0.012478058</probability>
+  </transition>
+  <transition source="41" target="45">
+   <probability>0.0004595486</probability>
+  </transition>
+  <transition source="41" target="46">
+   <probability>0.0021714147</probability>
+  </transition>
+  <transition source="41" target="47">
+   <probability>0.98489098</probability>
+  </transition>
+  <transition source="42" target="44">
+   <probability>0.027770064</probability>
+  </transition>
+  <transition source="42" target="45">
+   <probability>0.0032554048</probability>
+  </transition>
+  <transition source="42" target="46">
+   <probability>0.013934812</probability>
+  </transition>
+  <transition source="42" target="47">
+   <probability>0.95503972</probability>
+  </transition>
+  <transition source="43" target="44">
+   <probability>0.00129534</probability>
+  </transition>
+  <transition source="43" target="45">
+   <probability>0.00014014232</probability>
+  </transition>
+  <transition source="43" target="46">
+   <probability>0.028152783</probability>
+  </transition>
+  <transition source="43" target="47">
+   <probability>0.97041173</probability>
+  </transition>
+  <transition source="44" target="48">
+   <probability>0.0005320371</probability>
+  </transition>
+  <transition source="44" target="49">
+   <probability>0.0020266219</probability>
+  </transition>
+  <transition source="44" target="50">
+   <probability>0.99727826</probability>
+  </transition>
+  <transition source="44" target="51">
+   <probability>0.00016307686</probability>
+  </transition>
+  <transition source="45" target="48">
+   <probability>0.0091754759</probability>
+  </transition>
+  <transition source="45" target="49">
+   <probability>0.0076082599</probability>
+  </transition>
+  <transition source="45" target="50">
+   <probability>0.97463399</probability>
+  </transition>
+  <transition source="45" target="51">
+   <probability>0.0085822693</probability>
+  </transition>
+  <transition source="46" target="48">
+   <probability>0.0031976454</probability>
+  </transition>
+  <transition source="46" target="49">
+   <probability>0.0084054226</probability>
+  </transition>
+  <transition source="46" target="50">
+   <probability>0.98778711</probability>
+  </transition>
+  <transition source="46" target="51">
+   <probability>0.00060982596</probability>
+  </transition>
+  <transition source="47" target="48">
+   <probability>0.00099065118</probability>
+  </transition>
+  <transition source="47" target="49">
+   <probability>0.0020350026</probability>
+  </transition>
+  <transition source="47" target="50">
+   <probability>0.99409516</probability>
+  </transition>
+  <transition source="47" target="51">
+   <probability>0.0028791846</probability>
+  </transition>
+  <transition source="48" target="52">
+   <probability>0.65405681</probability>
+  </transition>
+  <transition source="48" target="53">
+   <probability>0.093478166</probability>
+  </transition>
+  <transition source="48" target="54">
+   <probability>0.16139282</probability>
+  </transition>
+  <transition source="48" target="55">
+   <probability>0.091072202</probability>
+  </transition>
+  <transition source="49" target="52">
+   <probability>0.59875313</probability>
+  </transition>
+  <transition source="49" target="53">
+   <probability>0.12286798</probability>
+  </transition>
+  <transition source="49" target="54">
+   <probability>0.11484355</probability>
+  </transition>
+  <transition source="49" target="55">
+   <probability>0.16353534</probability>
+  </transition>
+  <transition source="50" target="52">
+   <probability>0.76573447</probability>
+  </transition>
+  <transition source="50" target="53">
+   <probability>0.064026349</probability>
+  </transition>
+  <transition source="50" target="54">
+   <probability>0.12556263</probability>
+  </transition>
+  <transition source="50" target="55">
+   <probability>0.04467656</probability>
+  </transition>
+  <transition source="51" target="52">
+   <probability>0.2749201</probability>
+  </transition>
+  <transition source="51" target="53">
+   <probability>0.16468122</probability>
+  </transition>
+  <transition source="51" target="54">
+   <probability>0.13694998</probability>
+  </transition>
+  <transition source="51" target="55">
+   <probability>0.4234487</probability>
+  </transition>
+  <transition source="52" target="56">
+   <probability>0.010900018</probability>
+  </transition>
+  <transition source="52" target="57">
+   <probability>0.56751054</probability>
+  </transition>
+  <transition source="52" target="58">
+   <probability>0.070098615</probability>
+  </transition>
+  <transition source="52" target="59">
+   <probability>0.35149083</probability>
+  </transition>
+  <transition source="53" target="56">
+   <probability>0.19634694</probability>
+  </transition>
+  <transition source="53" target="57">
+   <probability>0.34519523</probability>
+  </transition>
+  <transition source="53" target="58">
+   <probability>0.028586124</probability>
+  </transition>
+  <transition source="53" target="59">
+   <probability>0.4298717</probability>
+  </transition>
+  <transition source="54" target="56">
+   <probability>0.082442062</probability>
+  </transition>
+  <transition source="54" target="57">
+   <probability>0.2460148</probability>
+  </transition>
+  <transition source="54" target="58">
+   <probability>0.21983929</probability>
+  </transition>
+  <transition source="54" target="59">
+   <probability>0.45170385</probability>
+  </transition>
+  <transition source="55" target="56">
+   <probability>0.049190872</probability>
+  </transition>
+  <transition source="55" target="57">
+   <probability>0.32626629</probability>
+  </transition>
+  <transition source="55" target="58">
+   <probability>0.23868506</probability>
+  </transition>
+  <transition source="55" target="59">
+   <probability>0.38585777</probability>
+  </transition>
+  <transition source="56" target="60">
+   <probability>0.20860651</probability>
+  </transition>
+  <transition source="56" target="61">
+   <probability>0.28106753</probability>
+  </transition>
+  <transition source="56" target="62">
+   <probability>0.23638032</probability>
+  </transition>
+  <transition source="56" target="63">
+   <probability>0.27394565</probability>
+  </transition>
+  <transition source="57" target="60">
+   <probability>0.24781848</probability>
+  </transition>
+  <transition source="57" target="61">
+   <probability>0.34695101</probability>
+  </transition>
+  <transition source="57" target="62">
+   <probability>0.02903782</probability>
+  </transition>
+  <transition source="57" target="63">
+   <probability>0.37619269</probability>
+  </transition>
+  <transition source="58" target="60">
+   <probability>0.19667008</probability>
+  </transition>
+  <transition source="58" target="61">
+   <probability>0.31145416</probability>
+  </transition>
+  <transition source="58" target="62">
+   <probability>0.24646651</probability>
+  </transition>
+  <transition source="58" target="63">
+   <probability>0.24540925</probability>
+  </transition>
+  <transition source="59" target="60">
+   <probability>0.16712217</probability>
+  </transition>
+  <transition source="59" target="61">
+   <probability>0.33007752</probability>
+  </transition>
+  <transition source="59" target="62">
+   <probability>0.26894542</probability>
+  </transition>
+  <transition source="59" target="63">
+   <probability>0.23385489</probability>
+  </transition>
+  <transition source="60" target="64">
+   <probability>0.23663545</probability>
+  </transition>
+  <transition source="60" target="65">
+   <probability>0.24507897</probability>
+  </transition>
+  <transition source="60" target="66">
+   <probability>0.23233225</probability>
+  </transition>
+  <transition source="60" target="67">
+   <probability>0.28595333</probability>
+  </transition>
+  <transition source="61" target="64">
+   <probability>0.37671645</probability>
+  </transition>
+  <transition source="61" target="65">
+   <probability>0.24433061</probability>
+  </transition>
+  <transition source="61" target="66">
+   <probability>0.039503</probability>
+  </transition>
+  <transition source="61" target="67">
+   <probability>0.33944994</probability>
+  </transition>
+  <transition source="62" target="64">
+   <probability>0.2725541</probability>
+  </transition>
+  <transition source="62" target="65">
+   <probability>0.24306226</probability>
+  </transition>
+  <transition source="62" target="66">
+   <probability>0.20323386</probability>
+  </transition>
+  <transition source="62" target="67">
+   <probability>0.28114979</probability>
+  </transition>
+  <transition source="63" target="64">
+   <probability>0.21477381</probability>
+  </transition>
+  <transition source="63" target="65">
+   <probability>0.22091862</probability>
+  </transition>
+  <transition source="63" target="66">
+   <probability>0.27451268</probability>
+  </transition>
+  <transition source="63" target="67">
+   <probability>0.28979489</probability>
+  </transition>
+  <transition source="64" target="68">
+   <probability>0.24517627</probability>
+  </transition>
+  <transition source="64" target="69">
+   <probability>0.24389002</probability>
+  </transition>
+  <transition source="64" target="70">
+   <probability>0.28595784</probability>
+  </transition>
+  <transition source="64" target="71">
+   <probability>0.22497587</probability>
+  </transition>
+  <transition source="65" target="68">
+   <probability>0.37481428</probability>
+  </transition>
+  <transition source="65" target="69">
+   <probability>0.26335994</probability>
+  </transition>
+  <transition source="65" target="70">
+   <probability>0.062237765</probability>
+  </transition>
+  <transition source="65" target="71">
+   <probability>0.29958802</probability>
+  </transition>
+  <transition source="66" target="68">
+   <probability>0.26456405</probability>
+  </transition>
+  <transition source="66" target="69">
+   <probability>0.23781343</probability>
+  </transition>
+  <transition source="66" target="70">
+   <probability>0.26180253</probability>
+  </transition>
+  <transition source="66" target="71">
+   <probability>0.23581999</probability>
+  </transition>
+  <transition source="67" target="68">
+   <probability>0.16540313</probability>
+  </transition>
+  <transition source="67" target="69">
+   <probability>0.26179794</probability>
+  </transition>
+  <transition source="67" target="70">
+   <probability>0.30617844</probability>
+  </transition>
+  <transition source="67" target="71">
+   <probability>0.26662049</probability>
+  </transition>
+  <transition source="68" target="72">
+   <probability>0.27851756</probability>
+  </transition>
+  <transition source="68" target="73">
+   <probability>0.19557617</probability>
+  </transition>
+  <transition source="68" target="74">
+   <probability>0.30714789</probability>
+  </transition>
+  <transition source="68" target="75">
+   <probability>0.21875838</probability>
+  </transition>
+  <transition source="69" target="72">
+   <probability>0.37614787</probability>
+  </transition>
+  <transition source="69" target="73">
+   <probability>0.24084575</probability>
+  </transition>
+  <transition source="69" target="74">
+   <probability>0.059011452</probability>
+  </transition>
+  <transition source="69" target="75">
+   <probability>0.32399493</probability>
+  </transition>
+  <transition source="70" target="72">
+   <probability>0.25520651</probability>
+  </transition>
+  <transition source="70" target="73">
+   <probability>0.24860195</probability>
+  </transition>
+  <transition source="70" target="74">
+   <probability>0.25242733</probability>
+  </transition>
+  <transition source="70" target="75">
+   <probability>0.24376421</probability>
+  </transition>
+  <transition source="71" target="72">
+   <probability>0.17502816</probability>
+  </transition>
+  <transition source="71" target="73">
+   <probability>0.24571691</probability>
+  </transition>
+  <transition source="71" target="74">
+   <probability>0.31684385</probability>
+  </transition>
+  <transition source="71" target="75">
+   <probability>0.26241109</probability>
+  </transition>
+  <transition source="72" target="0">
+   <probability>0.2463789</probability>
+  </transition>
+  <transition source="72" target="1">
+   <probability>0.2112412</probability>
+  </transition>
+  <transition source="72" target="2">
+   <probability>0.29693411</probability>
+  </transition>
+  <transition source="72" target="3">
+   <probability>0.24544579</probability>
+  </transition>
+  <transition source="73" target="0">
+   <probability>0.32596828</probability>
+  </transition>
+  <transition source="73" target="1">
+   <probability>0.27504806</probability>
+  </transition>
+  <transition source="73" target="2">
+   <probability>0.056058986</probability>
+  </transition>
+  <transition source="73" target="3">
+   <probability>0.34292468</probability>
+  </transition>
+  <transition source="74" target="0">
+   <probability>0.2483668</probability>
+  </transition>
+  <transition source="74" target="1">
+   <probability>0.23049575</probability>
+  </transition>
+  <transition source="74" target="2">
+   <probability>0.28083216</probability>
+  </transition>
+  <transition source="74" target="3">
+   <probability>0.24030529</probability>
+  </transition>
+  <transition source="75" target="0">
+   <probability>0.1666407</probability>
+  </transition>
+  <transition source="75" target="1">
+   <probability>0.24393754</probability>
+  </transition>
+  <transition source="75" target="2">
+   <probability>0.29703467</probability>
+  </transition>
+  <transition source="75" target="3">
+   <probability>0.29238708</probability>
+  </transition>
+ </HMM>
+</mixture>

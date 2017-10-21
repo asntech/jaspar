@@ -1,0 +1,39 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<br><br>
+<br>
+
+<div class="error-page">
+        <h2 class="headline text-yellow"> 404</h2>
+
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+
+          <p>
+            We could not find the page you were looking for.
+            Meanwhile, you may <a href="/">return to dashboard</a> or try using the search form.
+          </p>
+
+          <form id="quick_search" method="get" action="/search">
+                <div class="input-group input-group-lg">
+                  <input type="text" class="form-control" autocomplete="off" name="q" id="q" placeholder="What are you searching for?" data-toggle="tooltip" data-placement="bottom" title="You can search for gene of interest, JASPAR ID."/> 
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary btn-flat" type="submit">Search <i class="fa fa-search"></i></button>
+                      </span>
+                </div> 
+                  <div class="form-group">                                     
+                    <b>Examples:</b> <a href="/search?q=CEBPB&collection=CORE&tax_group=vertebrates">CEBPB</a>,
+                    <a href="/search?q=SPI1&collection=CORE&tax_group=vertebrates">SPI1</a>,
+                    <a href="/search?q=P17676&collection=CORE&tax_group=vertebrates"> P17676</a>,
+                   <a href="/search?q=ChIP-seq&collection=CORE&tax_group=vertebrates"> ChIP-seq</a>
+                  </div>
+                </form>
+        </div>
+        <!-- /.error-content -->
+</div>
+
+{% endblock content %}

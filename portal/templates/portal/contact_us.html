@@ -1,0 +1,107 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+    Contact us
+{% endblock %}
+
+{% block content_header %}
+ Contact Us
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Contact us</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-envelope-o"> </i> Correspondence</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            We appreciate feedback – criticism as well as suggestions for new content. Development and supervision of the JASPAR project is coordinated by the lab's of Albin Sandelin, Anthony Mathelier, Boris Lenhard and Wyeth Wasserman.
+           <hr> 
+            <ul>
+            <li><b><a href="http://albinsandelin.wixsite.com/sandelinlab" target="_blank">Albin Sandelin</a></b>: albin AT binf.ku.dk</li>
+            <li><b><a href="https://mathelierlab.com/" target="_blank">Anthony Mathelier</a></b>: anthony.mathelier AT ncmm.uio.no</li>  
+            <li><b><a href="http://group.genereg.net/" target="_blank">Boris Lenhard</a></b>: b.lenhard AT imperial.ac.uk</li>
+            <li><b><a href="http://cmmt.ubc.ca/wasserman-lab/" target="_blank">Wyeth Wasserman</a></b>: wyeth AT cmmt.ubc.ca</li>
+            </ul>
+            <hr>
+            <p>For technical problems please contact: </p>
+            <ul>
+            <li>
+            <b><a href="http://folk.uio.no/azizk/" target="_blank">Aziz Khan</a></b>: aziz.khan AT  ncmm.uio.no </li>
+
+            <li>
+            <b>Damir Baranasic</b>: damir.baranasic AT lms.mrc.ac.uk
+            </li>
+            <li>
+            <b>David Arenillas</b>: dave AT cmmt.ubc.ca
+            </li>
+            </ul>
+            <hr>
+            Follow JASPAR database on Twitter:<br><br>
+            <a href="https://twitter.com/jaspar_db?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="true">Follow @jaspar_db</a>
+          <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <!--
+
+        <div class="col-md-6">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Feedback</h3>
+
+              </div>
+            <div class="box-body">
+
+                {% if form %}
+
+                <p>If you would like to make an enquiry or provide your feedback, please use the form below and we will get back to you soon. Thank you.</p>
+                <form id="quick_email" action="/contact-us" method="post">
+                 {% csrf_token %}
+                {{ form|bootstrap }}
+                          
+                  <div class="form-group">
+                  <div class="box-footer clearfix">
+                  <button type="submit" class="pull-right btn btn-primary" name="sendEmail" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+                  </div>
+                  </div>
+               </form>
+              {% else %}
+
+                <div class="alert alert-{{ message_type }} alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+      -->
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+   JASPAR CORE matrix clustering
+{% endblock %}
+
+{% block content_header %}
+  JASPAR CORE matrix clustering
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Clustering</li>
+{% endblock %}
+{% block content %}
+
+{% block stylesheets %}
+ 
+{% endblock %}
+  
+ <div class="row">
+  <div class="col-md-12">
+      <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-search"></i>
+                <h3 class="box-title">Browse JASPAR CORE matrix clustering for five taxonomic groups</h3>
+              </div>
+          
+          <div class="box-body" id="jaspar-core">
+          
+            <div class="col-lg-2 col-xs-6">
+            <div class="box box-primary" >
+              
+              <img class="img-responsive img-square" src="{% static 'img/tetra_small.jpg' %}" width="100%" alt="JASPAR CORE Vertebrata">
+              <h4 align="center">Vertebrata</h4>
+              
+               <a href="/matrix-clusters/vertebrates">
+                <h5 align="center"> <i class="fa fa-code-fork"></i> Radial  tree &nbsp;</h5>
+              </a>
+              <a href="/matrix-clusters/vertebrates/?detail=true">
+                <h5 align="center"> <i class="fa fa-table"></i> Cluster summary </h5>
+              </a>
+            </div>
+            </div>
+
+            <div class="col-lg-2 col-xs-6">
+            <div class="box box-primary">
+              
+              <img class="img-responsive img-square" src="{% static 'img/C_elegans_stained_small.jpg' %}" width="100%" alt="JASPAR CORE Nematoda">
+              <h4 align="center">Nematoda</h4>
+              
+               <a href="/matrix-clusters/nematodes">
+                <h5 align="center"> <i class="fa fa-code-fork"></i> Radial  tree &nbsp;</h5>
+              </a>
+              <a href="/matrix-clusters/nematodes/?detail=true">
+                <h5 align="center"> <i class="fa fa-table"></i> Cluster summary </h5>
+              </a>
+            
+            </div>
+            </div>
+
+            <div class="col-lg-2 col-xs-6">
+            <div class="box box-primary">
+             
+              <img class="img-responsive img-square" src="{% static 'img/Drosophila_small.jpg' %}" width="100%" alt="JASPAR CORE Insecta">
+              <h4 align="center">Insecta</h4>
+                
+               <a href="/matrix-clusters/insects">
+                <h5 align="center"> <i class="fa fa-code-fork"></i> Radial  tree &nbsp;</h5>
+              </a>
+              <a href="/matrix-clusters/insects/?detail=true">
+                <h5 align="center"> <i class="fa fa-table"></i> Cluster summary </h5>
+              </a>
+            </div>
+            </div>
+
+            <div class="col-lg-2 col-xs-6">
+            <div class="box box-primary">
+              
+              <img class="img-responsive img-square" src="{% static 'img/Fern_small.jpg' %}" width="100%" alt="JASPAR CORE Plantae">
+              <h4 align="center">Plantae</h4>
+              
+               <a href="/matrix-clusters/plants">
+                <h5 align="center"> <i class="fa fa-code-fork"></i> Radial  tree &nbsp;</h5>
+              </a>
+              <a href="/matrix-clusters/plants/?detail=true">
+                <h5 align="center"> <i class="fa fa-table"></i> Cluster summary </h5>
+              </a>
+            </div>
+            </div>
+
+            <div class="col-lg-2 col-xs-6">
+            <div class="box box-primary">
+              
+              <img class="img-responsive img-square" src="{% static 'img/Morelasci_small.jpg' %}" width="100%" alt="JASPAR CORE Fungi">
+              <h4 align="center">Fungi </h4>
+             
+               <a href="/matrix-clusters/fungi">
+                <h5 align="center"> <i class="fa fa-code-fork"></i> Radial  tree &nbsp;</h5>
+              </a>
+               <a href="/matrix-clusters/fungi/?detail=true">
+                <h5 align="center"> <i class="fa fa-table"></i> Cluster summary </h5>
+              </a>
+            </div>
+            </div>
+            <!--
+            <div class="col-lg-4 col-xs-6">
+            <div class="box box-primary">
+              
+              <img class="img-responsive img-square" src="{% static 'img/tunicates_small.jpg' %}" width="100%" alt="Urochordata">
+              <h4 align="center">Urochordata</h4>
+              <a href="/search?q=&collection=CORE&tax_group=urochordates">
+                <h5 align="center"> <i class="fa fa-table"></i> Summary page</h5>
+              </a>
+               
+                <h5 align="center"> &nbsp;</h5>
+            </div>
+            </div>
+            -->
+
+          </div>
+
+          </div>
+      
+     </div>
+  </div>
+
+{% endblock %}

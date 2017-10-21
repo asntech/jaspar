@@ -1,0 +1,129 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+RESTful API Clients
+{% endblock %}
+
+{% block content_header %}
+API Clients
+{% endblock %}
+
+      
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+
+  <li><a href="/api/"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="#"> Clients</a></li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+
+<p>API clients handles the underlying details of how network requests are made and how responses are decoded.
+
+We are using <a href="http://www.coreapi.org/" target="_blank"> Core API </a> which is a format-independent Document Object Model for representing Web APIs. It's recommended to use below Core API clients for more robust and meaningful way to interact with your JASPAR API rather than constructing HTTP GET requests and decoding responses.
+</p> 
+
+<p><b>We are providing three clients: 
+  <ul>
+    <li><a href="#commandline"> Command line client</a></li>
+    <li><a href="#python"> Python client</a></li>
+    <li><a href="#javascript"> JavaScript client</a></li>
+  </ul>
+</b></p>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="commandline"><i class="fa fa-terminal"> </i> Command line client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+<pre># Install the command line client
+$ pip install coreapi-cli
+</pre>
+
+<pre class="pre-scrollable prettyprint linenums">
+# Load the schema document
+$ coreapi get http://127.0.0.1:8000/api/v1/matrix/
+
+# Interact with the API endpoint
+$ coreapi action v1 list
+</pre>
+    </div>
+    </div>
+</div>
+ 
+</div>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="python"><i class="fa fa-code"> </i> Python client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+    <pre class="prettyprint">
+# Install the Python client library
+$ pip install coreapi</pre>
+<pre class="pre-scrollable prettyprint linenums">
+import coreapi
+
+# Initialize a client & load the schema document
+client = coreapi.Client()
+schema = client.get("http://127.0.0.1:8000/api/v1/doc/")
+
+# Interact with the API endpoint
+action = ["v1", "list"]
+result = client.action(schema, action)
+</pre>
+    </div>
+    </div>
+</div>
+ 
+</div>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="javascript"><i class="fa fa-code"> </i> JavaScript client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+    <pre class="pre-scrollable prettyprint linenums" data-language="javascript"><code><span class="c">&lt;!-- Load the JavaScript client library --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/static/rest_framework/js/coreapi-0.1.0.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/api/v1/doc/schema.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre>
+
+Interact with API.
+<pre class="pre-scrollable prettyprint linenums">
+
+var coreapi = window.coreapi  // Loaded by `coreapi.js`
+var schema = window.schema    // Loaded by `schema.js`
+
+// Initialize a client
+var client = new coreapi.Client()
+
+// Interact with the API endpoint
+var action = ["v1", "list"]
+client.action(schema, action).then(function(result) {
+    // Return value is in 'result'
+})
+</pre>
+
+     </div>
+    </div>
+</div>
+ 
+</div>
+
+{% endblock %}
+
+
+

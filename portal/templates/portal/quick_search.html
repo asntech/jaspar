@@ -1,0 +1,143 @@
+{% load bootstrap %}
+
+<div class="col-md-12 col-lg-12 col-xs-12">
+<div class="box box-primary">
+					 
+<div class="box-body">
+	<form id="quick_search" method="get" action="/search">
+		<div class="input-group input-group-lg">
+			<input type="text" id="jaspar-search" value="{{ request.GET.q }}" class="form-control" autocomplete="off" name="q" placeholder="Search JASPAR database..." data-toggle="tooltip" data-placement="bottom" title="You can search by TF name or ID, species, taxon, UniProt ID or any other keyword."/> 
+			<span class="input-group-btn">
+			<button class="btn btn-primary btn-flat" type="submit">Search <i class="fa fa-search"></i></button>
+			</span>
+			</div> 
+			<div class="form-group">                                     
+			<b>Examples:</b>
+			<a href="/search?q=SPI1&collection=CORE&tax_group=vertebrates">SPI1</a>,
+			<a href="/search?q=P17676&collection=CORE&tax_group=vertebrates"> P17676</a>,
+			<a href="/search?q=ChIP-seq&collection=CORE&tax_group=vertebrates"> ChIP-seq</a>, 
+			<a href="/search?q=Homo sapiens&collection=CORE&tax_group=vertebrates"> Homo sapiens</a>
+
+			<a role="button" class="pull-right" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Advanced Options</strong></a>
+			</div>
+
+			<div class="collapse" id="advanced-search">
+			<hr>
+
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="collection">Collection: </label>
+				<div class="col-sm-9">
+
+					<select name="collection" class="form-control">
+						<option value="all"> All Collection</option>
+						<option value="CORE" {% if request.GET.collection == "CORE" %} selected {% endif %}> CORE</option>
+						<option value="CNE" {% if request.GET.collection == "CNE" %} selected {% endif %}> CNE</option>
+						<option value="PHYLOFACTS" {% if request.GET.collection == "PHYLOFACTS" %} selected {% endif %}> PHYLOFACTS</option>
+						<option value="SPLICE" {% if request.GET.collection == "SPLICE" %} selected {% endif %}> SPLICE</option>
+						<option value="POLII" {% if request.GET.collection == "POLII" %} selected {% endif %}> POLII</option>
+						<option value="FAM" {% if request.GET.collection == "FAM" %} selected {% endif %}> FAM</option>
+						<option value="PBM" {% if request.GET.collection == "PBM" %} selected {% endif %}> PBM</option>
+						<option value="PBM_HOMEO" {% if request.GET.collection == "PBM_HOMEO" %} selected {% endif %}> PBM HOMEO</option>
+						<option value="PBM_HLH" {% if request.GET.collection == "PBM_HLH" %} selected {% endif %}> PBM HLH</option>
+					</select>
+
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="tax_group">Taxonomy: </label>
+				<div class="col-sm-9">
+					<select name="tax_group" class="form-control">
+						<option value="all"> All Taxon</option>
+						<option value="vertebrates" {% if request.GET.tax_group == "vertebrates" %} selected {% endif %}> Vertebrates</option>
+						<option value="nematodes" {% if request.GET.tax_group == "nematodes" %} selected {% endif %}> Nematodes</option>
+						<option value="insects" {% if request.GET.tax_group == "insects" %} selected {% endif %}> Insects</option>
+						<option value="plants" {% if request.GET.tax_group == "plants" %} selected {% endif %}> Plants</option>
+						<option value="fungi" {% if request.GET.tax_group == "fungi" %} selected {% endif %}> Fungi</option>
+						<option value="urochordates" {% if request.GET.tax_group == "urochordates" %} selected {% endif %}> Urochordates</option>
+
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+
+			<br>
+
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="version">Versions: </label>
+				<div class="col-sm-9">
+					<select name="version" class="form-control">
+						<option value="all" {% if request.GET.version == "all" %} selected {% endif %}> All versions</option>
+						<option value="latest" {% if request.GET.version == "latest" %} selected {% endif %}> Latest version</option>
+					</select>
+
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+																															 
+				<label class="col-sm-3 control-label" for="type">Data Type: </label>
+				<div class="col-sm-9">
+					<select name="type" class="form-control">
+						<option value="all"> All Types</option>
+						{% for type in exp_type %}
+						<option value="{{ type.val }}" {% if request.GET.type == type.val %} selected {% endif %}> {{ type.val }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+
+			<br>
+
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+																															 
+				<label class="col-sm-3 control-label" for="class">Class: </label>
+				<div class="col-sm-9">
+					<select name="class" class="form-control">
+						<option value="all"> All Classes</option>
+						{% for class in tf_class %}
+						<option value="{{ class.val }}" {% if request.GET.class == class.val %} selected {% endif %}> {{ class.val }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+																															 
+				<label class="col-sm-3 control-label" for="family">Family: </label>
+				<div class="col-sm-9">
+					<select name="family" class="form-control">
+						<option value="all"> All Families</option>
+						{% for family in tf_family %}
+						<option value="{{ family.val }}" {% if request.GET.family == family.val %} selected {% endif %}> {{ family.val }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+																										
+			<hr>
+		</div>
+	</form>
+</div>          
+</div>                                                             
+</div>

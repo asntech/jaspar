@@ -1,0 +1,15 @@
+numpy
+biopython==1.69
+django==1.11
+bootstrap-admin==0.3.7.1
+djangorestframework==3.6.3
+markdown==2.6.8
+django-filter==1.0.4
+django-bootstrap-form==3.2.1
+djangorestframework-yaml==1.0.3
+djangorestframework-jsonp==1.0.2
+django_compressor==2.1.1
+django-debug-toolbar==1.8
+python-memcached==1.58
+coreapi
+django-rest-swagger

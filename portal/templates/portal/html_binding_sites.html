@@ -1,0 +1,64 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+    Contact us
+{% endblock %}
+
+{% block content_header %}
+ HTML Binding Sites
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">HTML sites</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-envelope-o"> </i> HTML Binding Sites</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            <table class="table table-hover">
+            <tr>
+              <th colspan="2" align="center">Site</th>
+              <th>Occurences</th>
+            </tr>
+            
+            {% for site in sites %}
+            <tr>
+            <td align="right">
+            {{ site.0 }}
+            </td>
+            <td align="left">
+              <b>{{ site.2 }}</b>{{ site.1 }}
+            </td>
+            <td>1</td>
+
+            </tr>
+
+            {% endfor %}
+
+            </table>
+
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div>
+
+{% endblock %}

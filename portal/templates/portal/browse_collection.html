@@ -1,0 +1,319 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Browse Collection {{ collection }}
+{% endblock %}
+
+{% block content_header %}
+  JASPAR {% if request.collection != 'CORE' %}Collection {% endif %}{{ collection|upper }}
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Collection {{ collection }}</li>
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+   
+    <div class="col-xs-12 col-md-9 col-xl-9">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title"> Total {{ pages.paginator.count }} profiles
+              </h3>
+              
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+             {% if request.GET.cart == '1' %}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-cart-plus"></i> {{ request.session.message }}
+            </div> 
+            {% endif %}
+
+            <div class="box-tools pull-left">
+              <form method="GET" id="page_size_form" class="form-inline">
+                                  Display 
+                <select name="page_size" id="page_size" class="form-control">
+                  <option value="10" {% if request.GET.page_size == '10' %} selected{% endif %}>10</option>
+                  <option value="25" {% if request.GET.page_size == '25' %} selected{% endif %}>25</option>
+                  <option value="50" {% if request.GET.page_size == '50' %} selected{% endif %}>50</option>
+                  <option value="100" {% if request.GET.page_size == '100' %} selected{% endif %}>100</option>
+                  <option value="250" {% if request.GET.page_size == '250' %} selected{% endif %}>250</option>
+                  <option value="500" {% if request.GET.page_size == '500' %} selected{% endif %}>500</option>
+                  <option value="1000" {% if request.GET.page_size == '1000' %} selected{% endif %}>1000</option>
+
+                </select>   profiles
+              </form>
+              </div>
+            
+            <form action="/analysis" id="analysis_form" method="POST">
+              {% csrf_token %}
+                <input type="hidden" name="collection_data" value="true">
+                <input type="hidden" name="page_number" value="{{ request.GET.page }}">
+                <input type="hidden" name="page_size" value="{{ request.GET.page_size }}">
+
+              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th><input data-toggle="tooltip" data-placement="bottom" title="Select all profiles" type="checkbox" class="flat-red" name="selectAll" id="check-all" /></th> 
+                  <th>ID</th>
+                  <th>Name</th>
+                  {% if request.collection == 'CNE' %}
+                  
+                  <th>Consensus</th>
+                  <th>Species</th>
+
+                  {% elif request.collection == 'PHYLOFACTS' %}
+                  
+                  <th>JASPAR</th>
+                  <th>TRANSFAC</th>
+
+                   {% elif request.collection == 'SPLICE' %}
+
+                    <th>Consensus</th>
+
+                  {% elif request.collection == 'FAM' %}
+
+                   <th>Included models</th>
+                  
+                  {% else %}
+
+                  <th>Species</th>
+                  <th>Class</th>
+                  <th>Family</th>
+
+                  {% endif %}
+                                    
+                  <th>Sequence logo</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for matrix in matrices %}
+                  <tr>
+                  <td><input type="checkbox" name="matrix_id" value="{{ matrix.id }}" 
+                  data-validation="checkbox_group" class="flat-red" data-validation-qty="min1"></td>
+                  
+                  <td><b><a href="/matrix/{{ matrix.base_id }}.{{ matrix.version }}">{{ matrix.base_id }}.{{ matrix.version }}</a></b></td>
+                  <td>{{ matrix.name }}</td>
+
+                  {% if request.collection == 'CNE' %}
+
+                  <td> {{ matrix.consensus }}</td>
+                    <td>
+                      {% for val in matrix.species %}                    
+                                          
+                      <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{ val.0 }}"
+                       target="_blank"> {{ val.1 }}</a>
+
+                     {% endfor %}
+                    
+                    </td>
+                  {% elif request.collection == 'PHYLOFACTS' %}
+
+                   <td> {{ matrix.jaspar }}</td>
+                  <td> {{ matrix.transfac }}</td>
+
+                  {% elif request.collection == 'FAM' %}
+
+                   <td> {{ matrix.included_models }}</td>
+
+                  {% elif request.collection == 'SPLICE' %}
+                  <td> {{ matrix.consensus }}</td>
+
+                  {% else %}
+
+                    <td>
+                    {% if matrix.species|length != 0 %}
+                      {% for val in matrix.species %}                    
+                                          
+                      <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{ val.0 }}"
+                       target="_blank"> {{ val.1 }}</a>
+
+                     {% endfor %}
+
+                     {% else %}
+                     NA
+
+                    {% endif %}
+                    
+                    </td>
+                  <td>{{ matrix.class|join:"::" }} </td>
+                  <td>{{ matrix.family|join:"::" }} </td>
+                  
+                  {% endif %}
+
+                  <td>
+                  <a href="/matrix/{{ matrix.base_id }}.{{ matrix.version }}">
+                  <img class="zoom" src="{% static 'logos/svg/' %}{{ matrix.base_id }}.{{ matrix.version }}.svg" width="150px" height="50px" title="Click to view details"></a>
+                  </td>
+
+                </tr>
+                {% endfor %}            
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            
+              </table>
+
+              <span class="pull-left"> Showing <b>{{ matrices|length }} </b> profiles of page  <b>{{ pages.number }}</b> from  <b>{{ pages.paginator.num_pages }}</b> pages
+              </span>
+
+               <ul class="pagination pull-right">
+
+                {% if pages.has_previous %}
+                      <li><a href="?page_size={{ request.GET.page_size }}&page={{ pages.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                  {% else %}
+                      <li class="disabled"><span><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+                  {% endif %}
+
+                  {% if pages.number|add:'-4' > 1 %}
+                      <li><a href="?page_size={{ request.GET.page_size }}&page={{ pages.number|add:'-5' }}">&hellip;</a></li>
+                  {% endif %}
+
+                  {% for i in pages.paginator.page_range %}
+                      {% if pages.number == i %}
+                          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% elif i > pages.number|add:'-5' and i < pages.number|add:'5' %}
+                          <li><a href="?page_size={{ request.GET.page_size }}&page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+
+                  {% if pages.paginator.num_pages > pages.number|add:'4' %}
+                      <li><a href="?page_size={{ request.GET.page_size }}&page={{ pages.number|add:'5' }}">&hellip;</a></li>
+                  {% endif %}
+
+                  {% if pages.has_next %}
+                      <li><a href="?page_size={{ request.GET.page_size }}&page={{ pages.next_page_number }}">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                  {% else %}
+                      <li class="disabled"><span><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+                  {% endif %}
+                </ul>
+
+
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+         <!-- /.box -->
+      </div>
+
+     <div class="col-xs-12 col-md-3 col-xl-3">
+         {% include "portal/analysis_modules.html" %}
+     </div>
+
+    </form>
+  </div>
+  
+  {% block javascript %}
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+  <script>
+
+  // Restrict presentation length
+  $('#scan_sequence').restrictLength( $('#pres-max-length') );
+
+  </script>
+
+  <script type="text/javascript">
+      $('#fill').click(
+    function(){
+        $('#scan_sequence').val($(this).val());
+          }
+      );
+
+      $("#page_size").change(function() {
+        $("#page_size_form").submit();
+      });
+  </script>
+
+
+<script type="text/javascript">
+      $('#scan_button').click(
+    function(evt){
+        if ($('#scan_sequence').val().charAt(0) != ">"){
+           $('#fasta_format_model').modal('show');
+          }
+        }
+      );
+  </script>
+
+  {% endblock %}
+
+<div id="fasta_format_model" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Input sequence is not FASTA-formatted</h4>
+      </div>
+      <div class="modal-body">
+        <p>Your input sequence is not FASTA-formatted to scan with selected matrix models. <br><br>
+          Read more about <a href="https://en.wikipedia.org/wiki/FASTA_format" target="_blank">fasta-formatted</a>. Or you can click and load the example sequence.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% block datatable %}
+<script>
+  $(function () {
+    $('#search_table').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": true,
+     // "ordering": true,
+      "info": false,
+      "autoWidth": true,
+      "bProcessing": true,
+      "bScrollInfinite": true,
+      "fixedHeader": false,
+      "bLengthChange": false,
+      //"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+      "searchHighlight": true,
+      "order": [[ 1, "asc" ]],
+      "responsive": true,               
+      //"sScrollY": "100%",
+      {% if request.collection == 'CNE' or request.collection == 'PHYLOFACTS' %} 
+      "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [0,5] }
+                      ],
+      {% elif request.collection == 'FAM' or request.collection == 'SPLICE' %}
+      "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [0,4] }
+                      ],
+      {% else %}
+       "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [0,6] }
+                      ],
+      {% endif %}
+      "oLanguage": {
+                     "sSearch": "Filter:",
+                     "sLengthMenu": "Display _MENU_ profiles",
+                   },
+      'dom': 'lfrtipB',
+        'buttons': [
+        'copy', 'csv'
+           ],
+    });
+  });
+</script>
+{% endblock %}
+{% endblock %}

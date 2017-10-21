@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mixture PUBLIC "-//ghmm.org//DOCUMENT ghmm V1.0//EN" "http://ghmm.sourceforge.net/xml/1.0/ghmm.dtd">
+<mixture version="1.0" noComponents="1">
+ <HMM name="" type="higher-order discrete">
+  <alphabet id="0">
+   <symbol code="0">A</symbol>
+   <symbol code="1">C</symbol>
+   <symbol code="2">G</symbol>
+   <symbol code="3">T</symbol>
+  </alphabet>
+  <state id="0" initial="1.00000000">
+   <discrete id="0">0.34228053, 0.15452324, 0.15375347, 0.34944275</discrete>
+  </state>
+  <state id="1" initial="0.00000000">
+   <discrete id="0" order="1">0.39521192, 0.15955703, 0.15366118, 0.29156987, 0.33054715, 0.16412461, 0.091940956, 0.41338729, 0.35612372, 0.15505975, 0.1605092, 0.32830733, 0.22507797, 0.15434567, 0.14320483, 0.47737153</discrete>
+  </state>
+  <state id="2" initial="0.00000000">
+   <discrete id="0" order="1">0.45318086, 0.14056974, 0.24327276, 0.16297664, 0.41814462, 0.24406223, 0.12730403, 0.21048912, 0.40693804, 0.15296683, 0.22680515, 0.21328998, 0.30427212, 0.16244139, 0.23832764, 0.29495884</discrete>
+  </state>
+  <state id="3" initial="0.00000000">
+   <discrete id="0" order="1">0.56258619, 0.11992897, 0.17662481, 0.14086003, 0.64790195, 0.15244388, 0.081903853, 0.11775032, 0.59710751, 0.098094272, 0.14180685, 0.16299136, 0.49597596, 0.13771183, 0.18090542, 0.18540678</discrete>
+  </state>
+  <state id="4" initial="0.00000000">
+   <discrete id="0" order="1">0.65400949, 0.039103079, 0.090428115, 0.21645932, 0.75981271, 0.068165723, 0.031251783, 0.14076978, 0.61934482, 0.05439769, 0.091875934, 0.23438156, 0.61160945, 0.05789621, 0.060684934, 0.26980941</discrete>
+  </state>
+  <state id="5" initial="0.00000000">
+   <discrete id="0" order="1">0.98561475, 0.0067148697, 0.0041754848, 0.0034948919, 0.98917845, 0.009645844, 0.00050294127, 0.00067276272, 0.98705381, 0.0094068979, 0.00081925523, 0.002720032, 0.98442206, 0.011669626, 0.0013925904, 0.0025157256</discrete>
+  </state>
+  <state id="6" initial="0.00000000">
+   <discrete id="0" order="1">0.9695954, 0.0052551416, 0.0025489867, 0.02260047, 0.97614783, 0.010029665, 0.0013540445, 0.012468459, 0.97947215, 0.0059127082, 0.00045176321, 0.014163382, 0.93086581, 0.022932225, 0.0023243631, 0.043877601</discrete>
+  </state>
+  <state id="7" initial="0.00000000">
+   <discrete id="0" order="1">0.90532777, 0.041245357, 0.025095934, 0.02833094, 0.63409587, 0.33458514, 0.021644514, 0.0096744752, 0.93742534, 0.037065656, 0.0060633295, 0.019445679, 0.71790611, 0.18782168, 0.08183503, 0.012437183</discrete>
+  </state>
+  <state id="8" initial="0.00000000">
+   <discrete id="0" order="1">0.12921089, 0.017099991, 0.8058416, 0.047847512, 0.45048546, 0.084956158, 0.29093598, 0.17362241, 0.19135724, 0.040045977, 0.68962127, 0.078975516, 0.17657435, 0.022508258, 0.78858723, 0.012330166</discrete>
+  </state>
+  <state id="9" initial="0.00000000">
+   <discrete id="0" order="1">0.56004623, 0.095866236, 0.15794077, 0.18614676, 0.54436871, 0.18154379, 0.028937635, 0.24514986, 0.30137772, 0.14111739, 0.17176517, 0.38573972, 0.56989468, 0.14002156, 0.16855217, 0.12153159</discrete>
+  </state>
+  <transition source="0" target="1">
+   <probability>1</probability>
+  </transition>
+  <transition source="1" target="1">
+   <probability>0.98024828</probability>
+  </transition>
+  <transition source="1" target="2">
+   <probability>0.019751718</probability>
+  </transition>
+  <transition source="2" target="3">
+   <probability>1</probability>
+  </transition>
+  <transition source="3" target="4">
+   <probability>1</probability>
+  </transition>
+  <transition source="4" target="5">
+   <probability>1</probability>
+  </transition>
+  <transition source="5" target="6">
+   <probability>1</probability>
+  </transition>
+  <transition source="6" target="7">
+   <probability>1</probability>
+  </transition>
+  <transition source="7" target="8">
+   <probability>1</probability>
+  </transition>
+  <transition source="8" target="9">
+   <probability>1</probability>
+  </transition>
+  <transition source="9" target="1">
+   <probability>1</probability>
+  </transition>
+ </HMM>
+</mixture>

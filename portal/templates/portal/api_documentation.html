@@ -1,0 +1,470 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+ API Documentation
+{% endblock %}
+
+{% block content_header %}
+ RESTful API Documentation <small>Version 1</small>
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">API Docs</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xs-12">
+        <div class="box box-primary">
+           <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-info-circle"> </i> RESTful API Introduction</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+           </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+
+         <p>The RESTful API provides programmatic access to JASPAR database. This RESTful API is browsable and also machine readable, which is implemented by using Django Rest Framework. <br>
+          </p>
+        <h3 class="page-header">API Versioning</h3>
+        <p>Currently, JASPAR API have Version 1, which is available at <a href="{{ request.build_absolute_uri }}v1">{{ request.build_absolute_uri }}v1</a>. New versions will be realeased here with new URL and there will be a prior notice before obsoleting any older API version.
+        </p>
+
+
+        <h3 class="page-header">Throttling</h3>
+        <p>Our API is using throttling in order to control the rate of requests that clients can make to the API. We allow <b>25</b> requests per second from the <b>same IP address</b>, but no limit on the total number of requests. <br>
+
+        Please feel free to write to us if you need higher request.
+        </p>
+
+        <h3 class="page-header">Pagination</h3>
+        <p>To provide a faster response to each request and to prevent larger accidental downloads, API provides pagination. Users can increase or decrease the number of records per pages by setting the <code>page_size</code>.
+        By default <code>page_size=10</code>, which can be increased up-to <b>100</b>.
+        <pre>{{ request.build_absolute_uri }}v1/matrix/?page=1&page_size=25</pre>
+        Further, to jump from one page to another, specify the <code>page</code> parameter.
+        <pre>{{ request.build_absolute_uri }}v1/matrix/?page=2</pre>
+        </p>
+      
+
+         <h3 class="page-header">Ordering</h3>
+        <p>
+        This supports simple query parameter controlled ordering of results. The query parameter is named <code>order</code>.
+
+        <br>For example, to order matrices by name:
+        <pre>{{ request.build_absolute_uri }}v1/matrix?order=name</pre>
+        The client may also specify reverse order by prefixing the field name with '-', like so:
+      <pre>{{ request.build_absolute_uri }}v1/matrix?order=-name</pre>
+        Multiple orderings may also be specified: <pre>{{ request.build_absolute_uri }}v1/matrix?order=name,version</pre>
+
+
+        <h3 class="page-header">Data output formats</h3>
+        <p>
+
+        REST API provides several data renderer types, that allow you to return responses with various media types.
+        
+        The query parameter is named <code>format</code>. <br> Currently, available data fromats are; <code>json</code>, <code>jsonp</code>, <code>api</code>, <code>ymal</code>, 
+        <code>jaspar</code>, <code>transfac</code>, <code>pfm</code>
+        <br>For example, to return all the matrices in JSON format:
+        <pre>{{ request.build_absolute_uri }}v1/matrix/?format=json</pre>
+        <br>For example, to return PFM values of matrix <code>MA0001.1</code> in JASPAR format:
+        <pre>{{ request.build_absolute_uri }}v1/matrix/MA0001.1/?format=jaspar</pre>
+        The aove URL will return this:
+        <pre>
+>MA0001.1 AGL3
+A [  0.00   3.00  79.00  40.00  66.00  48.00  65.00  11.00  65.00   0.00]
+C [ 94.00  75.00   4.00   3.00   1.00   2.00   5.00   2.00   3.00   3.00]
+G [  1.00   0.00   3.00   4.00   1.00   0.00   5.00   3.00  28.00  88.00]
+T [  2.00  19.00  11.00  50.00  29.00  47.00  22.00  81.00   1.00   6.00]
+        </pre>
+
+        </p>
+
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-book"> </i> RESTful API Documentation</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+  <p>JASPAR provides a RESTful API to access the data progmatically. The API comes with a human browsable interface and also programmatic interface, which return the results in JSON format. The current version of API is available at <b> <a href="{{ request.build_absolute_uri }}v1">{{ request.build_absolute_uri }}v1</a></b>
+  </p> 
+
+
+<h3>List matrix profiles</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      URL
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix</code> </b>
+      
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      Method
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      URL Params
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>None</code> <br>
+        
+        <b>Optional:</b> <br>
+
+        <code>q=[string]</code> Any query string, for example <code>q=Myc</code><br>
+        <code>collection=[alphanumeric]</code> Collection name, for example <code>collection=core</code><br>
+        <code>tax_group=[alphanumeric]</code> Taxonomic group, for example <code>tax_group=vertebrates</code><br>
+        <code>class=[alphanumeric]</code> TF class, for example <code>class=Zipper-Type</code><br> 
+        <code>family=[alphanumeric]</code> TF family, for example <code>family=SMAD factors</code><br>
+        <code>type=[alphanumeric]</code> Data type, for example <code>type=ChIP-seq</code><br>
+        <code>version=[string]</code> Matrix version, for example <code>version=latest</code><br>
+        
+        <b>Example URLs</b> <br>
+        <ul>
+            <li>
+             <a href="{{ request.build_absolute_uri }}v1/matrix?q=CEBPB">{{ request.build_absolute_uri }}v1/matrix?q=CEBPB</a>
+            </li>
+            <li>
+             <a href="{{ request.build_absolute_uri }}v1/matrix?q=Myc&collection=core&version=latest">{{ request.build_absolute_uri }}v1/matrix?q=Myc&collection=core&version=latest</a>
+            </li>
+        </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      Data Params
+    </th>
+    <td>
+      <b>Example:</b> <br>
+        URL: <a href="{{ request.build_absolute_uri }}v1/matrix?q=CEBPB&version=latest">{{ request.build_absolute_uri }}v1/matrix?q=CEBPB&version=latest</a><br>
+        Result: <br>
+
+<pre>
+{
+    "matrix_id": "MA0466.2",
+    "name": "CEBPB",
+    "collection": "CORE",
+    "base_id": "MA0466",
+    "version": "2",
+    "sequence_logo": "http://127.0.0.1:8000/static/logos/MA0466.2.png",
+    "url": "http://127.0.0.1:8000/api/v1/matrix/MA0466.2/"
+}
+</pre>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        Success Response
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> { "matrix_id": "MA0466.2" }</code><br>
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">
+        Sample Call
+      </th>
+      <td>
+          <span class="caption">This is a sample $.ajax() call.</span> <br>
+          <pre>
+$.ajax({
+    url: '{{ request.build_absolute_uri }}v1/matrix?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+      </td>
+    </tr>
+    
+    <tr>
+      <th valign="top">
+        Notes
+      </th>
+      <td>
+          <span class="caption">.</span> <br>
+      </td>
+    </tr>
+</table>
+
+
+<h3>Show individual matrix details</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      URL
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix/:matrix_id<code> </b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      Method
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      URL Params
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>matrix_id=[string]</code> <br>
+        example: matrix_id=MA0466.2<br><br>
+     
+        <b>Example URLs</b> <br>
+        <ul>
+            <li>
+             <a href="{{ request.build_absolute_uri }}v1/matrix/MA0466.2/">{{ request.build_absolute_uri }}v1/matrix/MA0466.2/</a>
+            </li>
+            
+        </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      Data Params
+    </th>
+    <td>
+      <b>Example:</b> <br>
+<pre>
+    {
+        "matrix_id": "MA0466.2",
+        "name": "CEBPB",
+        "version": 2,
+        "base_id": "MA0466",
+        "collection": "CORE",
+        "tax_group": "vertebrates",
+        "family": "C/EBP-related",
+        "tfe_id": "604",
+        "type": "HT-SELEX",
+        "class": "Basic leucine zipper factors (bZIP)",
+        "comment": "Data is from Taipale HTSELEX DBD (2013)",
+        "medline": "8632009",
+        
+        "tffm": {
+            "log_p_1st_order": -88949.7,
+            "experiment_name": "wgEncodeAwgTfbsSydhImr90CebpbIggrabUniPk.narrowPeak",
+            "version": 1,
+            "log_p_detailed": -90462.6,
+            "base_id": "TFFM0010",
+            "tffm_id": "TFFM0010.1"
+        },
+        "pfm": {
+            "A": [10585.0,33.0,17.0,10930.0,393.0,3521.0,2527.0,22732.0,22732.0,155.0],
+            "C": [5007.0,34.0,14.0,34.0,22732.0,555.0,22732.0,636.0,9.0,10617.0],
+            "T": [859.0,22732.0,22732.0,2237.0,2217.0,486.0,2135.0,0.0,9.0,12116.0],
+            "G": [6282.0,8.0,2276.0,11803.0,221.0,22732.0,3.0,9.0,0.0,940.0]
+        },
+        "species": {
+            "9606": {
+                "name": "Homo sapiens",
+                "tax_id": 9606
+            }
+        },
+        "pazar_tf_id": "TF0000609",
+        "uniprot_ids": [
+            "P17676"
+        ],
+        
+    }
+
+</pre>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        Success Response
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> { "matrix_id": "MA0466.2" }</code><br>
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">
+        Sample Call
+      </th>
+      <td>
+          <span class="caption">This is a sample $.ajax() call.</span> <br>
+          <pre>
+$.ajax({
+    url: '{{ request.build_absolute_uri }}v1/matrix/MA0466.2?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+      </td>
+    </tr>
+  
+</table>
+
+<h3>List matrix versions</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      URL
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix/:base_id/versions/<code> </b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      Method
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      URL Params
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>base_id=[string]</code> <br>
+        example: base_id=MA0466<br><br>
+     
+        <b>Example URLs</b> <br>
+        <ul>
+            <li>
+             <a href="{{ request.build_absolute_uri }}v1/matrix/MA0466/versions/">{{ request.build_absolute_uri }}v1/matrix/MA0466/versions/</a>
+            </li>
+            
+        </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      Data Params
+    </th>
+    <td>
+      <b>Example:</b> <br>
+<pre>
+{
+    "count": 2,
+    "results": [
+        {
+            "name": "CEBPB",
+            "matrix_id": "MA0466.1",
+            "collection": "CORE",
+            "version": 1,
+            "sequence_logo": "http://127.0.0.1:8000/static/logos/MA0466.1.png",
+            "base_id": "MA0466"
+        },
+        {
+            "name": "CEBPB",
+            "matrix_id": "MA0466.2",
+            "collection": "CORE",
+            "version": 2,
+            "sequence_logo": "http://127.0.0.1:8000/static/logos/MA0466.2.png",
+            "base_id": "MA0466"
+        }
+    ]
+} 
+
+</pre>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        Success Response
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> { "base_id": "MA0466" }</code><br>
+      </td>
+    </tr>
+
+    <tr>
+      <th valign="top">
+        Sample Call
+      </th>
+      <td>
+          <span class="caption">This is a sample $.ajax() call.</span> <br>
+<pre>
+$.ajax({
+    url: '{{ request.build_absolute_uri }}v1/matrix/MA0466/versions?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+      </td>
+    </tr>
+        
+   
+</table>
+
+  
+     </div>
+    </div>
+</div>
+
+  
+</div>
+
+
+
+
+
+{% endblock %}

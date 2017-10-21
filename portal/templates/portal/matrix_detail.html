@@ -1,0 +1,831 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+{% block twitter %}        
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@khanaziz84" />
+  <meta name="twitter:creator" content="@khanaziz84" />
+  <meta name="twitter:title" content="Matrix profile: {{ matrix.name }} - {{ matrix.base_id }}.{{ matrix.version }} - from JASPAR 2018" />
+  <meta name="twitter:url" content="http://{{ request.get_host }}/matrix/{{ matrix.base_id }}.{{ matrix.version }}" />
+  <meta name="twitter:description" content="JASPAR is the largest open-access database of curated and non-redundant transcription factor (TF) binding profiles from six different taxonomic groups." />
+  <meta name="twitter:image" content="http://{{ request.get_host }}{% static 'logos/' %}{{ matrix.base_id }}.{{ matrix.version }}.png" />
+  {% endblock %}
+  <!-- for Facebook -->  
+  {% block facebook %}        
+  <meta property="og:title" content="Matrix profile: {{ matrix.name }} - {{ matrix.base_id }}.{{ matrix.version }} - JASPAR 2018" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://{{ request.get_host }}{% static 'logos/' %}{{ matrix.base_id }}.{{ matrix.version }}.png" />
+  <meta property="og:url" content="http://{{ request.get_host }}/matrix/{{ matrix.base_id }}.{{ matrix.version }}" />
+  <meta property="og:description" content="JASPAR is the largest open-access database of curated and non-redundant transcription factor (TF) binding profiles from six different taxonomic groups." />
+{% endblock %}
+
+{% block title %}
+    {{ matrix.name }} - {{ matrix.base_id }}.{{ matrix.version }} -  profile summary
+{% endblock %}
+
+{% block content_header %}
+Detailed information of matrix profile <b>{{ matrix.base_id }}.{{ matrix.version }} </b>
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Matrix > {{ matrix.base_id }}.{{ matrix.version }}</li>
+{% endblock %}
+
+{% block content %}
+
+          {% if request.GET.cart == '1' %}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-cart-plus"></i>  You have added profile <b>{{ matrix.base_id }}.{{ matrix.version }}</b> to the cart.
+            </div> 
+            {% endif %}
+
+            {% if request.GET.remove %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-trash"></i> You have removed profile <b>{{ matrix.base_id }}.{{ matrix.version }}</b> from the cart.
+            </div>
+            {% endif %}
+
+    <div class="row">
+        <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title">Profile summary</h3>
+            
+              <div class="box-tools pull-right">              
+                <a href='?revcomp={% if request.GET.revcomp %}{% if request.GET.revcomp == "1" %}0 {% else %}1 {% endif %}{% else %}1{% endif %}'>
+                  
+                  {% if matrix.id|stringformat:"i" in request.session.imatrix_ids %}
+
+                  <a href="?remove={{ matrix.id }}">
+                  <button type="submit" class="btn btn-danger btn-md" id="cart_submit" name="cart" value="cart" title="Remove from cart"><i class="fa fa-shopping-cart"></i> Remove</button>
+                  </a>
+               
+                 </form>
+
+                {% else %}
+                  <form action="/analysis" method="POST" id="analysis_form">
+                  {% csrf_token %}
+                  <input type="hidden" name="matrix_id" value="{{ matrix.id }}">
+
+                  <button type="submit" class="btn btn-success btn-md" id="cart_submit" name="cart" value="cart" title="Add to cart"><i class="fa fa-cart-plus"></i> Add </button>
+                  <input type="hidden" name="profile_data" value="True">
+              </form>
+              {% endif %}
+              </a>
+                
+              </div>
+         
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover" id="matrix-detail">
+              <tr id="profile-detail">
+                <td><b>Name:</b>  </td>
+                <td>{{ matrix.name }}</td>
+              </tr>
+
+              <tr>
+                <td><b>Matrix ID: </b> </td>
+                <td>{{ matrix.base_id }}.{{ matrix.version }}</td>
+              </tr>
+              <tr>
+                <td><b>Class:</b>  </td>
+                <td>{{ class|join:"::" }}</td>
+              </tr>
+
+              <tr>
+                <td><b>Family:</b>  </td>
+                <td>{{ family|join:"::" }}</td>
+              </tr>
+
+               <tr>
+                <td><b>Collection:</b>  </td>
+                <td>{{ matrix.collection }}</td>
+              </tr>
+              <tr>
+                <td><b>Taxon:</b>  </td>
+                <td>{{ tax_group|title }}</td>
+              </tr>
+              <tr>
+                <td><b>Species:</b>  </td>
+                <td>
+                {% for specie in species %} 
+                <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{ specie.tax_id.tax_id }}" target="_blank"> 
+                {{ specie.tax_id.species }}
+                </a>
+                {% endfor %}
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>Data Type:</b>  </td>
+                <td>{{ type }}</td>
+              </tr>
+               <tr>
+                <td><b>Validation:</b>  </td>
+                <td>
+                  {% if pubmed_ids and pubmed_ids.0 != '-' %}
+                  {% for medline in pubmed_ids %}
+                  <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ medline }}" target="_blank">
+
+                  {{ medline }}
+
+                  </a>
+                  {% endfor %}
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td><b>Uniprot ID:</b>  </td>
+                <td>
+                {% for protein in proteins %}
+                <a href="http://www.uniprot.org/uniprot/{{ protein.acc }}" target="_blank"> {{ protein.acc }} </a> &nbsp;
+                
+                {% endfor %}
+                </td>
+              </tr>
+              
+              <tr>
+                <td><b>Pazar TF:</b>  </td>
+                <td>  {% if pazar_tf_ids and pazar_tf_ids.0 != '-' %}
+                      {% for pazar_tf_id in pazar_tf_ids %}
+                      <a href="http://www.pazar.info/cgi-bin/tf_search.cgi?geneID={{ pazar_tf_id }}" target="_blank"> {{ pazar_tf_id }} </a>
+                      {% endfor %}
+                      {% endif %}
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>TFBSshape ID:</b>  </td>
+                <td>
+                    {% if tfbs_shape_id and tfbs_shape_id != '-' %}
+                     <a href="http://rohslab.cmb.usc.edu/TFBSshape/?tfid={{ tfbs_shape_id }}&sourceDB=jaspar#tabs-3" target="_blank"> {{ tfbs_shape_id }} </a>
+                     {% endif %}
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>TFencyclopedia IDs:</b>  </td>
+                <td>
+                  {% if tfe_ids and tfe_ids.0 != '-' %}
+                  {% for tfe_id in tfe_ids %}
+                  <a href="http://cisreg.cmmt.ubc.ca/cgi-bin/tfe/articles.pl?tfid={{ tfe_id }}" target="_blank">{{ tfe_id }} </a>
+                  {% endfor %}
+                  {% endif %}
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>Source:</b>  </td>
+                <td>
+                {% if source == 'ENCODE' %}
+                <a href="https://www.encodeproject.org/" target="_blank"> {{ source }} </a>
+
+                {% elif source == 'ENCODE reprocessed in ReMap2' %}
+                <a href="http://remap.cisreg.eu/" target="_blank"> {{ source }} </a>
+                
+                {% elif source == 'PAZAR' %}
+                <a href="http://www.pazar.info/" target="_blank"> {{ source }} </a>
+
+                {% elif source == 'ChIP-seq' %}
+                 {{ source }}
+                {% else %}
+               <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ source }}" target="_blank"> {{ source }} </a>
+                {% endif %}
+                
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>Comment:</b>  </td>
+                <td>{{ comment }}</td>
+              </tr>
+
+              </table>
+              <hr>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+    
+         <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sequence logo</h3>
+
+              <div class="box-tools pull-right"> <a href="{% static 'logos/svg/' %}{{ matrix.base_id }}.{{ matrix.version }}{% if request.GET.revcomp == '1' %}.rc{% endif %}.svg" target="_blank">
+                <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download SVG</button></a>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="sequence-logo">
+            <p align="center" id="demo-end">
+              <img class="img-fluid" style="max-width: 100%; height: 200px;" src="{% static 'logos/svg/' %}{{ matrix.base_id }}.{{ matrix.version }}{% if request.GET.revcomp == '1' %}.rc{% endif %}.svg" height="200px" align="center">
+            </p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Frequency matrix</h3>
+              <div class="box-tools pull-right">
+              <a href="/api/v1/matrix/{{ matrix.base_id }}.{{ matrix.version }}.jaspar" target="_blank">
+                  <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-download"> </i> JASPAR</button> </a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}.{{ matrix.version }}.transfac" target="_blank">
+                  <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-download"> </i> TRANSFAC</button></a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}.{{ matrix.version }}.meme" target="_blank">
+                  <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-download"> </i> MEME</button></a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}.{{ matrix.version }}.pfm" target="_blank">
+                  <button type="button" class="btn btn-sm btn-primary"><i class="fa  fa-download"> </i> RAW PFM</button></a> &nbsp;&nbsp;&nbsp;
+                <!--
+                <a href="/download/pfm/{{matrix.base_id}}.{{ matrix.version }}.pfm" target="_blank">
+                <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-download"> </i> Download PFM</button>
+                </a>
+                -->
+                <a href='?revcomp={% if request.GET.revcomp %}{% if request.GET.revcomp == "1" %}0 {% else %}1 {% endif %}{% else %}1{% endif %}'>
+                <button type="button" class="btn btn-sm btn-success" title="Reverse complement"><i class="fa fa-exchange"> </i> Reverse comp.</button>
+                </a>
+                <!--
+                <button type="button" class="btn btn-sm btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              -->
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+              
+                <tr>
+                <th>A&nbsp;[ </th>
+                {% for value in A %}
+                  <td align="left"> {{ value|floatformat:0 }} </td>
+                {% endfor %}
+                <th>]</th>
+                </tr>
+
+                <tr id="frequency-matrix">
+                <th>C&nbsp;[ </th>
+                {% for value in C %}
+                  <td align="left"> {{ value|floatformat:0 }} </td>
+                {% endfor %}
+                <th>]</th>
+                </tr>
+
+                 <tr>
+                <th>G&nbsp;[ </th>
+                {% for value in G %}
+                  <td align="left"> {{ value|floatformat:0 }} </td>
+                {% endfor %}
+                <th>]</th>
+                </tr>
+
+                 <tr>
+                <th>T&nbsp;[ </th>
+                {% for value in T %}
+                  <td align="left"> {{ value|floatformat:0 }} </td>
+                {% endfor %}
+                <th>]</th>
+                </tr>
+               
+              </table>
+              </div>
+                 
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Binding sites information</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             {% if tfbs_info_fasta %}
+              <a href="/sites/{{ matrix.base_id }}.{{ matrix.version }}" target="_blank">
+                  <button type="button" class="btn btn-primary"><i class="fa fa-html5"> </i> HTML file</button> </a> &nbsp;
+              <a href="/download/sites/{{ matrix.base_id }}.{{ matrix.version }}.sites" target="_blank">
+                  <button type="button" class="btn btn-primary"><i class="fa fa-list-alt"> </i> FASTA file</button></a> &nbsp;
+                {% if tfbs_info_bed %}
+              <a href="/download/bed_files/{{ matrix.base_id }}.{{ matrix.version }}.bed" target="_blank">
+                  <button type="button" class="btn btn-primary"><i class="fa  fa-file-text-o"> </i> BED file</button></a>
+                {% endif %}
+
+              {% else %}
+              <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>No Binding sites available for this model.
+               </div>
+              {% endif %}
+                                         
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">TFBS profiles</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {% if tfbs_shape_id %}
+              <a href="http://rohslab.cmb.usc.edu/TFBSshape/?tfid={{ tfbs_shape_id }}&sourceDB=jaspar#tabs-3" target="_blank">
+              <img src="{% static 'img/TFBSshape_logo.png' %}" width="150px">
+              </a>
+              {% else %}
+              <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>No TFBSshape profile for this model.
+               </div>
+              {% endif %}
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">External links</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {% if tfe_ids and tfe_ids != '-' %}
+              {% for tfe_id in tfe_ids %}
+              <a href="http://cisreg.cmmt.ubc.ca/cgi-bin/tfe/articles.pl?tfid={{ tfe_id }}" target="_blank">
+              <img src="{% static 'img/tfe_logo.png' %}" height="30px"> &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              {% endfor %}
+              {% endif %}
+              
+              {% for protein in proteins %}
+              <a href="http://www.rcsb.org/pdb/protein/{{ protein.acc }}?evtc=Suggest&evta=UniProtAccession&evtl=OtherOptions" target="_blank" title="{{ protein.acc }}">
+              <img src="{% static 'img/pdb_logo.png' %}" height="30px"> &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              {% endfor %}
+             
+              {% for protein in proteins %}
+              <a href="http://www.uniprot.org/uniprot/{{ protein.acc }}" title="{{ protein.acc }}" target="_blank">
+              <img src="{% static 'img/uniprot_logo.png' %}" height="30px"> &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              {% endfor %}
+             
+             {% if pazar_tf_ids and pazar_tf_ids.0 != '-' %}
+             {% for pazar_tf_id in pazar_tf_ids %}
+              <a href="http://www.pazar.info/cgi-bin/tf_search.cgi?geneID={{ pazar_tf_id }}" target="_blank">
+              <img src="{% static 'img/pazar_logo.gif' %}" height="30px"> &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              {% endfor %}
+             {% endif %}
+
+             {% if remap_tf_name and remap_tf_name != '-' %}
+                <a href="http://tagc.univ-mrs.fr/remap/factor.php?TF={{ remap_tf_name }}&page=overview" target="_blank">
+                 <img src="{% static 'img/remap_v2_logo.png' %}" height="30px"> </a>
+             {% endif %}
+             <!--
+              {% if matrix.collection == "CORE" %}
+            
+              <a href="http://www.genecards.org/cgi-bin/carddisp.pl?gene={{ matrix.name }}" target="_blank">
+              <img src="{% static 'img/genecards_logo.png' %}" height="30px"> &nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              
+              {% endif %}
+              -->
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      
+    </div>
+
+    <div class="row">
+
+    <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" id="detailTabs">
+              <li class="active"><a href="#version" data-toggle="tab">Version information</a></li>
+              <li><a href="#centrality" data-toggle="tab">ChIP-seq centrality</a></li>
+              <li id="more-details"><a href="#tfmm_first_order" data-toggle="tab">First order TFFM</a></li>
+              <li><a href="#tffm_detailed" data-toggle="tab">Detailed TFFM</a></li>
+              <li><a href="#details" data-toggle="tab">More details</a></li>
+            </ul>
+            <div class="tab-content">
+            
+              <div class="active tab-pane" id="version">
+               <table id="version_table" class="table table-responsive table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Matrix ID</th>
+                  <th>Base ID</th>
+                  <th>Version</th>
+                  <th>Name</th>
+                  <th>Species</th>
+                  <th>Family</th>
+                  <th>Class</th>
+                  <th>Sequence logo</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for version in versions %}
+                  <tr>
+                  <td><b><a href="/matrix/{{ version.base_id }}.{{ version.version }}">{{ version.base_id }}.{{ version.version }}</a></b></td>
+                  <td><b><a href="/matrix/{{ version.base_id }}/versions">{{ version.base_id }}</a></b></td>
+                  <td><b>{{ version.version }}</b></td>
+                  <td>{{ version.name }}</td>
+                  <td>
+                  {% for val in version.species %}                    
+                                        
+                    <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{ val.0 }}"
+                     target="_blank"> 
+                     {{ val.1 }}
+                    </a> <br>
+
+                  {% endfor %}
+                  </td>
+                  <td>{{ version.family|join:"::" }}</td>
+                  <td>{{ version.class|join:"::" }}</td>
+                  <td><img class="zoom" src="{% static 'logos/svg/' %}{{ version.base_id }}.{{ version.version }}.svg" width="150px" height="50px"></td>
+                </tr>
+                {% endfor %}            
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="8" align="right">
+                  <a href="/api/v1/matrix/{{ matrix.base_id }}/versions.jaspar" target="_blank">
+                  <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-download"> </i> JASPAR</button> </a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}/versions.transfac" target="_blank">
+                  <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-download"> </i> TRANSFAC</button></a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}/versions.meme" target="_blank">
+                  <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-download"> </i> MEME</button></a> &nbsp;
+              <a href="/api/v1/matrix/{{ matrix.base_id }}/versions.pfm" target="_blank">
+                  <button type="button" class="btn btn-sm btn-warning"><i class="fa  fa-download"> </i> RAW PFM</button></a>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+     
+              </div>
+
+               <div class="tab-pane" id="centrality">
+              {% if centrality_logp %}
+              <h4> log(P-value) = {{ centrality_logp }} </h4>
+              <img src="/download/centrality_files/{{ matrix.base_id }}.{{ matrix.version }}.png" class="img img-responsive">
+              {% else %}
+                <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>There is no centrality information of the model.
+               </div>
+              {% endif %}
+          
+              </div>
+
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tfmm_first_order">
+              {% if tffm == None %}
+              <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>TFFM first order profile doesn't exist for this profile.
+               </div>
+              
+              {% else %}
+
+                 <div class="row">
+                  <div class="col-md-4">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-table"></i>
+                        <h3 class="box-title">TFFM details</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                          <tr>
+                            <th>TFFM ID: </th>
+                            <td> {{ tffm.base_id }}.{{ tffm.version}} </td>
+                          </tr>
+                          <!--
+                          <tr>
+                            <th>Experiment name: </th>
+                            <td> {{ tffm.experiment_name }} </td>
+                          </tr>
+                          -->
+                          {% if tffm.log_p_1st_order != None %}
+                          <tr>
+                            <th colspan="2"> <h4> ChIP-seq Centrality</h4></th>
+                          </tr>
+                          <tr>
+                            <th>log(P-value): </th>
+                            <td> {{ tffm.log_p_1st_order }} </td>
+                          </tr>
+                          {% endif %}
+                        </table>
+                        {% if tffm.log_p_1st_order != None %}
+                        <p>
+                          <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_first_order_trained.hits.svg" width="100%">
+                        </p>
+                        {% endif %}
+
+                        <p>
+                        <a href="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_first_order_trained.xml" target="_blank">
+                         <button type="button" class="btn btn-primary"><i class="fa fa-file-code-o"> </i> TFFM as XML</button> </a>
+                        <a href="http://www.cisreg.ca/TFFM/doc/" target="_blank">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-book"> </i> TFFM Docs and API </button></a>
+                        </p>
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-md-8">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-image"></i>
+                        <h3 class="box-title">TFFM first order summary logos</h3>
+                        <div class="box-tools pull-right">
+                        <a href="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_first_order_trained_dense_logo.svg" target="_blank">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download SVG</button>
+                        </a>
+                        </div>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">                      
+                      <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_first_order_trained_dense_logo.svg" width="100%">
+                      <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_first_order_trained_summary_logo.svg" width="100%">
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                </div>
+              {% endif %}
+              </div>
+
+              <div class="tab-pane" id="tffm_detailed">
+              {% if tffm == None %}
+               <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i>TFFM detailed profile doesn't exist for this profile.
+               </div>
+              {% else %}
+                 <div class="row">
+                  <div class="col-md-4">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-table"></i>
+                        <h3 class="box-title">TFFM details</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                          <tr>
+                            <th>TFFM ID: </th>
+                            <td> {{ tffm.base_id }}.{{ tffm.version}} </td>
+                          </tr>
+                          <!--
+                          <tr>
+                            <th>Experiment name: </th>
+                            <td> {{ tffm.experiment_name }} </td>
+                          </tr>
+                          -->
+                          {% if tffm.log_p_detailed != None %}
+                          <tr>
+                            <th colspan="2"> <h4> ChIP-seq Centrality</h4></th>
+                          </tr>
+                          <tr>
+                            <th>log(P-value): </th>
+                            <td> {{ tffm.log_p_detailed }} </td>
+                          </tr>
+                        {% endif %}
+                        </table>
+                        {% if tffm.log_p_detailed != None %}
+                        <p>
+                          <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_detailed_trained.hits.svg" width="100%">
+                        </p>
+                        {% endif %}
+                        <p>
+                        <a href="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_detailed_trained.xml" target="_blank">
+                         <button type="button" class="btn btn-primary"><i class="fa fa-file-code-o"> </i> TFFM as XML</button> </a>
+                        <a href="http://www.cisreg.ca/TFFM/doc/" target="_blank">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-book"> </i> TFFM Docs and API </button></a>
+                        </p>
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-md-8">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-image"></i>
+                        <h3 class="box-title">TFFM detailed summary logos</h3>
+                        <div class="box-tools pull-right">
+                        <a href="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_detailed_trained_dense_logo.svg" target="_blank">
+                          <button type="button" class="btn btn-md btn-primary"><i class="fa fa-download"> </i> Download SVG</button>
+                        </a>
+                        </div>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">                      
+                      <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_detailed_trained_dense_logo.svg" width="100%">
+                      <img src="{% static 'TFFM/' %}{{ tffm.base_id }}.{{ tffm.version }}/TFFM_detailed_trained_summary_logo.svg" width="100%">
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                </div>
+              {% endif %}
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="details">
+              <p><b>Description:</b> {{ description }}</p>
+              <p><b>Alias:</b> {{ alias }} </p>
+              <p><b>Symbol:</b> {{ symbol }} </p>
+              <p><b>Consensus:</b> {{ consensus }} </p>
+              <p><b>Included Models:</b> {{ included_models }} </p>
+              <p><b>GC Content:</b> {{ gc_content }} </p>
+              </div>
+              
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+      </div>
+
+            
+        <!-- /.col -->
+      </div>
+
+    {% block javascript %}
+
+      <script>
+  
+        var tour = {
+          id: 'jaspar-home',
+          showPrevButton: true,
+          scrollDuration: 700,
+          steps: [
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'search',
+              placement: 'bottom',
+            },
+            {
+              title: 'Browse JASPAR CORE',
+              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
+              target: 'jaspar-core',
+              placement: 'top',
+            },
+              {
+              title: 'Browse Collections',
+              content: 'Browse the JASPAR collections',
+              target: 'jaspar-browse',
+              placement: 'bottom',
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence for which to look for a JASPAR TF binding profile.',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/matrix/MA0037.2';
+              }
+            },
+            {
+              title: 'Profile summary',
+              content: 'A detail summary box of individual profile',
+              target: 'profile-detail',
+              placement: 'right',
+              //xOffset: "center",
+              arrowOffset: "left",
+            },
+             {
+              title: 'Frequency Matrix',
+              content: 'Position frequency matrix (PFM) of the profile with download and reverse complement options.',
+              target: 'frequency-matrix',
+              placement: 'left',
+              arrowOffset: "right",
+            },
+            {
+              title: "Profile versions",
+              content: "Version(s) information of matrix profile (MA0037).",
+              target: "version_table",
+              placement: "bottom",
+              onNext: function() {
+
+                $('#detailTabs a[href="#tfmm_first_order"]').tab('show') 
+
+              }
+             
+            },
+             {
+              title: "TFFM and more details",
+              content: "ChIP-seq centrality, detailed and first order TFFM, and more info.",
+              target: "more-details",
+              placement: "top",
+              xOffset: "center",
+              arrowOffset: "center",
+             
+            },
+            {
+              title: "Thanks!",
+              content: "Thanks for taking the JASPAR tour. You can read more about JASPAR <a href='/about'>here</a>.",
+              target: "demo-end",
+              placement: "bottom",
+              xOffset: "center",
+              arrowOffset: "center"
+            }
+          ]
+        }
+       if(hopscotch.getState() === "jaspar-home:6") {
+        hopscotch.startTour(tour, 6);
+       }else{
+        //hopscotch.startTour(tour, 0);
+       }
+
+    </script>
+
+    <script>
+  $(function () {
+    $('#version_table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+     // "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "bProcessing": true,
+      "bScrollInfinite": true,
+      "fixedHeader": false,
+      "bLengthChange": true,
+      "searchHighlight": true,
+      "order": [[ 2, "desc" ]],
+      "responsive": true,               
+      //"sScrollY": "100%",
+
+      "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [7] }
+                      ],
+
+      });
+  });
+</script>
+
+    {% endblock %}
+
+{% endblock %}

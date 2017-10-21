@@ -1,0 +1,1051 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+RESTful API Documentation
+{% endblock %}
+
+{% block content_header %}
+API Documentation
+{% endblock %}
+      
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+  <li><a href="/api/"><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="#"> Docs</a></li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+
+ <div class="row">
+  <div class="col-sm-2">
+    <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+</div>
+
+  <div class="col-md-10 col-lg-10 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-book"> </i> API Documentation</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+
+  <p>This API provides a RESTful interface to access the data progmatically from JASPAR database. The API comes with a human browsable interface and also programmatic interface, which return the results in JSON format. <br>
+
+The root of current API version 1 is available at:
+<pre class="prettyprint">
+<b><a href="{{ request.get_api_host }}">{{ request.get_api_host }}</a></b>
+</pre>
+  </p>
+  <p><b>The API have follwoing endpoints: 
+  <ul>
+    <li><a href="#listmatrix"> /matrix => List all matrix profiles</a></li>
+    <li><a href="#showmatrix"> /matrix/:matrix_id => Show matrix details</a></li>
+    <li><a href="#listversions"> /matrix/:base_id/versions => List matrix versions</a></li>
+  </ul>
+</b></p>
+<h3 id="listmatrix">List matrix profiles</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      <h4>URL</h4>
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix</code> </b>
+      
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>Method</h4>
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>URL Params</h4>
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>None</code> <br>
+        
+        <b>Optional:</b> <br>
+        <table class="table table-striped">
+        <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td><code>search</code></td>
+          <td>string</td>
+          <td>Any query string to search</td>
+          <td><code>?search=Myc</code></td>
+        </tr>
+         <tr>
+          <td><code>collection</code></td>
+          <td>alphanumeric</td>
+          <td>JASPAR CORE or collection name</td>
+          <td><code>?collection=core</code></td>
+        </tr>
+         <tr>
+          <td><code>tax_group</code></td>
+          <td>alphanumeric</td>
+          <td>Taxonomic group</td>
+          <td><code>?tax_group=vertebrates</code></td>
+        </tr>
+        <tr>
+          <td><code>class</code></td>
+          <td>alphanumeric</td>
+          <td>Transcription factor class</td>
+          <td><code>?class=Zipper-Type</code></td>
+        </tr>
+        <tr>
+          <td><code>family</code></td>
+          <td>alphanumeric</td>
+          <td>Transcription factor family</td>
+          <td><code>?family=SMAD factors</code></td>
+        </tr>
+         <tr>
+          <td><code>type</code></td>
+          <td>alphanumeric</td>
+          <td>Data type</td>
+          <td><code>?type=ChIP-seq</code></td>
+        </tr>
+         <tr>
+          <td><code>version</code></td>
+          <td>string</td>
+          <td>Get latest matrix version</td>
+          <td><code>?version=latest</code></td>
+        </tr>
+
+        </table>
+
+        <b>Examples:</b> <br>
+        <ul>
+            <li>
+             <a href="{{ request.get_api_host }}matrix/?search=CEBPB">{{ request.get_api_host }}matrix/?search=CEBPB</a>
+            </li>
+            <li>
+             <a href="{{ request.get_api_host }}matrix/?collection=core">{{ request.get_api_host }}matrix/?collection=core</a>
+            </li>
+            <li>
+             <a href="{{ request.get_api_host }}matrix/?family=SMAD factors">{{ request.get_api_host }}matrix/?family=SMAD factors</a>
+            </li>
+          
+        </ul>
+        All the above listed parameters can be used to together to narrow down the search query using the <code>&</code> symbol as a separator. For example;
+        <ul>
+          <li><a href="{{ request.get_api_host }}matrix/?search=Myc&collection=core&version=latest">{{ request.get_api_host }}matrix/?search=Myc&collection=core&version=latest</a></li>
+        </ul>
+        Note: The <code>&</code> symbol works as the  <code>AND</code> logical operator.
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      <h4>Example output</h4>
+    </th>
+    <td>
+        URL: {{ request.get_api_host }}matrix/<br>
+        Results: <br>
+<pre class="prettyprint">
+{
+    "count": 2049,
+    "next": "{{ request.get_api_host }}matrix/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "matrix_id": "MA0001.1",
+            "name": "AGL3",
+            "collection": "CORE",
+            "base_id": "MA0001",
+            "version": "1",
+            "sequence_logo": "{{ request.get_host }}static/logos/svg/MA0001.1.svg",
+            "url": "{{ request.get_api_host }}matrix/MA0001.1/"
+        },
+        {
+            "matrix_id": "MA0002.1",
+            "name": "RUNX1",
+            "collection": "CORE",
+            "base_id": "MA0002",
+            "version": "1",
+            "sequence_logo": "http://127.0.0.1:8000/static/logos/svg/MA0002.1.svg",
+            "url": "{{ request.get_api_host }}matrix/MA0002.1/"
+        },
+
+        // 8 profiles more
+
+    ]
+}
+</pre>
+
+Matrix list endpoint returns multiple profiles with pagination and have the following extra fields:
+<ul>
+<li><code>count</code>: is the total number of profiles for the matching query</li>
+<li><code>next</code>: url to get the next page profiles results. It will be null for the last page</li>
+<li><code>previous</code>: url to get the previous page profiles results. It will be null for the first page</li>
+<li><code>results</code>: have the list of for the matching query.</li>
+</ul>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        <h4>Success Response</h4>
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> {
+    "count": number,
+    "next": url,
+    "previous": url,
+    "results": [ { }, ...] }</code><br>
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">
+        <h4>Sample Calls</h4>
+      </th>
+      <td>
+        These are sample calls to API from different languages.
+
+       <div class="col-md-12">
+          <div class="nav-tabs">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#ajax" data-toggle="tab">Ajax</a></li>
+              <li><a href="#python" data-toggle="tab">Python</a></li>
+              <li><a href="#perl" data-toggle="tab">Perl</a></li>
+              <li><a href="#ruby" data-toggle="tab">Ruby</a></li>
+              <li><a href="#r" data-toggle="tab">R</a></li>
+              <li><a href="#java" data-toggle="tab">Java</a></li>
+              <li><a href="#curl" data-toggle="tab">curl</a></li>
+              <li><a href="#wget" data-toggle="tab">wget</a></li>
+            </ul>
+            <div class="tab-content">
+            
+              <div class="active tab-pane" id="ajax">
+              <pre class="pre-scrollable prettyprint linenums">
+$.ajax({
+    url: '{{ request.get_api_host }}matrix?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+
+              </div>
+
+              <div class="tab-pane" id="python">
+              <pre class="pre-scrollable prettyprint linenums">
+import requests, sys
+ 
+api_root = "{{ request.get_api_host }}"
+query = "matrix?format=json"
+ 
+result = requests.get(api_root+query)
+ 
+if not result.ok:
+  r.raise_for_status()
+  sys.exit()
+ 
+decoded = result.json()
+print(repr(decoded))
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="perl">
+              <pre class="pre-scrollable prettyprint linenums">
+use strict;
+use warnings;
+ 
+use HTTP::Tiny;
+ 
+my $http = HTTP::Tiny->new();
+ 
+my $server = '{{ request.get_api_host }}';
+my $ext = 'matrix?format=json';
+my $response = $http->get($server.$ext, {
+  headers => { 'Content-type' => 'application/json' }
+});
+ 
+die "Failed!\n" unless $response->{success};
+ 
+ 
+use JSON;
+use Data::Dumper;
+if(length $response->{content}) {
+  my $hash = decode_json($response->{content});
+  local $Data::Dumper::Terse = 1;
+  local $Data::Dumper::Indent = 1;
+  print Dumper $hash;
+  print "\n";
+}
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="ruby">
+              <pre class="pre-scrollable prettyprint linenums">
+require 'net/http'
+require 'uri'
+ 
+server='{{ request.get_api_host }}'
+path = 'matrix?format=json'
+ 
+url = URI.parse(server)
+http = Net::HTTP.new(url.host, url.port)
+ 
+request = Net::HTTP::Get.new(path, {'Content-Type' => 'application/json'})
+ 
+response = http.request(request)
+ 
+if response.code != "200"
+  puts "Invalid response: #{response.code}"
+  puts response.body
+  exit
+end
+ 
+require 'rubygems'
+require 'json'
+require 'yaml'
+ 
+result = JSON.parse(response.body)
+puts YAML::dump(result)
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="r">
+              <pre class="pre-scrollable prettyprint linenums">
+library(jsonlite)
+url <- "{{ request.get_api_host }}matrix?format=json"
+
+result <- fromJSON(url)
+#create a dataframe
+df <- result$results
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="java">
+              <pre class="pre-scrollable prettyprint linenums">
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.Reader;
+ 
+public class JASPARRest {
+ 
+  public static void main(String[] args) throws Exception {
+    String server = "{{ request.get_api_host }}";
+    String ext = "matrix?format=json";
+    URL url = new URL(server + ext);
+ 
+    URLConnection connection = url.openConnection();
+    HttpURLConnection httpConnection = (HttpURLConnection)connection;
+    
+    httpConnection.setRequestProperty("Content-Type", "application/json");
+    
+    InputStream response = connection.getInputStream();
+    int responseCode = httpConnection.getResponseCode();
+ 
+    if(responseCode != 200) {
+      throw new RuntimeException("Response code was not 200. Detected response was "+responseCode);
+    }
+ 
+    String output;
+    Reader reader = null;
+    try {
+      reader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
+      StringBuilder builder = new StringBuilder();
+      char[] buffer = new char[8192];
+      int read;
+      while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+        builder.append(buffer, 0, read);
+      }
+      output = builder.toString();
+    } 
+    finally {
+        if (reader != null) try {
+          reader.close(); 
+        } catch (IOException logOrIgnore) {
+          logOrIgnore.printStackTrace();
+        }
+    }
+    System.out.println(output);
+  }
+}
+              </pre>
+
+              </div>
+
+              <div class="tab-pane" id="curl">
+              <pre class="pre-scrollable prettyprint linenums">
+curl '{{ request.get_api_host }}matrix?format=json' -H 'Content-type:application/json'
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="wget">
+              <pre class="pre-scrollable prettyprint linenums">
+wget -q --header='Content-type:application/json' '{{ request.get_api_host }}matrix?format=json'  -O -
+              </pre>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    
+</table>
+
+<a id="back-to-top" href="#" class="btn btn-primary btn-sm back-to-top pull-right" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+<h3 id="showmatrix">Show matrix details</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      <h4>URL</h4>
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix/:matrix_id<code> </b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>Method</h4>
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>URL Params</h4>
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>matrix_id=[string]</code> <br>
+        example: matrix_id=MA0466.2<br><br>
+     
+        <b>Example URLs</b> <br>
+        <ul>
+            <li>
+             {{ request.get_api_host }}matrix/MA0466.2/
+            </li>
+            
+        </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      <h4>Example output</h4>
+    </th>
+    <td>
+      <b>URL:</b> {{ request.get_api_host }}matrix/MA0466.2/<br>
+      <b>Result:</b>
+<pre class="prettyprint">
+    {
+        "matrix_id": "MA0466.2",
+        "name": "CEBPB",
+        "version": 2,
+        "base_id": "MA0466",
+        "collection": "CORE",
+        "tax_group": "vertebrates",
+        "family": ["C/EBP-related"],
+        "tfe_ids": [604],
+        "type": "HT-SELEX",
+        "class": ["Basic leucine zipper factors (bZIP)"],
+        "comment": "Data is from Taipale HTSELEX DBD (2013)",
+        "medline": "8632009",
+        "sites_bed": "{{ request.get_api_host }}download/bed_files/MA0466.2.bed",
+        "sites_fasta": "{{ request.get_api_host }}download/sites/MA0466.2.sites",
+        "sequence_logo": "{{ request.get_host }}static/logos/svg/MA0466.2.svg",
+        
+        "tffm": {
+            "log_p_1st_order": -88949.7,
+            "experiment_name": "wgEncodeAwgTfbsSydhImr90CebpbIggrabUniPk.narrowPeak",
+            "version": 1,
+            "log_p_detailed": -90462.6,
+            "base_id": "TFFM0010",
+            "tffm_id": "TFFM0010.1"
+        },
+        "pfm": {
+            "A": [10585.0,33.0,17.0,10930.0,393.0,3521.0,2527.0,22732.0,22732.0,155.0],
+            "C": [5007.0,34.0,14.0,34.0,22732.0,555.0,22732.0,636.0,9.0,10617.0],
+            "T": [859.0,22732.0,22732.0,2237.0,2217.0,486.0,2135.0,0.0,9.0,12116.0],
+            "G": [6282.0,8.0,2276.0,11803.0,221.0,22732.0,3.0,9.0,0.0,940.0]
+        },
+        "species": {
+            "9606": {
+                "name": "Homo sapiens",
+                "tax_id": 9606
+            }
+        },
+        "pazar_tf_id": "TF0000609",
+        "uniprot_ids": [
+            "P17676"
+        ]
+    }
+</pre>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        <h4>Success Response</h4>
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> { "matrix_id": "MA0466.2", ... }</code><br>
+      </td>
+    </tr>
+    <tr>
+      <th valign="top">
+        <h4>Sample Call</h4>
+      </th>
+      <td>
+     These are sample calls to API from different languages.
+
+       <div class="col-md-12">
+          <div class="nav-tabs">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#ajax1" data-toggle="tab">Ajax</a></li>
+              <li><a href="#python1" data-toggle="tab">Python</a></li>
+              <li><a href="#perl1" data-toggle="tab">Perl</a></li>
+              <li><a href="#ruby1" data-toggle="tab">Ruby</a></li>
+              <li><a href="#r1" data-toggle="tab">R</a></li>
+
+              <li><a href="#java1" data-toggle="tab">Java</a></li>
+              <li><a href="#curl1" data-toggle="tab">curl</a></li>
+              <li><a href="#wget1" data-toggle="tab">wget</a></li>
+            </ul>
+           <div class="tab-content">
+            
+              <div class="active tab-pane" id="ajax1">
+              <pre class="pre-scrollable prettyprint linenums">
+$.ajax({
+    url: '{{ request.get_api_host }}matrix/MA0001.1?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+
+              </div>
+
+              <div class="tab-pane" id="python1">
+              <pre class="pre-scrollable prettyprint linenums">
+import requests, sys
+ 
+api_root = "{{ request.get_api_host }}"
+query = "matrix/MA0001.1?format=json"
+ 
+result = requests.get(api_root+query)
+ 
+if not result.ok:
+  r.raise_for_status()
+  sys.exit()
+ 
+decoded = result.json()
+print(repr(decoded))
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="perl1">
+              <pre class="pre-scrollable prettyprint linenums">
+use strict;
+use warnings;
+ 
+use HTTP::Tiny;
+ 
+my $http = HTTP::Tiny->new();
+ 
+my $server = '{{ request.get_api_host }}';
+my $ext = 'matrix/MA0001.1?format=json';
+my $response = $http->get($server.$ext, {
+  headers => { 'Content-type' => 'application/json' }
+});
+ 
+die "Failed!\n" unless $response->{success};
+ 
+ 
+use JSON;
+use Data::Dumper;
+if(length $response->{content}) {
+  my $hash = decode_json($response->{content});
+  local $Data::Dumper::Terse = 1;
+  local $Data::Dumper::Indent = 1;
+  print Dumper $hash;
+  print "\n";
+}
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="ruby1">
+              <pre class="pre-scrollable prettyprint linenums">
+require 'net/http'
+require 'uri'
+ 
+server='{{ request.get_api_host }}'
+path = 'matrix/MA0001.1?format=json'
+ 
+url = URI.parse(server)
+http = Net::HTTP.new(url.host, url.port)
+ 
+request = Net::HTTP::Get.new(path, {'Content-Type' => 'application/json'})
+ 
+response = http.request(request)
+ 
+if response.code != "200"
+  puts "Invalid response: #{response.code}"
+  puts response.body
+  exit
+end
+ 
+require 'rubygems'
+require 'json'
+require 'yaml'
+ 
+result = JSON.parse(response.body)
+puts YAML::dump(result)
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="r1">
+              <pre class="pre-scrollable prettyprint linenums">
+library(jsonlite)
+url <- "{{ request.get_api_host }}matrix/MA0001.1?format=json"
+
+result <- fromJSON(url)
+#create a dataframe
+df <- result$results
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="java1">
+              <pre class="pre-scrollable prettyprint linenums">
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.Reader;
+ 
+public class JASPARRest {
+ 
+  public static void main(String[] args) throws Exception {
+    String server = "{{ request.get_api_host }}";
+    String ext = "matrix/MA0001.1?format=json";
+    URL url = new URL(server + ext);
+ 
+    URLConnection connection = url.openConnection();
+    HttpURLConnection httpConnection = (HttpURLConnection)connection;
+    
+    httpConnection.setRequestProperty("Content-Type", "application/json");
+    
+    InputStream response = connection.getInputStream();
+    int responseCode = httpConnection.getResponseCode();
+ 
+    if(responseCode != 200) {
+      throw new RuntimeException("Response code was not 200. Detected response was "+responseCode);
+    }
+ 
+    String output;
+    Reader reader = null;
+    try {
+      reader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
+      StringBuilder builder = new StringBuilder();
+      char[] buffer = new char[8192];
+      int read;
+      while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+        builder.append(buffer, 0, read);
+      }
+      output = builder.toString();
+    } 
+    finally {
+        if (reader != null) try {
+          reader.close(); 
+        } catch (IOException logOrIgnore) {
+          logOrIgnore.printStackTrace();
+        }
+    }
+    System.out.println(output);
+  }
+}
+              </pre>
+
+              </div>
+
+              <div class="tab-pane" id="curl1">
+              <pre class="pre-scrollable prettyprint linenums">
+curl '{{ request.get_api_host }}matrix/MA0001.1?format=json' -H 'Content-type:application/json'
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="wget1">
+              <pre class="pre-scrollable prettyprint linenums">
+wget -q --header='Content-type:application/json' '{{ request.get_api_host }}matrix/MA0001.1?format=json'  -O -
+              </pre>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  
+</table>
+
+<a id="back-to-top" href="#" class="btn btn-primary btn-sm back-to-top pull-right" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+
+<h3 id="matrixversions">List matrix versions</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th valign="top">
+      <h4>URL</h4>
+    </th>
+    <td>
+        <span class="caption">The URL structure (path only, no root url)</span> <br>
+        <b><code>/matrix/:base_id/versions/<code> </b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>Method</h4>
+    </th>
+    <td>
+        <span class="caption">The request type</span> <br>
+        <b><code>GET</code></b>
+    </td>
+  </tr>
+  
+  <tr>
+    <th valign="top">
+      <h4>URL Params</h4>
+    </th>
+    <td>
+        <b>Required:</b> <br>
+        <code>base_id=[string]</code> <br>
+        example: base_id=MA0466<br><br>
+     
+        <b>Example URLs</b> <br>
+        <ul>
+            <li>
+            {{ request.get_api_host }}matrix/MA0466/versions/
+            </li>
+            
+        </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th valign="top">
+      <h4>Example output</h4>
+    </th>
+    <td>
+      <b>URL:</b> {{ request.get_api_host }}matrix/MA0466/versions/ <br>
+      <b>Results:</b> 
+<pre class="prettyprint">
+{
+    "count": 2,
+    "results": [
+        {
+            "name": "CEBPB",
+            "matrix_id": "MA0466.1",
+            "collection": "CORE",
+            "version": 1,
+            "sequence_logo": "{{ request.get_host }}static/logos/svg/MA0466.1.svg",
+            "base_id": "MA0466"
+        },
+        {
+            "name": "CEBPB",
+            "matrix_id": "MA0466.2",
+            "collection": "CORE",
+            "version": 2,
+            "sequence_logo": "{{ request.get_host }}static/logos/svg/MA0466.2.svg",
+            "base_id": "MA0466"
+        }
+    ]
+} 
+
+</pre>
+Matrix version list endpoint returns all the versions of a profile with no pagination and have the following extra fields:
+<ul>
+<li><code>count</code>: is the total number of verions of a profile</li>
+<li><code>results</code>: have the list of profiles for the base_id.</li>
+</ul>
+    </td>
+  </tr>
+
+    <tr>
+      <th valign="top">
+        <h4>Success Response</h4>
+      </th>
+      <td>
+          <b> Example: </b> <br>
+          <b>Code:</b> 200 <br>
+          <b>Content:</b> <code> { "count": number, "results": [{}, ... ] }</code><br>
+      </td>
+    </tr>
+
+    <tr>
+      <th valign="top">
+        <h4>Sample Calls</h4>
+      </th>
+      <td>
+
+      These are sample calls to API from different languages.
+
+       <div class="col-md-12">
+          <div class="nav-tabs">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#ajax2" data-toggle="tab">Ajax</a></li>
+              <li><a href="#python2" data-toggle="tab">Python</a></li>
+              <li><a href="#perl2" data-toggle="tab">Perl</a></li>
+              <li><a href="#ruby2" data-toggle="tab">Ruby</a></li>
+              <li><a href="#r2" data-toggle="tab">R</a></li>
+
+              <li><a href="#java2" data-toggle="tab">Java</a></li>
+              <li><a href="#curl2" data-toggle="tab">curl</a></li>
+              <li><a href="#wget2" data-toggle="tab">wget</a></li>
+            </ul>
+            <div class="tab-content">
+            
+              <div class="active tab-pane" id="ajax2">
+              <pre class="pre-scrollable prettyprint linenums">
+$.ajax({
+    url: '{{ request.get_api_host }}matrix/MA0466/versions?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+
+              </div>
+
+              <div class="tab-pane" id="python2">
+              <pre class="pre-scrollable prettyprint linenums">
+import requests, sys
+ 
+api_root = "{{ request.get_api_host }}"
+query = "matrix/MA0466/versions?format=json"
+ 
+result = requests.get(api_root+query)
+ 
+if not result.ok:
+  r.raise_for_status()
+  sys.exit()
+ 
+decoded = result.json()
+print(repr(decoded))
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="perl2">
+              <pre class="pre-scrollable prettyprint linenums">
+use strict;
+use warnings;
+ 
+use HTTP::Tiny;
+ 
+my $http = HTTP::Tiny->new();
+ 
+my $server = '{{ request.get_api_host }}';
+my $ext = 'matrix/MA0466/versions?format=json';
+my $response = $http->get($server.$ext, {
+  headers => { 'Content-type' => 'application/json' }
+});
+ 
+die "Failed!\n" unless $response->{success};
+ 
+ 
+use JSON;
+use Data::Dumper;
+if(length $response->{content}) {
+  my $hash = decode_json($response->{content});
+  local $Data::Dumper::Terse = 1;
+  local $Data::Dumper::Indent = 1;
+  print Dumper $hash;
+  print "\n";
+}
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="ruby2">
+              <pre class="pre-scrollable prettyprint linenums">
+require 'net/http'
+require 'uri'
+ 
+server='{{ request.get_api_host }}'
+path = 'matrix/MA0466/versions?format=json'
+ 
+url = URI.parse(server)
+http = Net::HTTP.new(url.host, url.port)
+ 
+request = Net::HTTP::Get.new(path, {'Content-Type' => 'application/json'})
+ 
+response = http.request(request)
+ 
+if response.code != "200"
+  puts "Invalid response: #{response.code}"
+  puts response.body
+  exit
+end
+ 
+require 'rubygems'
+require 'json'
+require 'yaml'
+ 
+result = JSON.parse(response.body)
+puts YAML::dump(result)
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="r2">
+              <pre class="pre-scrollable prettyprint linenums">
+library(jsonlite)
+url <- "{{ request.get_api_host }}matrix/MA0466/versions?format=json"
+
+result <- fromJSON(url)
+#create a dataframe
+df <- result$results
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="java2">
+              <pre class="pre-scrollable prettyprint linenums">
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.Reader;
+ 
+public class JASPARRest {
+ 
+  public static void main(String[] args) throws Exception {
+    String server = "{{ request.get_api_host }}";
+    String ext = "matrix/MA0466/versions?format=json";
+    URL url = new URL(server + ext);
+ 
+    URLConnection connection = url.openConnection();
+    HttpURLConnection httpConnection = (HttpURLConnection)connection;
+    
+    httpConnection.setRequestProperty("Content-Type", "application/json");
+    
+    InputStream response = connection.getInputStream();
+    int responseCode = httpConnection.getResponseCode();
+ 
+    if(responseCode != 200) {
+      throw new RuntimeException("Response code was not 200. Detected response was "+responseCode);
+    }
+ 
+    String output;
+    Reader reader = null;
+    try {
+      reader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
+      StringBuilder builder = new StringBuilder();
+      char[] buffer = new char[8192];
+      int read;
+      while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+        builder.append(buffer, 0, read);
+      }
+      output = builder.toString();
+    } 
+    finally {
+        if (reader != null) try {
+          reader.close(); 
+        } catch (IOException logOrIgnore) {
+          logOrIgnore.printStackTrace();
+        }
+    }
+    System.out.println(output);
+  }
+}
+              </pre>
+
+              </div>
+
+              <div class="tab-pane" id="curl2">
+              <pre class="pre-scrollable prettyprint linenums">
+curl '{{ request.get_api_host }}matrix/MA0466/versions?format=json' -H 'Content-type:application/json'
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="wget2">
+              <pre class="pre-scrollable prettyprint linenums">
+wget -q --header='Content-type:application/json' '{{ request.get_api_host }}matrix/MA0466/versions?format=json'  -O -
+              </pre>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+      </td>
+    </tr>
+        
+   
+</table>
+<a id="back-to-top" href="#" class="btn btn-primary btn-sm back-to-top pull-right" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+  
+     </div>
+    </div>
+</div>
+
+  
+</div>
+
+{% endblock %}
+
+
+

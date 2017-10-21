@@ -1,0 +1,776 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Documentation
+{% endblock %}
+
+{% block content_header %}
+ JASPAR Documentation
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Docs</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8 col-lg-8 col-xs-12">
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-book"></i> JASPAR Documentation</h3>
+              <p class="pull-right"><em>Last updated: 23 Sept. 2017</em></p>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <!-- code folding -->
+
+              <p>JASPAR is a collection of transcription factor DNA-binding preferences, modeled as matrices. These can be converted into Position Weight Matrices (PWMs or PSSMs), used for scanning genomic sequences.</p>
+              <p>JASPAR is the only database with this scope where the data can be used with no restrictions (open-source). For a comprehensive review of models and how they can be used, please see the following reviews</p>
+              <ul>
+              <li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=25045190&amp;query_hl=1">Modeling the specificity of protein-DNA interactions Quant Biol. 2013 Jun;1(2):115-130</a></li>
+              <li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15131651&amp;query_hl=4">Applied bioinformatics for the identification of regulatory elements Nat Rev Genet. 2004 Apr;5(4):276-87</a></li>
+              </ul>
+              <div id="jaspar-collections" class="section level1">
+              <h3 class="page-header">JASPAR Collections</h3>
+              <p>The JASPAR database consists of smaller subsets of profiles known as collections. Each of these collections have different goals as described below. The main collection is known as JASPAR CORE and is the collection most scientists use.</p>
+              <div id="version-control" class="section level2">
+              <h4>Version control</h4>
+              <p>Since JASPAR 4, all matrix models have versions. This is primarily to keep track of improvements - which can be anything from correcting typos to actually making a new model based on new data. Version control works as follows: IDs are based on a stable ID, and a version number, so that the whole ID is [stable ID].[version]. The stable ID follows a certain transcription factor, or other logic unit such as a dimer pair. For instance, the stable ID for the factor GATA1 is MA0035. However, the GATA1 matrix has been updated twice with new data, so there are currently three versions: MA0035.1, MA0035.2 and MA0035.3. Per default, only the latest version is shown, but it is possible to list all versions of a matrix with the same stable ID.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="the-jaspar-core-collection" class="section level2">
+              <h4>The JASPAR CORE Collection</h4>
+              <p>The JASPAR CORE collection contains a curated, non-redundant set of TF binding profiles. All profiles are derived from published collections of experimentally defined transcription factor binding sites for multi-cellular eukaryotes. The TF binding profiles were historically determined from SELEX experiments or the collection of data from the experimentally determined binding regions of actual regulatory regions. More recent profiles are derived from high-throughput techniques such as ChIP-sequencing, Protein Binding Microarray, or High-Throughput SELEX. One of the central goals of the JASPAR CORE is to provide a single, “best” model for each transcription factor. This means that the database is non-redundant in the sense that there are not many models for the same factor (with some few exceptions motivated by the recognition of significantly different motifs).</p>
+              <p>The prime difference to similar resources (TRANSFAC, etc) consist of the open data access, non-redundancy and quality: JASPAR CORE is a smaller set that is non-redundant and curated.</p>
+              <p>JASPAR CORE is what most scientists mean when referring to JASPAR in manuscripts.</p>
+              <p>For convenience, JASPAR CORE is divided by larger groups of species. This distinction is mainly used in the web interface and, optionally, in the download section. Currently these larger taxonomic groups are: vertebrates, planst, insects, nematodes, fungi, plants and urochordates.</p>
+              <p><strong>What annotation data does each entry hold?</strong></p>
+              <table class="table table-hover"  style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. CORE matrices always have a MAnnnn IDs. Version</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of the transcription factor. As far as possible, the name is based on the standardized Entrez gene symbols. In the case the model describes a transcription factor hetero-dimer, two names are concatenated, such as RXR-VDR. In a few cases, different splice forms of the same gene have different binding specificity: in this case the splice form information is added to the name, based on the relevant literature.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Class</td>
+              <td align="left">Structural class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Family</td>
+              <td align="left">Structural sub-class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Species</td>
+              <td align="left">The species source for the sequences, in Latin. Linked to the NCBI Taxonomic browser. The actual database entries are the NCBI tax IDs – the latin conversion is only in the web interface.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Tax_group</td>
+              <td align="left">Group of species, currently consisting of 4 larger groups: vertebrate, insect, plant, chordate</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Acc</td>
+              <td align="left">A representative protein accession number in Genbank for the transcription factor. Human takes precedence if several exists.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Type</td>
+              <td align="left">Methodology used for matrix construction (see below)</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Pubmed ID</td>
+              <td align="left">a link to the relevant publication reporting the sites used in the mode building</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Pazar_tf_id</td>
+              <td align="left">A link to the PAZAR database</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Comment</td>
+              <td align="left">For some matrices, a curator comment is added</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>This is main JASPAR collection and should be used when curated, non-redundant binding profile models for specific factors derived from experimental data are required.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="other-jaspar-collections" class="section level2">
+              <h3>Other JASPAR Collections</h3>
+              <p>The other JASPAR collections are collections of matrices that do not fit under the JASPAR CORE scope. Examples include splice forms, computationally derived patterns with no linked transcription factors, meta-models etc.</p>
+              <div id="jaspar-fam" class="section level3">
+              <h4>JASPAR FAM</h4>
+              <p>The JASPAR FAM database consists of 11 models describing shared binding properties of structural classes of transcription factors. These types of models can be called “familial profiles”, “consensus matrices” or metamodels. The models have two prime benefits: 1)Since many factors have similar target sequences, we often experience multiple predictions at the same locations that correspond to the same site. This type of models reduce the complexity of the results. 2)The models can be used to classify newly derived profiles (or project what type of structural class its cognate transcription factor belongs to). The construction of the models is based on the JASPAR CORE collection and described in detail in</p>
+              <p>Sandelin A, Wasserman WW. Constrained binding site diversity within families of transcription factors enhances pattern discovery bioinformatics <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15066426&amp;query_hl=11">J Mol Biol. 2004 Apr 23;338(2):207-15</a>. A recent, comprehensive study of familial binding profiles and associated methods is available in (that plos paper by maohney et al)</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover" style="width:100%;">
+              <colgroup>
+              <col width="11%"></col>
+              <col width="98%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">A unique identifier for each model. FAM matrices always have MFnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model. In this database, models were built by first partitioning JASPAR CORE matrices into structural classes – therefore, the names are essentially structure class names</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">The source article (always <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15066426&amp;query_hl=11">J Mol Biol. 2004 Apr 23;338(2):207-15</a>)</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Included models</td>
+              <td align="left">The JASPAR CORE matrices used to construct the model</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Type</td>
+              <td align="left">Always “Metamodel”</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>When searching large genomic sequences with no prior knowledge. For classification of new user-supplied profiles.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-phylofacts" class="section level3">
+              <h4>JASPAR PHYLOFACTS</h4>
+              <p>The JASPAR PHYLOFACTS database consists of 174 profiles that were extracted from phylogenetically conserved gene upstream elements.</p>
+              <p>For a detailed description, see Xie et al., Systematic discovery of regulatory motifs in human promoters and 3’ UTRs by comparison of several mammals., <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15735639&amp;query_hl=3">Nature 434, 338-345 (2005)</a> and supplementary material.</p>
+              <p>In short, the authors used the following strategy. Promoters (defined as the 4-kb region around the TSS) of human genes from the RefSeq database were aligned against the genomes of mouse, rat and dog. Every consensus sequence of length between 6 and 26, defined over an alphabet of 4 unique (A,C,G,T) and 7 degenerate (R, Y, K, M, S, W, N) nucleotides, was scanned over the alignments. A motif is regarded as conserved when it appears in the alignment both for the human and for the other three mammalian species. The conservation rate p is defined as the number of times a motif is conserved divided by the number of times it occurs in man only. This conservation rate is compared to the expected conservation rate p0, estimated from random motifs, which gives the motif conservation score MCS. Only motifs with an MCS&gt;6 were retained, resulting in a list of 174 highly conserved motifs (see supplementary Table S2 of Xie et al.). The count matrices for these 174 motifs were extracted from the downloaded alignments. They were further annotated according to their resemblance with TRANSFAC and JASPAR CORE motifs. For TRANSFAC, the annotation of Xie et al. was used. For comparing to the JASPAR CORE matrices, the Pearson Correlation Coefficient (PCC) was used to define matrix similarity. All PHYLOFACTS matrices were scanned against the JASPAR CORE matrices, and matrices were regarded as being similar when PCC&gt;0.8. When multiple hits were found, only the one with the highest PCC was retained. .</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover"  style="width:100%;">
+              <colgroup>
+              <col width="12%"></col>
+              <col width="97%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. PHYLOFACTS matrices always have MFnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model. In this database, models are based on over-represented words which are unique. The name is simply the consensus sequence.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Jaspar</td>
+              <td align="left">The JASPAR CORE motif that has the best similarity score when compared to this model. Only hits with a similarity score over 0.8 are considered.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Transfac</td>
+              <td align="left">The transfac (public version) motif that has the best similarity score when compared to this model. Only hits with a similarity score over 0.8 are considered.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Sysgroup</td>
+              <td align="left">Group of species. Always “mammals”</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Type</td>
+              <td align="left">Always “phylogenetic”</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">The source article (always <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15735639&amp;query_hl=3">Nature 434, 338-345 (2005)</a>)</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>The JASPAR PHYLOFACTS matrices are a mix of motifs corresponding to motifs for known and undefined transcription factors. They are useful when one expects that other factors might determine promoter characteristics, such as structural aspects and tissue specificity. They are highly complementary to the JASPAR CORE matrices, so are best used in combination with this matrix set.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-polii" class="section level3">
+              <h4>JASPAR POLII</h4>
+              <p>The deluge of novel data presented recently pertaining transcription start sites (reviewed in (13,14)) motivates computational studies of core promoters. The JASPAR_POLII sub-database holds known 13 DNA patterns linked to RNA polymerase II core promoters, such as the Inr and BRE elements, each based on experimental evidence: each model must be constructed using 5 or more experimentally verified sites. An important difference to the transcription factor profiles in JASPAR CORE is that patters here do not necessarily have a specified protein interactor (See (15) for a review on core promoter patterns). When possible, profiles were extended by two nucleotides more than the core motif. We consistently report positions relative to the TSS as the position of 5’ and 3’ edge of the matrix.</p>
+              <p><strong>When data does each entry hold?</strong></p>
+              <table class="table table-hover"  style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. POLII matrices always have POLnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The reported name of the pattern (not necessarily the binding protein, if this is known)</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Species</td>
+              <td align="left">The species source for the sequences, in Latin. “-“ generally signifies that several species were used in the model construction PubMed ID |A link to the relevant publication reporting the sites used in the mode building Start relative to TSS |Reported bias (if any) on position relative to the dominant transcription start site in the promoter. This is counted from the 5’ end of the pattern (the left side). As we have added some flanking nucleotides, this sometimes is not the exact numbers shown in the source publications. End relative to TSS | See above. Distance is counted from the 3’ end of the matrix (the right side).</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>When analyzing properties of core promoters.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-cne" class="section level3">
+              <h3>JASPAR CNE</h3>
+              <p>Highly conserved non-coding elements are a distinctive feature of metazoan genomes. Many of them can be shown to act as long-range enhancers that drive expression of genes that are themselves regulators of core aspects of metazoan development and differentiation. Since they act as regulatory inputs, attempts at deciphering the regulatory content of these elements have started. JASPAR CNE is a collection of 233 matrix profiles derived by <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Citation&amp;list_uids=17442748">Xie et al</a> based on clustering of overrepresented motifs from human conserved non-coding elements. While the biochemical and biological role of most of these patterns is still unknown, Xie et al. have shown that the most abundant ones correspond to known DNA-binding proteins, most notably insulator-binding protein CTCF. These matrix profiles will be useful for further characterization of regulatory inputs in long-range developmental gene regulation in vertebrates.</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover"  style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. NCRNA matrices always have CNnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Consensus sequence</td>
+              <td align="left">the consensus sequence of the motif - important as it is the basis for clustering over-represented sites in this study</td>
+              </tr>
+              <tr class="even">
+              <td align="left">PubMed ID</td>
+              <td align="left">The source article (always <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Citation&amp;list_uids=17442748">Xie et al</a>)</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>When analyzing properties of potential enhancers.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-splice" class="section level3">
+              <h4>JASPAR SPLICE</h4>
+              <p>This small collection contains matrix profiles of human canonical and non-canonical splice sites, as matching donor:acceptor pairs. It currently contains only 6 highly reliable profiles obtained from human genome made by <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Citation&amp;list_uids=15475254">Chong et al</a>. In the future, we shall include additional eukaryotic species, as well as new models for exonic splicing enhancers (ESE) and inhibitors (ESI).</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover" style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. SPLICE matrices always have SPnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">The source article (always Chong et al )</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>When analyzing splice sites and alternative splicing</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-pbm" class="section level3">
+              <h4>JASPAR PBM</h4>
+              <p>All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: <a href="http://the_brain.bwh.harvard.edu/uniprobe/">UniPROBE</a>.</p>
+              <p>The PBM, collection is the set derived by <a href="http://www.ncbi.nlm.nih.gov/pubmed/19443739?ordinalpos=2&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum">Badis et al</a> from binding preferences of 104 mouse transcription factors. One profile (IRC900814) was excluded because the transcription factor could not be identified.</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover" style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. SPLICE matrices always have PHnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Class</td>
+              <td align="left">Structural class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Family</td>
+              <td align="left">Structural sub-class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Species</td>
+              <td align="left">The species source for the sequences, in Latin. Linked to the NCBI Taxonomic browser. The actual database entries are the NCBI tax IDs – the latin conversion is only in the web interface.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Tax_group</td>
+              <td align="left">Group of species, currently consisting of 4 larger groups: vertebrate, insect, plant, chordate</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">A link to the relevant publication reporting the sites used in the mode building</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Type</td>
+              <td align="left">Methodology used for matrix construction</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Comment</td>
+              <td align="left">For some matrices, a curator comment is added</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>Where it is important that each matrix was derived using the same protocol</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-pbm-homeo" class="section level3">
+              <h4>JASPAR PBM HOMEO</h4>
+              <p>All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: <a href="http://the_brain.bwh.harvard.edu/uniprobe/">UniPROBE</a>.</p>
+              <p>The PBM, collection is the set derived by <a href="http://www.ncbi.nlm.nih.gov/pubmed/18585359?ordinalpos=1&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum">Berger et al</a> including 176 profiles from mouse homeodomains</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover" style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. SPLICE matrices always have PHnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Class</td>
+              <td align="left">Structural class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Family</td>
+              <td align="left">Structural sub-class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Species</td>
+              <td align="left">The species source for the sequences, in Latin. Linked to the NCBI Taxonomic browser. The actual database entries are the NCBI tax IDs – the latin conversion is only in the web interface.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Tax_group</td>
+              <td align="left">Group of species, currently consisting of 4 larger groups: vertebrate, insect, plant, chordate</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">A link to the relevant publication reporting the sites used in the mode building</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Type</td>
+              <td align="left">Methodology used for matrix construction</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Comment</td>
+              <td align="left">For some matrices, a curator comment is added</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>Where it is important that each matrix was derived using the same protocol, focused on homeobox factors</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-pbm-hlh" class="section level3">
+              <h4>JASPAR PBM HLH</h4>
+              <p>All the PBM collections are built by using new in-vitro techniques, based on k-mer microarrays. PBM matrix models have their own database which is specialized for the data: <a href="http://the_brain.bwh.harvard.edu/uniprobe/">UniPROBE</a>.</p>
+              <p>The PBM HLH, collection is the set derived by <a href="http://www.ncbi.nlm.nih.gov/entrez/utils/fref.fcgi?PrId=3048&amp;itool=AbstractPlus-def&amp;uid=19632181&amp;nlmid=0413066&amp;db=pubmed&amp;url=http://linkinghub.elsevier.com/retrieve/pii/S0092-8674(09)00519-4">Grove et al</a>. It holds 19 C. elegans bHLH transcription factor models</p>
+              <p><strong>What data does each entry hold?</strong></p>
+              <table class="table table-hover" style="width:100%;">
+              <colgroup>
+              <col width="10%"></col>
+              <col width="90%"></col>
+              </colgroup>
+              <thead>
+              <tr class="header">
+              <th align="left">Entry</th>
+              <th align="left">Note</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="odd">
+              <td align="left">ID</td>
+              <td align="left">a unique identifier for each model. SPLICE matrices always have PHnnnn IDs</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Name</td>
+              <td align="left">The name of model.</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Class</td>
+              <td align="left">Structural class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Family</td>
+              <td align="left">Structural sub-class of the transcription factor, based on the TFClass system</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Species</td>
+              <td align="left">The species source for the sequences, in Latin. Linked to the NCBI Taxonomic browser. The actual database entries are the NCBI tax IDs – the latin conversion is only in the web interface.</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Tax_group</td>
+              <td align="left">Group of species, currently consisting of 4 larger groups: vertebrate, insect, plant, chordate</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">PubMed ID</td>
+              <td align="left">A link to the relevant publication reporting the sites used in the mode building</td>
+              </tr>
+              <tr class="even">
+              <td align="left">Type</td>
+              <td align="left">Methodology used for matrix construction</td>
+              </tr>
+              <tr class="odd">
+              <td align="left">Comment</td>
+              <td align="left">For some matrices, a curator comment is added</td>
+              </tr>
+              </tbody>
+              </table>
+              <p><strong>When should it be used?</strong></p>
+              <p>Where it is important that each matrix was derived using the same protocol, focused on bHLH factors</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              </div>
+              </div>
+              <div id="jaspar-rest-api" class="section level1">
+              <h3 class="page-header">JASPAR RESTful API</h3>
+              <p>JASPAR provides a browsable API, which provides easy-to-use REST web interface to query/retrieve matrix profile data from JASPAR database. The API comes with a human browsable interface and also programmatic interface, which return the results in JSON format. For more details, please read the <a href="/api">API documentation</a>.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+
+              <div id="jaspar-web-api" class="section level1">
+              <h3 class="page-header">JASPAR WEB API</h3>
+              <p>The JASPAR database can now be reached remotely through a new Web Service interface. Current functionality includes retrieval of profiles by name, by identifier and by searching profile annotations. Profiles can be retrieved as position frequency matrices, position weight matrices or information content matrices. The purpose of providing an external application programming interface (API) is to simplify the utilization of JASPAR in distributed applications and in scientific workflows created in workflow editors like Triana, <a href="http://en.wikipedia.org/wiki/BPEL">BPEL</a>, or Taverna. Other benefits include platform- and language independent access, as well as constant up-to-date access to the database over time. The API is implemented as a WS-I compliant Web service, identical to the technology used for the services made available through the <a href="http://jaspar.genereg.net/html/TEMPLATES/www.embracegrid.info">EMBRACE Network</a> of Excellence, and the Web service technology chosen by the European Bioinformatics Institute (EBI) . The WSDL describing this service can be found <a href="http://api.bioinfo.no/wsdl/JasparDB.wsdl">here</a>. Further information about the Web service is available in the WSDL file, including example clients in Java and Python.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="jaspar-software-tools" class="section level1">
+              <h3 class="page-header">JASPAR SOFTWARE TOOLS</h3>
+              <p>Please check this <a href="/tools">Tools</a> page.</p>
+              </div>
+              <div id="downloading-databases" class="section level1">
+              <h3 class="page-header">DOWNLOADING DATABASES</h3>
+              <p>JASPAR is downloadable in two different formats, from the <a href="/download">DOWNLOAD</a> link in the start page:</p>
+              <ol style="list-style-type: lower-roman">
+              <li><p>flat files resulting from the TFBS::DB::MatrixDir function in the perl API, which are easily parsable</p></li>
+              
+              </ol>
+              <div id="downloading-sites-and-alignments" class="section level2">
+              <h4>Downloading sites and alignments</h4>
+              <p>In the <a href="/download">DOWNLOAD</a> directory, most matrix collections have a SITE subdirectory, which for each model lists all sites used for the model construction as a fasta file. The alignments are implicit – the used sub-parts of sequences are in capitals. Note that in the majority of cases, this is an interpretation – we use pattern finders to find the most likely alignment, but this might not always be the most correct. This is the principal reason we make these collections available – users can make their own models based on the raw files.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              </div>
+              <div id="jaspar-web-handbook" class="section level1">
+              <h3 class="page-header">JASPAR WEB HANDBOOK</h3>
+              <div id="start-page" class="section level2">
+              <h4>HOME PAGE</h4>
+              <p>
+              The JASPAR 2018 release comes with a completely redesigned web interface that meets modern web standards. 
+
+              We have greatly improved the visibility and usability of existing functionality, created easier navigation with semanticclearer URLs, and enhanced browsing and searching. 
+
+              You can take a dynamic tour of JASPAR, provided on the homepage, which walk you through the main features of the new website. A video of the tour  is available <a href="/tour">here</a>.
+
+              On the home page we also provide search box. TF binding profiles can be further filtered through the case insensitive search option available on the homepage. In addition, through the “Advanced Options”, the search criteria can be further restricted.
+
+              </p>
+
+       
+              <h4>Aling Matrix</h4>
+              Under tools tab, we have matrix align option, which takes a matrix as input and align it to the selected database:
+
+              <pre><code>A [13 13 3 1 54 1 1 1 0 3 2 5 ]
+C [13 39 5 53 0 1 50 1 0 37 0 17 ]
+G [17 2 37 0 0 52 3 0 53 8 37 12 ]
+T [11 0 9 0 0 0 0 52 1 6 15 20 ]</code></pre>
+              <p>is equivalent to</p>
+              <pre><code>13 13 3 1 54 1 1 1 0 3 2 5
+13 39 5 53 0 1 50 1 0 37 0 17
+17 2 37 0 0 52 3 0 53 8 37 12
+11 0 9 0 0 0 0 52 1 6 15 20 </code></pre>
+              <p>All profiles in the selected database will be compared to the input profile, using a modified Needleman-Wunsch algorithm described in</p>
+              <p>Sandelin A, Hoglund A, Lenhard B, Wasserman WW. Integrated analysis of yeast regulatory sequences for biologically linked clusters of genes. <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=12827523&amp;ordinalpos=20&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum">Funct Integr Genomics. 2003 Jul;3(3):125-34</a> and sorted by raw comparison score (for reference, the maximum score is 2*the width of the smallest matrix in the compared pair). Both the score and fraction of potential maximal score is reported.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+             
+              <div id="browse-page" class="section level2">
+              <h4>BROWSE PAGE</h4>
+
+              The database can be browsed for individual collections by using the navigation links on the left sidebar. Moreover, it can be searched for each of the six different taxonomic groups included in the JASPAR CORE collection using the tabs available on the homepage
+
+              Search results are presented in a responsive and paginated table along with sequence logos of the PFMs, which can be selected for download or to perform a variety of analyses available on the right panel. All information in the tables can be downloaded as comma-separated value files. 
+
+          
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              
+              <div id="detailed-matrix-information" class="section level2">
+              <h4>DETAILED MATRIX INFORMATION</h4>
+              <p> Profile IDs and sequence logos can be clicked to view the detailed profile page, which show detailed information about the model: both annotation data (which is different in different databases – see respective database entry above), and a sequence logo, a count matrix and hits/bp statistics:</p>
+              <p>PFMs can be downloaded in several formats including JASPAR, TRANSFAC, and MEME (Figure 2D). Furthermore, we have incorporated new features to the web interface, such as “Add to Cart”, where users can add TF profiles of interest for download or further analyses</p>
+              <div id="logo" class="section level3">
+             
+             <h5>Sequence logo:</h5>
+              <p>Sequence logos are graphical representations of the matrix model, based on information content. The information content of a matrix column ranges from 0 (no base preference) and 2 (only 1 base used). A sequence logo is basically a barplot showing the total information content in each position, where the bar is replaced by stacked letters (A,C,G,T), which are sized and sorted relative to their occurrence. See <a href="http://www-lmmb.ncifcrf.gov/~toms/paper/primer/latex/index.html">Schneider et al</a> for a more comprehensive description.</p>
+              <p>The “Make SVG button” gives an SVG version logo suitable for publication images (SVG is a vector format that does not have the pixel edges of the .png’s used in browsers – it can be read by many drawing programs and most web-browsers with proper plugins)</p>
+              </div>
+              
+              <div id="count-matrix" class="section level3">
+              <h5>Frequency matrix:</h5>
+              <p>The underlying model showing the DNA pattern. In most databases, the cell numbers indicate the number of sequences having base x in column y. These matrices can be used for a number of different analyses, including site searching, if suitably converted, See Wasserman and Sandelin for a review.</p>
+              <p>The reverse complement button make a reverse complement version of the matrix (as DNA is two-stranded, the two models are functionally equivalent). If the amtrix if reverse-complemented, the logo will change accordingly.</p>
+              </div>
+              
+              <div id="version-information" class="section level3">
+              <h5>Version information</h5>
+              <p>For some transcription factors, there are multiple models – usually this is due to new data becoming available. The version tab list all the versions of the selected profile.</p>
+              </div>
+              <div id="expected-hitsbp" class="section level3">
+              <h5>EXPECTED HITS/BP</h5>
+              <p>In order to visualize the binding properties of each JASPAR matrix we calculate the average number of hits per 1000 base pairs on three distinctly different sequence sets. We do this by converting the count matrix to a log-odds matrix using a uniform background model over the four bases. For a series of threshold values ([1, 0.95, … , 0.65, 0.60]) of the scoring range of the log-odds matrix we count the number of hits equal to or greater than the current threshold. We count the number of hits treating each sequence set as one string and then convert this number to a mean value per 1000 base pairs on both strands, that is, we search both the leading strand and the reverse complement. All means are for practical purposes rounded to one decimal.</p>
+              <p>We use three distinct sequence sets, known promoters, CpG islands and random DNA respectively. The known promoters consist of all plant, arthropod and vertebrate promoters in the -1000 to +100 region from the <a href="http://www.epd.isb-sib.ch/">EPD database</a> [ref 1]. This sequence set totals 4735 promoters concatenated into one string. The CpG sequence set consists of all regions from the <a href="http://genome.ucsc.edu/cgi-bin/hgGateway">UCSC genome browser</a> (hg18) with an epigenetic score above 0.5 (See <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=17559301&amp;ordinalpos=1&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum">Bock et al</a>). This totals 8,559,418 nucleotides. Finally the random DNA sequences are randomly picked 1000 base pair windows from hg18 across all chromosomes and totals 8,000,000 nucleotides. The randomly picked DNA is not repeat-masked or in any way filtered.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              </div>
+              <div id="extended-functionality" class="section level2">
+              <h4>EXTENDED FUNCTIONALITY</h4>
+              <div id="basic-sequence-analysis" class="section level3">
+              <h5>BASIC SEQUENCE ANALYSIS</h5>
+              <p>Using a subset of profiles, a submitted sequence can be analyzed. Sensitivity and specificity will be affected by the relative score threshold, by default 80% (See <a href="https://www.ncbi.nlm.nih.gov/pubmed/15131651
+" target="_blank">Wasserman and Sandelin</a> for a review on scoring of matrices to sequences) . This is the most basic form of sequence analysis: dedicated systems such as <a href="http://asp.ii.uib.no:8090/cgi-bin/CONSITE/consite/" target="_blank">ConSite</a> are preferable for anything more than a casual analysis.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="dynamic-clustering-of-matrices" class="section level3">
+              <h5>DYNAMIC CLUSTERING OF MATRICES</h5>
+              <p>The CLUSTER button provides the user with a means of investigating the relationship between the various matrices. This functionality is provided by the <a href="http://nar.oxfordjournals.org/cgi/content/full/gkm272v1">STAMP</a> tool available as a webservice at <a href="http://www.benoslab.pitt.edu/stamp/" class="uri">http://www.benoslab.pitt.edu/stamp/</a>.</p>
+              <p>Hierarchical clustering is performed on a selected set of matrices using the UPGMA algorithm with a Pearson Correlation Coefficient distance metric. Then the optimal number of clusters is selected using a log variant of the Calinski and Harabasz statistic (See this <a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1848003">link</a> for details).Finally the clusters are partioned and a familial binding profile is created for each cluster using an iterative refinement, multiple alignment method. Further details can be found in the STAMP <a href="http://nar.oxfordjournals.org/cgi/content/full/gkm272v1">manuscript</a>.</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="dynamic-random-matrix-generation" class="section level3">
+              <h3>DYNAMIC RANDOM MATRIX GENERATION</h3>
+              <div id="permutation" class="section level4">
+              <h5>PERMUTATION</h5>
+              <p>This option simply shuffles the columns in matrices. This can either be done by just shuffling columns within each selected matrix, or by shuffling columns almong all selected matrices.</p>
+              </div>
+              <div id="sampling" class="section level4">
+              <h5>SAMPLING</h5>
+              <p>This feature of the database enables the users to generate random Position Frequency Matrices (PFMs) from selected profiles.</p>
+              <p>We assume that each column in the profile is independent and described by a mixture of Dirichlet multinomials in which the letters are drawn from a multinomial and the multinomial parameters are drawn from a mixture of Dirichlets. Within this model each column has its own set of multinomial parameters but the higher level parameters – those of the mixture prior is assumed to be common to all Jaspar matrices. We can therefore use a maximum likelihood approach to learn these from the observed column counts of all Jaspar matrices. The maximum likelihood approach automatically ensures that matrices receive a weight relative to the number of counts it contains.</p>
+              <p>Drawing samples from the prior distribution will generate PWMs with the same statistical properties as the Jaspar matrices as a whole. PWMs with statistical properties like those of the selected profiles can be obtained by drawing from a posterior distribution which is proportional to the prior times a multinomial likelihood term with counts taken from one of the columns of the selected profiles.</p>
+              <p>Each 4-dimensional column is sampled by the following three-step procedure: 1. draw the mixture component according to the distribution of mixing proportions, 2. draw an input column randomly from the concatenated selected profiles and 3. draw the probability vector over nucleotides from a 4-dimensional Dirichlet distribution. The parameter vector alpha of the Dirichlet is equal to the sum of the count (of the drawn input) and the parameters of the Dirichlet prior (of the drawn component). .</p>
+              <p>Draws from a Dirichlet can be obtained in the following way from Gamma distributed samples:</p>
+              <p>(X1,X2,X3,X4) = (Y1/V,Y2/V,Y3/V,Y4/V) ~ Dir(α1,α2,α3,α4)</p>
+              <p>where V = sum(Yi) ~ Gamma(shape = sum(αi), scale = 1).</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              <div id="output-formats" class="section level4">
+              <h5>OUTPUT FORMATS</h5>
+              <p>For both and random generating of matrices you have the choice between four different output formats:</p>
+              
+              <p><b>Raw PFM</b> - Each matrix is separated by a fasta like header starting with the &gt; symbol and then a matrix ID. The count for each base (ACGT) is specified on its own space separated line where each element corresponds to one column. The order of the lines for the bases is A,C,G and finally T.</p>
+              <pre><code>13 13 3 1 54 1 1 1 0 3 2 5
+13 39 5 53 0 1 50 1 0 37 0 17
+17 2 37 0 0 52 3 0 53 8 37 12
+11 0 9 0 0 0 0 52 1 6 15 20</code></pre>
+
+              <p><b>JASPAR</b> - This is similar to the raw format, having an identical header. The lines for each base however starts with a label for the nucleotide (A,C,G or T) and then the columns follow enclosed in brackets: [].</p>
+              <pre><code>A [13 13 3 1 54 1 1 1 0 3 2 5 ]
+C [13 39 5 53 0 1 50 1 0 37 0 17 ]
+G [17 2 37 0 0 52 3 0 53 8 37 12 ]
+T [11 0 9 0 0 0 0 52 1 6 15 20 ]</code></pre>
+              
+              <p><b>TRANSFAC</b> - This is a TRANSFAC-like format having a header starting with “DE” then the matrix ID, the matrix name and the matrix class. The data itself is transposed as compared to the other formats, meaning that each line correspond to a column in the matrix. The column lines start with a number denoting the column index (counting</p>
+              <p>from 0). After that follows tab separated counts for each base in that column in the order: A,C,G and T. After the lines with the counts follows a final line containing the string: “XX”.</p>
+              <pre><code>DE MA0048    NHLH1    bHLH
+00    13    13    17    11   
+01    13    39    2    0   
+02    3    5    37    9   
+03    1    53    0    0   
+04    54    0    0    0   
+05    1    1    52    0   
+06    1    50    3    0   
+07    1    1    0    52   
+08    0    0    53    1   
+09    3    37    8    6   
+10    2    0    37    15   
+11    5    17    12    20   
+XX</code></pre>
+
+<p><b>MEME</b> - MEME motif format is a simple text format for motifs that is accepted by the programs in the MEME Suite that require MEME Motif Format.
+
+A text file in MEME minimal motif format can contain more than one motif, and also (optionally) specifies the motif alphabet, background frequencies of the letters in the alphabet, and strand information (for motifs of complementable alphabets like DNA), as illustrated in the example below:
+       <pre><code>MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.25 C 0.25 G 0.25 T 0.25
+
+MOTIF MA0048.2 NHLH1
+letter-probability matrix: alength= 4 w= 10 nsites= 3246 E= 0
+ 0.242760  0.667283  0.055761  0.034196
+ 0.142021  0.055145  0.667283  0.043746
+ 0.000924  0.667283  0.000000  0.000000
+ 0.667283  0.000924  0.000308  0.000000
+ 0.000000  0.092730  0.667283  0.035120
+ 0.029575  0.667283  0.038201  0.000000
+ 0.000000  0.001232  0.001232  0.667283
+ 0.000616  0.001232  0.667283  0.000308
+ 0.091189  0.667283  0.031423  0.107825
+ 0.094886  0.226741  0.667283  0.458718
+URL http://jaspar.genereg.net/matrix/MA0048.2</code></pre>
+
+</p>
+              <p><a href="#top">Back to top</a></p>
+              </div>
+              </div>
+              </div>
+              </div>
+          
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+      <div class="col-md-4 col-lg-4 col-xs-6">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-list"></i> Table of contents</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div id="TOC">
+              <ul>
+              <li><a href="#jaspar-collections">JASPAR Collections</a><ul>
+              <li><a href="#version-control">Version control</a></li>
+              <li><a href="#the-jaspar-core-collection">The JASPAR CORE Collection</a></li>
+              <li><a href="#other-jaspar-collections">Other JASPAR Collections</a></li>
+              </ul></li>
+              <li><a href="#jaspar-rest-api">JASPAR RESTful API</a></li>
+              <li><a href="#jaspar-web-api">JASPAR WEB API</a></li>
+              <li><a href="#jaspar-software-tools">JASPAR SOFTWARE TOOLS</a></li>
+              <li><a href="#downloading-databases">DOWNLOADING DATABASES</a><ul>
+              <li><a href="#downloading-sites-and-alignments">Downloading sites and alignments</a></li>
+              </ul></li>
+              <li><a href="#jaspar-web-handbook">JASPAR WEB HANDBOOK</a><ul>
+              <li><a href="#start-page">START PAGE</a></li>
+              <li><a href="#browse-page">BROWSE PAGE</a></li>
+              <li><a href="#detailed-matrix-information">DETAILED MATRIX INFORMATION</a></li>
+              <li><a href="#extended-functionality">EXTENDED FUNCTIONALITY</a></li>
+              </ul></li>
+              
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/changelog">Changelog</a></li>
+              <li><a href="/contact-us">Contact</a></li>
+              </ul>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        
+        
+  </div>
+
+    {% block javascript %}
+      <script>
+
+              // add bootstrap table styles to pandoc tables
+              $(document).ready(function () {
+                $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+              });
+
+              </script>
+
+              <!-- dynamically load mathjax for compatibility with self-contained -->
+              <script>
+                (function () {
+                  var script = document.createElement("script");
+                  script.type = "text/javascript";
+                  script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+                  document.getElementsByTagName("head")[0].appendChild(script);
+                })();
+              </script>
+
+        <script>
+        $(document).ready(function () {
+          window.buildTabsets("TOC");
+        });
+        </script>
+
+    {% endblock %}
+
+  
+
+{% endblock %}

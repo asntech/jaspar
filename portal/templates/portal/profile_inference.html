@@ -1,0 +1,86 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+{% load bootstrap %}
+{% block title %}
+    Contact us
+{% endblock %}
+
+{% block content_header %}
+ Profile Inference
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Profile Inference</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-refresh"></i> Profile Inference</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <form action="/inference" method="POST">
+            <p>Please input a TF protein sequence for which to look for a JASPAR TF binding profile.</p>
+             {% csrf_token %}
+
+             <div class="form-group">
+                <label for="id_sequence" class="control-label">Paste a protein sequence below</label>
+                <textarea class="form-control" name="sequence" id="id_sequence" rows="10" maxlength='2000' placeholder="Enter protein sequence ..."
+                        data-toggle="tooltip" data-placement="bottom" title="Please submit a fasta sequence less than 2000 nucleotides." 
+                        data-validation="required custom" data-validation="" data-validation-regexp="^\s*[ABCDEFGHIKLMNPQRSTVWXYZabcdefghiklmnpqrstvwxyz]{3,}\s*\n?"
+                        data-validation-ignore=""></textarea>
+            </div>
+
+              <div class="form-group">
+              <div class="box-footer clearfix">
+              <button type="button" class="btn btn-success" value="MSDNDDIEVESDEEQPRFQSAADKRAHHNALERKRRDHIKDSFHSLRDSVPSLQGEKASR
+AQILDKATEYIQYMRRKNHTHQQDIDDLKRQNALLEQQVRALEKARSSAQLQTNYPSSDN
+SLYTNAKGSTISAFDGGSDSSSESEPEEPQSRKKLRMEAS"
+              name="fill" id="fill"><i class="fa fa-sort-alpha-asc"> Example sequence </i></button>
+               <button type="reset" class="btn btn-warning" name="reset" id="reset"><i class="fa fa-trash-o"></i> Reset </button>
+               <button type="submit" class="pull-right btn btn-primary" name="ProfileInference" id="ProfileInference">JASPAR Profile Inference <i class="fa fa-arrow-circle-right"></i></button>
+               </div>
+              </div>
+            </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div>
+
+    {% block javascript %}
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+  <script>
+
+  $.validate({
+    modules : 'location, date, security, file',
+    onModulesLoaded : function() {
+      $('#country').suggestCountry();
+    }
+  });
+  </script>
+
+     <script type="text/javascript">
+      $('#fill').click(
+    function(){
+        $('#id_sequence').val($(this).val());
+          }
+      );
+
+    </script>
+
+    {% endblock %}
+
+{% endblock %}

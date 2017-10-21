@@ -1,0 +1,50 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+   JASPAR CORE {{ tax_group }} clustering
+{% endblock %}
+
+{% block content_header %}
+  JASPAR CORE {{ tax_group }} clustering
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="/matrix-clusters">Clustering</a></li>
+  <li class="active">Detail</li>
+{% endblock %}
+{% block content %}
+
+{% block stylesheets %}
+ 
+{% endblock %}
+  
+  <div class="row">
+  <div class="col-md-12">
+
+    <div class="panel panel-default" style = 'overflow-x: scroll', width="100%">
+      <div class="panel-body" width='100%' height="100%">
+
+       
+
+      {% if tax_group %}
+
+        {% if request.GET.detail == 'true' %}
+        <a type="button" class="btn btn-success" href="?detail=false">Radial tree</a><hr>
+        <iframe src="http://folk.uio.no/azizk/JASPAR_2018_clustering/results/JASPAR_2018_matrix_clustering/{{tax_group}}/JASPAR_2018_matrix_clustering_{{tax_group}}_SUMMARY.html" width="100%" height="1000px" frameborder=0></iframe>
+        {% else %}
+        <a type="button" class="btn btn-success" href="?detail=true">Matrix clustering summary</a><hr>
+        <iframe src="http://folk.uio.no/azizk/JASPAR_2018_clustering/results/JASPAR_2018_matrix_clustering_RADIAL/{{tax_group}}/JASPAR_2018_matrix_clustering_{{tax_group}}_radial_tree.html" width="100%" height="1000px" frameborder=0></iframe>
+        {% endif %}
+
+        {% endif %}
+      
+     </div>
+  </div>
+
+  </div>
+  </div>
+
+{% endblock %}

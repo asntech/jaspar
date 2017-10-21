@@ -1,0 +1,29 @@
+{% extends "rest_framework/base.html" %}
+
+{% load static from staticfiles %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "rest_framework_docs/css/style.css" %}">
+{% endblock %}
+  
+    {% block github_badge %}
+    
+    {% endblock %}
+
+     
+
+      {% block content %}
+
+
+
+      {% endblock %}
+
+    
+
+    <!-- Dist.js - Inlcuded Live API, jQuery, Bootstrap -->
+    {% block javascript %}
+    <script type="text/javascript" src="{% static "rest_framework_docs/js/dist.min.js" %}"></script>
+    {% endblock %}
+  </body>
+</html>

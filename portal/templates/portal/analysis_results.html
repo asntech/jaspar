@@ -1,0 +1,265 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+Analysis results
+{% endblock %}
+
+{% block content_header %}
+ Analysis results
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Analysis results</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-th"> </i> {{ analysis_type }} results</h3>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            {% if analysis_type %}
+
+                {% if analysis_type != 'Scan' %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Your results are ready! Please click the button below to download.
+                </div>
+
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <b>Note:</b> We will keep these files for <b>{{ temp_life }}</b> day(s). We suggest you to save your results before that. Thank you!
+
+                </div>
+                  <hr>
+
+                <div class="col-md-12 text-center"> 
+                
+
+                <a href='http://{{ request.get_host }}/temp/{{ results }}' target="_blank">
+                <button type="button" class="pull-right btn btn-primary" name="Download" id="Download"> <i class="fa fa-download"></i> Click here to download </button>
+                </a>
+
+
+                <div class="input-group">
+                <input type="text" class="form-control col-xs-5" id="dataurl" value="http://{{ request.get_host }}/temp/{{ results }}">
+                    <span class="input-group-btn">
+                      <button type="button" id="clipboardButton" data-clipboard-target="#dataurl" alt="Copy to clipboard"
+                      class="clipboardButton btn btn-info btn-flat">
+                      <i class="fa fa-clipboard"> </i> </button>
+                    </span>
+              </div>
+                
+
+                </div>
+
+
+                {% endif %}
+
+                {% if analysis_type == 'Scan' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Total <b>{{ results|length }}</b> putative site(s) were predicted with relative profile score threshold {{ request.POST.threshold_score }}%.
+                   </div>
+
+                  <a href="#scan_sequence" class="btn btn-info" data-toggle="collapse">Show FASTA Sequence</a>
+                  <div id="scan_sequence" class="collapse">
+                    {{ request.POST.scan_sequence }}
+                  </div>
+
+                <hr>
+                <table id="search_table" class="table table-bordered table-responsive table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th>Matrix ID</th>
+                  <th>Name</th>
+                  <th>Score </th>
+                  <th>Relative score</th>
+                  <th>Sequence ID</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Strand</th>
+                  <th>Predicted sequence</th>
+                 
+                </tr>
+                </thead>
+                <tbody>
+                 {% for result in results %}
+                  <tr>
+                  <td><b><a href="/matrix/{{ result.matrix_id }}">{{ result.matrix_id }}</a></b></td>
+                  <td>{{ result.name }}</td>
+                 
+                  <td>{{ result.score }} </td>
+                  <td>{{ result.rel_score }}</td>
+                  <td>{{ result.seq_id }}</td> 
+                  <td>{{ result.start }}</td>
+                  <td>{{ result.end }}</td>                
+                  <td>{{ result.strand }}</td>
+                  <td>{{ result.sequence }}</td>
+                  <!--
+                  
+                  <td>
+                  <img src="{% static 'logos/svg/' %}{{ result.matrix_id }}.svg" width="150px" height="50px">
+                  </td>
+                -->
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table>             
+                
+                  <p>
+                  <hr>
+                  <b>Comment:</b> This type of analysis has a high sensitivity but abysmal selectivity. In other words: while true functional will be detected in most cases, most predictions will correspond to sites bound in vitro but with no function in vivo. A number of additional contraints of the analysis can improve the prediction; phylogenetic footprinting is the most common. We recommend using the <a href="http://www.phylofoot.org/consite" target="_blank">ConSite</a> service, which uses the JASPAR datasets. The review <a href="https://www.nature.com/nrg/journal/v5/n4/full/nrg1315.html" target="_blank">Nat Rev Genet. 2004 Apr;5(4):276-87</a> gives a comprehensive overview of transcription binding site prediction
+                  </p>  
+                {% endif %}
+
+            {% else %}
+
+            <div class="alert alert-warning alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  Please select the models in the search table to perform analysis. Thanks!
+                 </div>
+
+             {% endif %}
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-th"> </i> Selected models</h3>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="alert alert-info alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  You have selected the following <b>{{ matrix_ids|length }}</b> model(s)!
+                 </div>
+                <hr>
+
+             <table id="analysis_table" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>Matrix ID</th>
+              </tr>
+              </thead>
+
+              {% for matrix_id in matrix_ids %}
+              <tr><td>
+                <a href='/matrix/{{ matrix_id }}' target="_blank"> {{ matrix_id }}</a>
+                </td>
+              </tr>
+              
+              {% endfor %}
+            </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div>
+
+    {% block javascript %}
+
+     <script src="{% static 'plugins/clipboard.js/dist/clipboard.min.js' %}"> </script>
+
+
+
+      <script type="text/javascript">
+        
+          var clipboard = new Clipboard('.clipboardButton');
+
+          clipboard.on('success', function(e) {
+              console.log(e);
+          });
+
+          clipboard.on('error', function(e) {
+              console.log(e);
+          });
+
+      
+      </script>
+
+
+    {% endblock %}
+
+
+    {% block datatable %}
+    <script>
+       $(function () {
+    $('#search_table').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+     // "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "bProcessing": true,
+      "bScrollInfinite": true,
+      "fixedHeader": false,
+      "bLengthChange": true,
+      "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+      "searchHighlight": true,
+      "order": [[ 0, "asc" ]],
+      "responsive": true, 
+      //"sScrollY": "100%",
+      "aoColumnDefs": [
+         { "bSortable": false,
+          "aTargets": [5] }
+                      ],
+      "oLanguage": {
+                     "sSearch": "Filter:",
+                     "sLengthMenu": "Display _MENU_ profiles",
+                   },
+            'dom': 'lfrtipB',
+            'buttons': [
+            'copy', 'csv'
+               ],  
+    });
+  });
+
+        $(function () {
+          $('#analysis_table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+           // "ordering": true,
+            "info": true,
+            "bScrollInfinite": true,
+            "fixedHeader": false,
+             "pageLength": 25,
+            "bLengthChange": true,
+            "searchHighlight": true,
+            "responsive": true,
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            'dom': 'lfBrtip',
+            'buttons': [
+            'copy', 'csv'
+               ],            
+           
+          });
+        });
+      </script>
+    {% endblock %}
+
+{% endblock %}

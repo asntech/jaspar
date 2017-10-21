@@ -1,0 +1,64 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+JASPAR RESTful API
+{% endblock %}
+
+{% block content_header %}
+ 
+{% endblock %}
+      
+{% block breadcrumb %}
+
+{% endblock %}
+
+
+{% block content %}
+
+ <div class="row">
+    <div class="col-md-12">
+
+    <!-- Server down notification -->
+    <!--
+      <div class="alert alert-danger alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <b>Note:</b> Our server will be down for maintenance from Thursday (13/07/2017) 14:00 (GMT+2) to Friday (14/07/2017) 12:00 (GMT+2).
+     </div>
+
+     -->
+
+ 	  <div class="jumbotron">
+ 	    <h2 class="display-3" align="center">Welcome to </h2>
+        <h1 class="display-3" align="center">{<b>JASPAR</b> RESTful API}</h1>
+        <p class="lead" align="center">This API provides easy-to-use REST web interface to query/retrieve matrix profile data from the latest version of JASPAR database. The API comes with a human browsable interface and also programmatic interface, which return the results in six different formats, including <code>json</code>, <code>jsonp</code>, <code>jaspar</code>, <code>meme</code>, <code>transfac</code>, <code>pfm</code>, <code>yaml</code> and <code>html</code>.</p>
+        <p align="center"><a class="btn btn-lg btn-success" href="/api/v1" role="button">Try it Now</a> 
+        {% if request.get_host != 'jaspar2018.genereg.net' %}
+        <a class="btn btn-lg btn-info" href="/api/v1/live/#/v1" target="_blank" role="button">Live API</a>
+        {% endif %}
+        </p>
+      </div>
+
+     <div class="panel panel-info">
+     <div class=panel-heading> <h3 class=panel-title> <i class="icon fa fa-globe"></i> Read more about JASPAR and JASPAR RESTful API</h3> </div>
+     <div class=panel-body>
+     <ul>
+     <li>Khan, A. and Mathelier, A. (2017). <a href="https://doi.org/10.1101/160184" target="_blank"> JASPAR RESTful API: accessing JASPAR data from any programming language</a>.
+     bioRxiv; doi: https://doi.org/10.1101/160184
+     </li>
+
+     <li>Mathelier, A. et al. (2016). <a href="https://www.ncbi.nlm.nih.gov/pubmed/26531826" target="_blank"> JASPAR 2016: a major expansion and update of the open-access database of transcription factor binding profiles</a>. Nucleic Acids Res. 2016 44: D110-D115.</li>
+
+     </ul>
+</div>
+     </div>
+
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+

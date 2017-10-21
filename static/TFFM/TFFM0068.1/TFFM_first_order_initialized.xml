@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mixture PUBLIC "-//ghmm.org//DOCUMENT ghmm V1.0//EN" "http://ghmm.sourceforge.net/xml/1.0/ghmm.dtd">
+<mixture version="1.0" noComponents="1">
+ <HMM name="" type="higher-order discrete">
+  <alphabet id="0">
+   <symbol code="0">A</symbol>
+   <symbol code="1">C</symbol>
+   <symbol code="2">G</symbol>
+   <symbol code="3">T</symbol>
+  </alphabet>
+  <state id="0" initial="1.00000000">
+   <discrete id="0">0.25, 0.25, 0.25, 0.25</discrete>
+  </state>
+  <state id="1" initial="0.00000000">
+   <discrete id="0" order="1">0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25</discrete>
+  </state>
+  <state id="2" initial="0.00000000">
+   <discrete id="0" order="1">0.2799168, 0.22799576, 0.20409495, 0.2879925, 0.2799168, 0.22799576, 0.20409495, 0.2879925, 0.2799168, 0.22799576, 0.20409495, 0.2879925, 0.2799168, 0.22799576, 0.20409495, 0.2879925</discrete>
+  </state>
+  <state id="3" initial="0.00000000">
+   <discrete id="0" order="1">0.16897789, 0.26568236, 0.44869076, 0.11664899, 0.16897789, 0.26568236, 0.44869076, 0.11664899, 0.16897789, 0.26568236, 0.44869076, 0.11664899, 0.16897789, 0.26568236, 0.44869076, 0.11664899</discrete>
+  </state>
+  <state id="4" initial="0.00000000">
+   <discrete id="0" order="1">4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05</discrete>
+  </state>
+  <state id="5" initial="0.00000000">
+   <discrete id="0" order="1">0.99331104, 4.0786361e-05, 4.0786361e-05, 0.0066073905, 0.99331104, 4.0786361e-05, 4.0786361e-05, 0.0066073905, 0.99331104, 4.0786361e-05, 4.0786361e-05, 0.0066073905, 0.99331104, 4.0786361e-05, 4.0786361e-05, 0.0066073905</discrete>
+  </state>
+  <state id="6" initial="0.00000000">
+   <discrete id="0" order="1">4.0786361e-05, 0.26201158, 0.7371319, 0.00081572722, 4.0786361e-05, 0.26201158, 0.7371319, 0.00081572722, 4.0786361e-05, 0.26201158, 0.7371319, 0.00081572722, 4.0786361e-05, 0.26201158, 0.7371319, 0.00081572722</discrete>
+  </state>
+  <state id="7" initial="0.00000000">
+   <discrete id="0" order="1">4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05</discrete>
+  </state>
+  <state id="8" initial="0.00000000">
+   <discrete id="0" order="1">4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764</discrete>
+  </state>
+  <state id="9" initial="0.00000000">
+   <discrete id="0" order="1">4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05, 4.0786361e-05, 4.0786361e-05, 0.99987764, 4.0786361e-05</discrete>
+  </state>
+  <state id="10" initial="0.00000000">
+   <discrete id="0" order="1">0.00040786361, 0.37066645, 0.026715066, 0.60221062, 0.00040786361, 0.37066645, 0.026715066, 0.60221062, 0.00040786361, 0.37066645, 0.026715066, 0.60221062, 0.00040786361, 0.37066645, 0.026715066, 0.60221062</discrete>
+  </state>
+  <state id="11" initial="0.00000000">
+   <discrete id="0" order="1">0.00069336814, 0.44909862, 0.11852517, 0.43168285, 0.00069336814, 0.44909862, 0.11852517, 0.43168285, 0.00069336814, 0.44909862, 0.11852517, 0.43168285, 0.00069336814, 0.44909862, 0.11852517, 0.43168285</discrete>
+  </state>
+  <state id="12" initial="0.00000000">
+   <discrete id="0" order="1">0.23908965, 0.30965005, 0.2425157, 0.2087446, 0.23908965, 0.30965005, 0.2425157, 0.2087446, 0.23908965, 0.30965005, 0.2425157, 0.2087446, 0.23908965, 0.30965005, 0.2425157, 0.2087446</discrete>
+  </state>
+  <state id="13" initial="0.00000000">
+   <discrete id="0" order="1">0.078065095, 0.47405987, 0.17619708, 0.27167795, 0.078065095, 0.47405987, 0.17619708, 0.27167795, 0.078065095, 0.47405987, 0.17619708, 0.27167795, 0.078065095, 0.47405987, 0.17619708, 0.27167795</discrete>
+  </state>
+  <state id="14" initial="0.00000000">
+   <discrete id="0" order="1">0.16844767, 0.31234195, 0.18043886, 0.33877151, 0.16844767, 0.31234195, 0.18043886, 0.33877151, 0.16844767, 0.31234195, 0.18043886, 0.33877151, 0.16844767, 0.31234195, 0.18043886, 0.33877151</discrete>
+  </state>
+  <transition source="0" target="1">
+   <probability>1</probability>
+  </transition>
+  <transition source="1" target="1">
+   <probability>0.99</probability>
+  </transition>
+  <transition source="1" target="2">
+   <probability>0.01</probability>
+  </transition>
+  <transition source="2" target="3">
+   <probability>1</probability>
+  </transition>
+  <transition source="3" target="4">
+   <probability>1</probability>
+  </transition>
+  <transition source="4" target="5">
+   <probability>1</probability>
+  </transition>
+  <transition source="5" target="6">
+   <probability>1</probability>
+  </transition>
+  <transition source="6" target="7">
+   <probability>1</probability>
+  </transition>
+  <transition source="7" target="8">
+   <probability>1</probability>
+  </transition>
+  <transition source="8" target="9">
+   <probability>1</probability>
+  </transition>
+  <transition source="9" target="10">
+   <probability>1</probability>
+  </transition>
+  <transition source="10" target="11">
+   <probability>1</probability>
+  </transition>
+  <transition source="11" target="12">
+   <probability>1</probability>
+  </transition>
+  <transition source="12" target="13">
+   <probability>1</probability>
+  </transition>
+  <transition source="13" target="14">
+   <probability>1</probability>
+  </transition>
+  <transition source="14" target="1">
+   <probability>1</probability>
+  </transition>
+ </HMM>
+</mixture>

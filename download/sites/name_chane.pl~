@@ -1,0 +1,5 @@
+opendir(DIR, "./") or die "can't opendir $dirname: $!";
+while (defined($file = readdir(DIR))) {
+    # do something with "$dirname/$file"
+}
+closedir(DIR);

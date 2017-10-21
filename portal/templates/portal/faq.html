@@ -1,0 +1,204 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Frequently Asked Questions
+{% endblock %}
+
+{% block content_header %}
+ FAQ
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">FAQ</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-question"></i> Frequently Asked Questions</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="how-do-i-cite-jaspar">
+              <h4 >How do I cite JASPAR?</h4>
+              <p>It depends on what you have used it for. If you simply want to acknowledge you used the last version, use:</p>
+              <p>Khan, A., Fornes, O., Stigliani, A., et al. (2018). JASPAR 2018: update of the open-access database of transcription factor binding profiles and its web framework. Nucleic Acids Res. 2018 (In print)</p>
+
+              <p>Otherwise:</p>
+              <ul>
+              <li>The original JASPAR paper: Sandelin A, Alkema W, Engstrom P, Wasserman WW, Lenhard B. JASPAR: an open-access database for eukaryotic transcription factor binding profiles. Nucleic Acids Res. 2004 Jan 1;32(Database issue):D91-4.</li>
+              <li>The first extension (JASPAR FAM and PHYLOFACTS collections): Vlieghe D, Sandelin A, De Bleser PJ, Vleminckx K, Wasserman WW, van Roy F, Lenhard B. A new generation of JASPAR, the open-access repository for transcription factor binding site profiles. Nucleic Acids Res. 2006 Jan 1;34(Database issue):D95-7.</li>
+              <li>Second expansion (POLII, SPLICE, CNE, many changes in the web service including matrix permutations): Bryne JC, Valen E, Tang MH, Marstrand T, Winther O, da Piedade I, Krogh A, Lenhard B, Sandelin A. JASPAR, the open access database of transcription factor-binding profiles: new content and tools in the 2008 update. Nucleic Acids Res. 2008 Jan;36(Database issue):D102-6.</li>
+              <li>Third expansion (Large expansion of the CORE collection, including yeast and worm matrices. Also includes new PBM collections): Portales-Casamar E, Thongjuea S, Kwon AT, Arenillas D, Zhao X, Valen E, Yusuf D, Lenhard B, Wasserman WW, Sandelin A. JASPAR 2010: the greatly expanded open-access database of transcription factor binding profiles. Nucleic Acids Res. 2010 Jan;38(Database issue):D105-10.</li>
+              <li>Fourth expansion: Mathelier, A., Zhao, X., Zhang, A. W., Parcy, F., Worsley-Hunt, R., Arenillas, D. J., Buchman, S., Chen, C.-y., Chou, A., Ienasescu, H., Lim, J., Shyr, C., Tan, G., Zhou, M., Lenhard, B., Sandelin, A. and Wasserman, W. W. JASPAR 2014: an extensively expanded and updated open-access database of transcription factor binding profiles. Nucleic Acids Research, 2014 Jan;42(Database issue):D142-7.</li>
+              <li>
+                Fifth expansion: Mathelier, A., Fornes, O., Arenillas, D.J., Chen, C., Denay, G., Lee, J., Shi, W., Shyr, C., Tan, G., Worsley-Hunt, R., et al. (2015). JASPAR 2016: a major expansion and update of the open-access database of transcription factor binding profiles. Nucleic Acids Res. 2016 44: D110-D115.
+              </li>
+              </ul>
+              </div>
+              <div id="why-are-certain-sequences-not-downloadable-from-jaspar-core">
+              <h4>Why are certain sequences not downloadable from JASPAR CORE?</h4>
+              <p>This is due to historical reasons. JASPAR CORE was originally built in order to create familial binding profiles for as many structural classes of transcription factor classes as possible. In some experimental literature, only matrices and not sequences are available. For this project, we were forced to include some matrices to gain coverage of certain binding site classes. For recent additions, it is a requirement to have the sequences available.</p>
+              </div>
+             
+             <div id="why-is-not-my-matrix-study-included-in-jaspar-core">
+              <h4>Why is not my matrix study included in JASPAR CORE?</h4>
+              <p>There are two principal explanations. The most likely is that we were not aware of your work: please let us know! The other possible reason is that the publication did not live up to the demands of the curators. As we have human curation of all JASPAR CORE matrices, this is to some degree an arbitrary call – we are happy to discuss it with you.</p>
+             </div>
+             <div id="linking-web-services-to-cpu-intensive-services-within-jaspar">
+              <h4>Linking web services to CPU-intensive services within JASPAR</h4>
+              <p>We appreciate that other services wants to link to JASPAR. However, if your are using the CPU-intensive services (matrix comparison, randomization or clustering), please ask the maintainers (see contact information below) before you do this – otherwise your server might be rejected without warning. In that case, we strongly suggest setting up a local JASPAR database, as the database and resources are freely available.</p>
+              </div>
+              <div id="data-formats">
+                <h4>What motif formats JASPAR supports?</h4>
+              <p>The data from JASPAR can be downloaded in four different motif formats:</p>
+              
+              <p><b>1. Raw PFM</b>: Each matrix is separated by a fasta like header starting with the &gt; symbol and then a matrix ID. The count for each base (ACGT) is specified on its own space separated line where each element corresponds to one column. The order of the lines for the bases is A,C,G and finally T.</p>
+              <pre><code>13 13 3 1 54 1 1 1 0 3 2 5
+13 39 5 53 0 1 50 1 0 37 0 17
+17 2 37 0 0 52 3 0 53 8 37 12
+11 0 9 0 0 0 0 52 1 6 15 20</code></pre>
+
+              <p><b>2. JASPAR</b>: This is similar to the raw format, having an identical header. The lines for each base however starts with a label for the nucleotide (A,C,G or T) and then the columns follow enclosed in brackets: [].</p>
+              <pre><code>A [13 13 3 1 54 1 1 1 0 3 2 5 ]
+C [13 39 5 53 0 1 50 1 0 37 0 17 ]
+G [17 2 37 0 0 52 3 0 53 8 37 12 ]
+T [11 0 9 0 0 0 0 52 1 6 15 20 ]</code></pre>
+              
+              <p><b>3. TRANSFAC</b>: This is a TRANSFAC-like format having a header starting with “DE” then the matrix ID, the matrix name and the matrix class. The data itself is transposed as compared to the other formats, meaning that each line correspond to a column in the matrix. The column lines start with a number denoting the column index (counting</p>
+              <p>from 0). After that follows tab separated counts for each base in that column in the order: A,C,G and T. After the lines with the counts follows a final line containing the string: “XX”.</p>
+              <pre><code>DE MA0048    NHLH1    bHLH
+00    13    13    17    11   
+01    13    39    2    0   
+02    3    5    37    9   
+03    1    53    0    0   
+04    54    0    0    0   
+05    1    1    52    0   
+06    1    50    3    0   
+07    1    1    0    52   
+08    0    0    53    1   
+09    3    37    8    6   
+10    2    0    37    15   
+11    5    17    12    20   
+XX</code></pre>
+
+<p><b>4. MEME</b>: MEME motif format is a simple text format for motifs that is accepted by the programs in the MEME Suite that require MEME Motif Format.
+
+A text file in MEME minimal motif format can contain more than one motif, and also (optionally) specifies the motif alphabet, background frequencies of the letters in the alphabet, and strand information (for motifs of complementable alphabets like DNA), as illustrated in the example below:
+       <pre><code>MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.25 C 0.25 G 0.25 T 0.25
+
+MOTIF MA0048.2 NHLH1
+letter-probability matrix: alength= 4 w= 10 nsites= 3246 E= 0
+ 0.242760  0.667283  0.055761  0.034196
+ 0.142021  0.055145  0.667283  0.043746
+ 0.000924  0.667283  0.000000  0.000000
+ 0.667283  0.000924  0.000308  0.000000
+ 0.000000  0.092730  0.667283  0.035120
+ 0.029575  0.667283  0.038201  0.000000
+ 0.000000  0.001232  0.001232  0.667283
+ 0.000616  0.001232  0.667283  0.000308
+ 0.091189  0.667283  0.031423  0.107825
+ 0.094886  0.226741  0.667283  0.458718
+URL http://jaspar.genereg.net/matrix/MA0048.2</code></pre>
+
+</p>
+</div>
+
+             <div id="who-is-jaspar-anyhow">
+              <h4>Who is JASPAR anyhow?</h4>
+              <p>JASPAR was originally the name of a master student project algorithm for comparing matrix profiles, an obscure tribute to an even more obscure dialog from the Black Adder episode “The Black Seal” between the Seven Most Evil Men in the Kingdom:</p>
+              <ul>
+              <li><p>…and with all haste, we will meet at Old Jaspar’s tavern</p></li>
+              <li><p>How is old Jaspar these days?</p></li>
+              <li><p>Dead.</p></li>
+              <li><p>How?</p></li>
+              <li><p>I killed him.</p></li>
+              <li><p>[Loud cheer].</p></li>
+              </ul>
+              </div>
+              
+
+              <!--
+              <div id="where-can-i-find-flatfiledirmatrix_list.txt-files-in-jaspar-2014-as-provided-in-jaspar-2010">
+              <h4>Where can I find “FlatFileDir/matrix_list.txt” files in JASPAR 2014 as provided in JASPAR 2010?</h4>
+              <p>
+                Since JASPAR 2014, we have put a dump of the entire database online <a href="http://jaspar.genereg.net/html/DOWNLOAD/database/" target="_blank">http://jaspar.genereg.net/html/DOWNLOAD/database/</a>. For each MySQL table there are a schema file (*.sql) and a data file (*.txt.gz). Please follow the README file for details and instruction to read the data or load it into MySQL <a href="http://jaspar2018.genereg.net/download/README" target="_blank">README</a>.
+
+                <br><br>The meta information (annotation) of each TFBS are provided in these tables. For instance, MATRIX_PROTEIN for protein accession, MATRIX_ANNOTATION for TF class/family/etc. From JASPAR 2014, these tables are used as an efficient replacement of "FlatFileDir/matrix_list.txt".
+
+                <br><br>You can still generate "matrix_list.txt" from these tables in two steps, given MySQL is installed in your system.
+                <br> 1) Create the JASPAR database follow the instruction in <a href="http://jaspar2018.genereg.net/download/README" target="_blank">README</a> and 
+                <br> 2) Download MySQL code <a href="http://jaspar2018.genereg.net/download/tools/make_flat.sql" target="_blank"><code>make_flat.sql</code></a> and run the command below at a UNIX-like system,
+                <br><code>mysql < make_flat.sql > matrix_list.txt</code>
+
+                <br><br> Please feel free to customize the MySQL code in <a href="http://jaspar2018.genereg.net/download/tools/make_flat.sql" target="_blank"><code>make_flat.sql</code></a> for a specific purpose, for example, when querying within a subset of the database.
+              </p>
+              </div>
+            -->
+            
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-xs-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-list"></i> List of questions </h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div id="TOC">
+              <ul>
+              <li><a href="#how-do-i-cite-jaspar">How do I cite JASPAR?</a></li>
+              <li><a href="#why-are-certain-sequences-not-downloadable-from-jaspar-core">Why are certain sequences not downloadable from JASPAR CORE?</a></li>
+              <li><a href="#why-is-not-my-matrix-study-included-in-jaspar-core">Why is not my matrix study included in JASPAR CORE?</a></li>
+              <li><a href="#linking-web-services-to-cpu-intensive-services-within-jaspar">Linking web services to CPU-intensive services within JASPAR</a></li>
+              
+              <li><a href="#data-formats">What motif formats JASPAR supports?</a></li>
+              <li><a href="#who-is-jaspar-anyhow">Who is JASPAR anyhow?</a></li>
+              <!--
+              <li><a href="#where-can-i-find-flatfiledirmatrix_list.txt-files-in-jaspar-2014-as-provided-in-jaspar-2010">Where can I find “FlatFileDir/matrix_list.txt” files in JASPAR 2014 as provided in JASPAR 2010?</a></li>
+            -->
+               </ul>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+    </div>
+
+    {% block javascript %}
+      
+        <script>
+        $(document).ready(function () {
+          window.buildTabsets("TOC");
+        });
+        </script>
+
+    {% endblock %}
+
+  
+
+{% endblock %}
